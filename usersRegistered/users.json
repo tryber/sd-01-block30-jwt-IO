@@ -1,0 +1,17 @@
+[
+  {
+    "username": "johe",
+    "password": "senhasupghghjghjghjersecreta",
+    "role": "egador"
+  },
+  {
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "entregador"
+  },
+  {
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "entregador"
+  }
+]

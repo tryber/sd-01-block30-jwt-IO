@@ -1,4 +1,25 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
+
+const { loginValidMiddleware } = require('../middlewares/loginValid');
+
+const router = express.Router();
+// router.use(loginValidMiddleware);
+
+router.post('/', (req, res) => {
+  const { username, password } = req.body;
+
+  const jwtConfig = {
+    expiresIn: '15m',
+    algorithm: 'HS256',
+  }
+
+  const token = jwt.sign({ username }, password, jwtConfig);
+  res.status(200).json({ token, expires: jwtConfig.expiresIn });
+});
+
+module.exports = router;
+
 // const User = require('../models/user');
 
 // module.exports = async (req, res) => {
@@ -13,4 +34,3 @@ const express = require('express');
 
 //   res.status(200).json(true);
 // };
-

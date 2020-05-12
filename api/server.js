@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // const apiRoutes = express.Router();
 app.use('/users', routes.createUser);
-// apiRoutes.post('/login', routes.login)
+app.use('/login', routes.login);
 
 // app.use(apiRoutes);
 
