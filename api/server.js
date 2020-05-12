@@ -16,4 +16,4 @@ apiRoutes.post('/login', routes.login)
 app.use(apiRoutes);
 
 app.listen(port);
-console.log('Conectado na porta ' + port);
+console.log('Conectado na porta ' + port); 
