@@ -18,6 +18,6 @@ module.exports = async (req, res) => {
     algorithm: 'HS256',
   };
 
-  const token = jwt.sign({ data: { username, password } }, secret, jwtConfig);
+  const token = jwt.sign({ username, password }, secret, jwtConfig);
   res.status(200).json({ token, expires: jwtConfig.expiresIn });
 };
