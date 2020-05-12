@@ -14,5 +14,5 @@ module.exports = async (req, res) => {
     await User.save(userData);
     return res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
   }
-  return res.status(400).json({ message: 'Dados inválidos' });
+  return res.status(422).json({ message: 'Dados inválidos' });
 };

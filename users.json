@@ -1,1 +1,14 @@
-[{"username":"antonio123456","password":"antonio123","role":"funcionario"},{"username":"antonio","password":"antonio123","role":"funcionario"}]
+[
+    {
+        "username": "antonio",
+        "password": "antonio123",
+        "role": "funcionario",
+        "id": "82fcae72-3322-4d83-89ce-94874e744366"
+    },
+    {
+        "username": "antoniopaolillo",
+        "password": "antonio123",
+        "role": "funcionario",
+        "id": "32fec94f-135d-40e9-a3dd-01aeaf842744"
+    }
+]

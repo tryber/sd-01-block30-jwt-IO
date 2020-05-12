@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const validateJWT = require('./auth/validateJWT');
 
 const port = process.env.PORT || 8080;
 
