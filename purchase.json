@@ -1,0 +1,7 @@
+// {
+//   "id": <id_da_compra>,
+//   "userID": <id_do_usuario>,
+//   "productId": <id_do_produto>,
+//   "quantity": <quantidade_comprada>
+// }
+[]
