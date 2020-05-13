@@ -10,12 +10,12 @@ const router = express.Router();
 router.use(userValidMiddleware);
 
 router.post('/', async (req, res) => { 
-  const addUser = await fs.readFile(path.resolve(__dirname, '..', 'usersRegistered', 'users.json'), 'utf8');
+  const addUser = await fs.readFile(path.resolve(__dirname, '..', 'data', 'users.json'), 'utf8');
   const newUsersJson = JSON.parse(addUser)
   const tranformArray = newUsersJson.map((array) => array)
   tranformArray.push(req.body)
 
-  await fs.writeFile(path.resolve(__dirname, '..', 'usersRegistered', 'users.json'),
+  await fs.writeFile(path.resolve(__dirname, '..', 'data', 'users.json'),
     JSON.stringify(tranformArray), 'utf8', (err) => {
       if (err) throw err;
       console.log('algo deu errado');

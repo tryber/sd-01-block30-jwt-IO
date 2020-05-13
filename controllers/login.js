@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
   const { username, password } = req.body;
   const { role } = await isLoginTrue(username, password);
 
-  const expires = moment().add(3, 'days').valueOf() - Date.now();
+  const expires = new Date(moment().add(3, 'days').valueOf());
   const payload = { username, role }
 
   const jwtConfig = {

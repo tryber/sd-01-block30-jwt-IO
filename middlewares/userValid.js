@@ -12,10 +12,20 @@ function roleValid(role = '') {
   return roleStatus.includes(role);
 }
 
+function isUserUnique(username) {
+  const usersRegistered = fs.readFileSync(path.resolve(__dirname, '..', 'data', 'users.json'), 'utf8');
+  const userExists = JSON.parse(usersRegistered);
+
+  return userExists.find(user => user.username === username);
+}
+
 function userValidMiddleware(req, res, next) {
   const { username, password, role } = req.body
   if (!usernameValid(username) || !passwordValid(password) || !roleValid(role))
     return res.status(400).json({ message: 'Campos inválidos' });
+
+  if (!isUserUnique(username))
+    return res.status(400).json({ message: 'Nome de usuário não disónível ' });
 
   next();
 }
