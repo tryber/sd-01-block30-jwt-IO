@@ -1,7 +1,7 @@
 const express = require('express');
 
 const ProductModel = require('../models/productModel');
-const { productAccessMiddleware } = require('../middlewares/productAccessValid');
+const { productAccessMiddleware, authorizationValidMiddleware } = require('../middlewares/productAccessValid');
 
 const router = express.Router();
 
@@ -21,6 +21,7 @@ router.get('/:id', async (req, res, next) => {
   res.status(200).json(product);
 });
 
+// router.use(authorizationValidMiddleware);
 router.use(productAccessMiddleware);
 
 router.post('/', async (req, res) => {

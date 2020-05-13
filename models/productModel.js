@@ -2,7 +2,6 @@ const fs = require('fs').promises;
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-
 class Product {
   constructor(name, description, price) {
     this.id = null;
@@ -12,28 +11,28 @@ class Product {
   }
 
   async getAll() {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'data', 'products.json'), 'utf8');
+    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
     const products = JSON.parse(rawData);
 
     return products;
   }
 
   async getById(id) {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'data', 'products.json'), 'utf8');
+    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
     const product = JSON.parse(rawData)
-      .find((product) => product.id === parseInt(id));
+      .find((product) => product.id === id);
 
     return product;
   }
 
   async add() {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'data', 'products.json'), 'utf8');
+    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
     const products = JSON.parse(rawData);
 
     this.id = uuidv4();
     products.push(this);
 
-    await fs.writeFile(path.resolve(__dirname, '..', 'data', 'products.json'),
+    await fs.writeFile(path.resolve(__dirname, '..', 'products.json'),
       JSON.stringify(products), 'utf8', (err) => {
         if (err) throw err;
         console.log('Ocorreu algum erro!');
@@ -43,10 +42,10 @@ class Product {
   }
 
   async delete(id) {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'data', 'products.json'), 'utf8');
-    const products = JSON.parse(rawData).filter(product => product.id !== parseInt(id));
+    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
+    const products = JSON.parse(rawData).filter(product => product.id !== id);
 
-    await fs.writeFile(path.resolve(__dirname, '..', 'data', 'products.json'),
+    await fs.writeFile(path.resolve(__dirname, '..', 'products.json'),
       JSON.stringify(products), 'utf8', (err) => {
         if (err) throw err;
         console.log('Ocorreu algum erro!');
@@ -56,10 +55,10 @@ class Product {
   }
 
   async addOrUpdate(id) {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'data', 'products.json'), 'utf8');
+    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
     const products = JSON.parse(rawData);
 
-    const product = products.find(product => product.id === parseInt(id));
+    const product = products.find(product => product.id === id);
 
     if (product) {
       product.name = this.name;
@@ -70,7 +69,7 @@ class Product {
       products.push(this);
     }
 
-    await fs.writeFile(path.resolve(__dirname, '..', 'data', 'products.json'),
+    await fs.writeFile(path.resolve(__dirname, '..', 'products.json'),
       JSON.stringify(products), 'utf8', (err) => {
         if (err) throw err;
         console.log('Ocorreu algum erro!');

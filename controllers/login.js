@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
+const { secret } = require('../config');
 
 const { loginValidMiddleware, isLoginTrue } = require('../middlewares/loginValid');
 
@@ -12,31 +12,15 @@ router.post('/', async (req, res) => {
   const { username, password } = req.body;
   const { role } = await isLoginTrue(username, password);
 
-  const expires = new Date(moment().add(3, 'days').valueOf());
-  const payload = { username, role }
+  const payload = { username, role };
 
   const jwtConfig = {
     expiresIn: '3d',
     algorithm: 'HS256',
-  }
+  };
 
-  const token = jwt.sign({ payload }, password, jwtConfig);
-  res.status(200).json({ token, expires });
+  const token = jwt.sign({ payload }, secret, jwtConfig);
+  res.status(200).json({ token });
 });
 
 module.exports = router;
-
-// const User = require('../models/user');
-
-// module.exports = async (req, res) => {
-//   const username = req.body.username;
-//   const password = req.body.password;
-
-//   if (!username || !password) return res.send(401);
-
-//   const user = await User.findOne({ username });
-
-//   if (!user) res.status(401).json(false);
-
-//   res.status(200).json(true);
-// };

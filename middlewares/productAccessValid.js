@@ -1,4 +1,8 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs').promises;
+const path = require('path');
+
+const { secret } = require('../config');
 
 function productNameValid(name = '') {
   const regex = /^([a-zA-Z0-9 _-]+)$/;
@@ -18,14 +22,22 @@ function productAccessMiddleware(req, res, next) {
   next();
 }
 
-function authorizationValidMiddleware(req, res, next) {
+async function authorizationValidMiddleware(req, res, next) {
   const token = req.headers['authorization'];
 
   if (!token) return res.status(401).json({ message: 'no auth token provided' });
+  console.log('passou aqui')
 
-  const payload = jwt.verify(token, 'senha');
+  const { payload } = jwt.verify(token, secret);
 
+  const fileUsers = await fs.readFile(path.resolve(__dirname, '..', 'users.json'), 'utf-8');
+  const parseFileUsers = JSON.parse(fileUsers);
+  const user = parseFileUsers
+    .find(({username}) => username === payload.username && username === 'funcionario');
+
+  if (!user) return res.status(401).json({ message: 'invalid token user' });
+
+  next();
 }
 
-module.exports = { productAccessMiddleware };
-
+module.exports = { productAccessMiddleware, authorizationValidMiddleware };

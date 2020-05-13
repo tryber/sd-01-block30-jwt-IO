@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function isLoginTrue(username, password) {
-  const usersRegistered = fs.readFileSync(path.resolve(__dirname, '..', 'data', 'users.json'), 'utf8');
+  const usersRegistered = fs.readFileSync(path.resolve(__dirname, '..', 'users.json'), 'utf8');
   const userExists = JSON.parse(usersRegistered);
 
   return userExists.find(user => user.username === username && user.password === password);

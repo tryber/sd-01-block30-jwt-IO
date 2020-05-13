@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Meu produto",
+    "description": "Descrição do meu produto",
+    "price": 49.99
+  },
+  {
+    "id": "cad8c6d3-04f9-4520-b594-c6f776a42a6d",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 49.99
+  }
+]
