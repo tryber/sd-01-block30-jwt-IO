@@ -1,14 +1,1 @@
-[
-    {
-        "username": "antonio",
-        "password": "antonio123",
-        "role": "funcionario",
-        "id": "82fcae72-3322-4d83-89ce-94874e744366"
-    },
-    {
-        "username": "antoniopaolillo",
-        "password": "antonio123",
-        "role": "funcionario",
-        "id": "32fec94f-135d-40e9-a3dd-01aeaf842744"
-    }
-]
+[{"username":"antonio","password":"antonio123","role":"funcionario","id":"82fcae72-3322-4d83-89ce-94874e744366"},{"username":"antoniopaolillo","password":"antonio123","role":"funcionario","id":"32fec94f-135d-40e9-a3dd-01aeaf842744"},{"username":"antonioqnehfuncionario","password":"antonio1123","role":"cliente","id":"5a85d75b-0e25-4eef-b5c8-5866d3127559"}]

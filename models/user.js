@@ -23,11 +23,15 @@ const User = {
       }
     );
   },
-  findOne: async log => {
+  loginFind: async log => {
     const users = await getFile();
     return users.find(
       user => user.username === log.username && user.password === log.password
     );
+  },
+  findByUser: async username => {
+    const users = await getFile();
+    return users.find(user => user.username === username);
   },
 };
 
