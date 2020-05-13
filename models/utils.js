@@ -2,8 +2,10 @@ const path = require('path');
 const fs = require('fs').promises;
 
 const getData = async (name) => {
-  const content = await fs.readFile(path.resolve(__dirname, '..', `${name}.json`));
-  return JSON.parse(content.toString('utf-8'));
+  console.log(name)
+  const content = await fs.readFile(path.resolve(__dirname, '..', `${name}.json`), 'utf8');
+
+  return JSON.parse(content);
 };
 
 const setData = async (name, data) => {

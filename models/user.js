@@ -5,7 +5,7 @@ const { v1: uuidv1 } = require('uuid');
 const FILE_NAME = 'users';
 
 const isValidDados = ({ username, password, role }) => {
-  if (password < 8) return false;
+  if (password.length < 8) return false;
   const validRoles = ['funcionario', 'entregador', 'cliente'];
   if (!validRoles.includes(role)) return false;
   if (!isValidUser(username)) return false;
@@ -24,13 +24,22 @@ const findOne = async ({ username, password }) => {
   const user = data.find((obj) => (
     obj.username === username && obj.password === password
   ));
-  return user || { username, role: user.role };
+  return (user) ? { username, role: user.role, id: user.id } : user;
+}
+
+const findOneById = async ({ id }) => {
+  const data = await getData(FILE_NAME);
+  const user = data.find((obj) => (
+    obj.id === id
+  ));
+  return (user) ? { username, role: user.role, id: user.id } : user;
 }
 
 const User = {
   isValidDados,
   save: addUser,
   findOne,
+  findOneById,
 };
 
 module.exports = User;

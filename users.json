@@ -1,7 +1,20 @@
-// {
-//   "id": <id_do_usuario>,
-//   "username": <username_do_usuario>,
-//   "password": <password_do_usuario>,
-//   "role": <role_do_usuario>
-// }
-[]
+[
+  {
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "7593c7d0-9546-11ea-ace4-4126ce9a963d"
+  },
+  {
+    "username": "Outrocara",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "83a290e0-9546-11ea-ace4-4126ce9a963d"
+  },
+  {
+    "username": "Manuel23",
+    "password": "senha234",
+    "role": "cliente",
+    "id": "ecb0a3b0-9546-11ea-9cd6-3ba89285c933"
+  }
+]

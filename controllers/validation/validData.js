@@ -8,7 +8,7 @@ const isValidUser = (username) => {
 
 const isUniqueUser = async (username) => {
   const data = await getData('users');
-  return !data.find((user) => user.username === username);
+  return !data.some((user) => user.username === username);
 }
 
 module.exports = {
