@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use(userValidMiddleware);
 
-router.post('/', async (req, res) => { 
+router.post('/', async (req, res) => {
   const addUser = await fs.readFile(path.resolve(__dirname, '..', 'users.json'), 'utf8');
   const newUsersJson = JSON.parse(addUser);
 

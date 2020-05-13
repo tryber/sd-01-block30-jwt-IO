@@ -6,16 +6,12 @@ const { productAccessMiddleware, authorizationValidMiddleware } = require('../mi
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  try {
-    const products = await new ProductModel().getAll();
+  const products = await new ProductModel().getAll();
 
-    res.status(200).json(products);
-  } catch (err) {
-    next(err)
-  }
+  res.status(200).json(products);
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
   const product = await new ProductModel().getById(req.params.id);
 
   res.status(200).json(product);

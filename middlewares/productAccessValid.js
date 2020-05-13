@@ -23,17 +23,16 @@ function productAccessMiddleware(req, res, next) {
 }
 
 async function authorizationValidMiddleware(req, res, next) {
-  const token = req.headers['authorization'];
+  const token = req.headers.authorization;
 
   if (!token) return res.status(401).json({ message: 'no auth token provided' });
-  console.log('passou aqui')
 
   const { payload } = jwt.verify(token, secret);
 
   const fileUsers = await fs.readFile(path.resolve(__dirname, '..', 'users.json'), 'utf-8');
   const parseFileUsers = JSON.parse(fileUsers);
   const user = parseFileUsers
-    .find(({username}) => username === payload.username && username === 'funcionario');
+    .find(({ username }) => username === payload.username && username === 'funcionario');
 
   if (!user) return res.status(401).json({ message: 'invalid token user' });
 

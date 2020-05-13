@@ -23,7 +23,7 @@ function isUserUnique(username) {
 }
 
 function userValidMiddleware(req, res, next) {
-  const { username, password, role } = req.body
+  const { username, password, role } = req.body;
   if (!usernameValid(username) || !passwordValid(password) || !roleValid(role))
     return res.status(400).json({ message: 'Campos inválidos' });
 
