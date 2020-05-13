@@ -1,8 +1,18 @@
 const { getData, setData } = require('./utils');
-const { isValidUser } = require('../controllers/validation/validData');
 const { v1: uuidv1 } = require('uuid');
 
 const FILE_NAME = 'users';
+
+const isUniqueUser = async (username) => {
+  const data = await getData('users');
+  return !data.some((user) => user.username === username);
+}
+
+const isValidUser = (username) => {
+  const usernameRegex = /[a-z0-9]*[A-Z0-9]*/g;
+  return username.match(usernameRegex)
+    && username.length >= 6;
+}
 
 const isValidDados = ({ username, password, role }) => {
   if (password.length < 8) return false;
@@ -40,6 +50,7 @@ const User = {
   save: addUser,
   findOne,
   findOneById,
+  isUniqueUser,
 };
 
 module.exports = User;

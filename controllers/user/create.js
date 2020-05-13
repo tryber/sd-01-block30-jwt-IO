@@ -1,5 +1,4 @@
-const User = require('../models/user');
-const { isUniqueUser } = require('./validation/validData');
+const User = require('../../models/user');
 
 module.exports = async (req, res) => {
   const { username, password, role } = req.body;
@@ -9,7 +8,7 @@ module.exports = async (req, res) => {
     return res.status(422).json({ message: 'Dados inválidos' });
   }
 
-  const isUnique = await isUniqueUser(username);
+  const isUnique = await User.isUniqueUser(username);
 
   if (!isUnique) return res.status(409).json({ message: 'Username já existe' });
 

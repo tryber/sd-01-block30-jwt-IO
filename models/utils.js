@@ -9,7 +9,7 @@ const getData = async (name) => {
 };
 
 const setData = async (name, data) => {
-  return fs.writeFile(path.resolve(__dirname, '..', `${name}.json`), JSON.stringify(data));
+  return fs.writeFile(path.resolve(__dirname, '..', `${name}.json`), JSON.stringify(data, null, 2));
 }
 
 module.exports = {

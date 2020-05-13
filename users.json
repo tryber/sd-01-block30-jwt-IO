@@ -16,5 +16,17 @@
     "password": "senha234",
     "role": "cliente",
     "id": "ecb0a3b0-9546-11ea-9cd6-3ba89285c933"
+  },
+  {
+    "username": "OutrocaraShow",
+    "password": "senhasupersecreta",
+    "role": "funcionario",
+    "id": "b58540c0-9551-11ea-9ffc-415352b4f59b"
+  },
+  {
+    "username": "OutrocaraShowAINDAMAISLEGAL",
+    "password": "senhasupersecreta",
+    "role": "funcionario",
+    "id": "ecbab4d0-9551-11ea-b6b4-6f0022fc3689"
   }
 ]

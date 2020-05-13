@@ -1,6 +1,6 @@
 const express = require('express');
-const routes = require('./routes');
-const auth = require('../middleware/auth');
+const controllers = require('./controllers');
+const auth = require('./middleware/auth');
 
 const port = process.env.PORT || 8080;
 
@@ -13,11 +13,9 @@ const JWT_SECRET = 'itsasecret';
 const apiRoutes = express.Router();
 const authMiddleware = auth.factory(JWT_SECRET);
 
-apiRoutes.post('/users', routes.createUsers);
+apiRoutes.post('/users', controllers.users.create);
 
-apiRoutes.post('/login', routes.login(JWT_SECRET));
-
-apiRoutes.post('/login', authMiddleware ,routes.login(JWT_SECRET));
+apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
 
 app.use(apiRoutes);
 
