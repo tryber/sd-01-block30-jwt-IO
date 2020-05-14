@@ -4,15 +4,12 @@ const User = require('../../models/user');
 const segredo = 'seusecretdetoken';
 
 module.exports = async (req, res, next) => {
-  if (req.method === 'GET') {
-    return next();
-  }
+  if (req.method === 'GET') return next();
 
   const token = req.headers['authorization'];
 
-  if (!token) {
+  if (!token)
     return res.status(401).json({ error: 'Token não encontrado ou informado' });
-  }
 
   try {
     const decoded = jwt.verify(token, segredo);

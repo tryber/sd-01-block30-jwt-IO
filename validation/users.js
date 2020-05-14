@@ -3,9 +3,7 @@ const users = require('../users.json');
 const findUser = username => users.find(user => user.username === username);
 
 function validateUsername({ username }) {
-  if (!findUser(username) && /[0-9a-zA-Z]{6,}/.test(username)){
-      return true;
-} 
+  if (!findUser(username) && /[0-9a-zA-Z]{6,}/.test(username)) return true;
   return false;
 }
 
@@ -21,9 +19,8 @@ function validateRole({ role }) {
 }
 
 function validate(obj) {
-  if (validateUsername(obj) && validatePassword(obj) && validateRole(obj)) {
+  if (validateUsername(obj) && validatePassword(obj) && validateRole(obj))
     return true;
-  }
   return false;
 }
 
