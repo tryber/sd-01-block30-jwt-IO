@@ -29,21 +29,21 @@ const Product = {
 
     await writing(products);
   },
-  findByName: async name => {
+  findById: async id => {
     const products = await getFile();
-    return products.find(product => product.name === name);
+    return products.find(product => product.id === id);
   },
-  updateProduct: async product => {
+  updateProduct: async (product, id) => {
     const products = await getFile();
-    const newProducts = products.filter(each => each.name !== product.name);
-    product.id = uuidv4();
+    const newProducts = products.filter(each => each.id !== id);
+    product.id = id;
     newProducts.push(product);
 
     await writing(newProducts);
   },
-  deleteProduct: async product => {
+  deleteProduct: async id => {
     const products = await getFile();
-    const newProducts = products.filter(each => each.name !== product.name);
+    const newProducts = products.filter(each => each.id !== id);
 
     await writing(newProducts);
   },
