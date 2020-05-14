@@ -9,4 +9,9 @@ async function modifyFile(newData, file) {
     });
 }
 
-module.exports = { modifyFile };
+async function readFileJson(fileName) {
+  const fileJson = await fs.readFile(path.resolve(__dirname, `${fileName}.json`), 'utf8');
+  return JSON.parse(fileJson);
+}
+
+module.exports = { modifyFile, readFileJson };

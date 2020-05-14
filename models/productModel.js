@@ -2,29 +2,24 @@ const fs = require('fs').promises;
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-const { modifyFile } = require('../modifyFile');
+const { modifyFile, readFileJson } = require('../modifyFile');
 
 async function getAll() {
-  const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
-  const products = JSON.parse(rawData);
-
+  const products = await readFileJson('products');
   return products;
 }
 
 async function getById(idProduct) {
-  const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
-  const product = JSON.parse(rawData)
-    .find(({ id }) => id === idProduct);
-
+  const rawData = await readFileJson('products');
+  const product = rawData.find(({ id }) => id === idProduct);
   return product;
 }
 
 async function deleteProduct(id) {
-  const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
-  const products = JSON.parse(rawData).filter(product => product.id !== id);
+  const rawData = await readFileJson('products');
+  const products = rawData.filter(product => product.id !== id);
 
   await modifyFile(products, 'products');
-
   return products;
 }
 
@@ -37,8 +32,7 @@ class Product {
   }
 
   async add() {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
-    const products = JSON.parse(rawData);
+    const products = await readFileJson('products');
 
     this.id = uuidv4();
     products.push(this);
@@ -49,8 +43,7 @@ class Product {
   }
 
   async update(idProduct) {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
-    const products = JSON.parse(rawData);
+    const products = await readFileJson('products');
 
     const product = products.find(({ id }) => id === idProduct);
 

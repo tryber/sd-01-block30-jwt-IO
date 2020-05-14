@@ -1,16 +1,17 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 
-function isLoginTrue(username, password) {
-  const usersRegistered = fs.readFileSync(path.resolve(__dirname, '..', 'users.json'), 'utf8');
-  const userExists = JSON.parse(usersRegistered);
+const { readFileJson } = require('../modifyFile');
+
+async function isLoginTrue(username, password) {
+  const userExists = await readFileJson('users');
 
   return userExists.find(user => user.username === username && user.password === password);
 }
 
-function loginValidMiddleware(req, res, next) {
+async function loginValidMiddleware(req, res, next) {
   const { username, password } = req.body;
-  if (!isLoginTrue(username, password))
+  if (!(await isLoginTrue(username, password)))
     return res.status(401).json({ message: 'invalid login / password' });
 
   next();

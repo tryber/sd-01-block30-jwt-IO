@@ -1,12 +1,9 @@
-const fs = require('fs').promises;
-const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-const { modifyFile } = require('../modifyFile');
+const { modifyFile, readFileJson } = require('../modifyFile');
 
 async function filterPurchases(userId) {
-  const rawData = await fs.readFile(path.resolve(__dirname, '..', 'purchases.json'), 'utf8');
-  const purchases = JSON.parse(rawData);
+  const purchases = await readFileJson('purchases');
   return purchases.filter(({ userID }) => userID === userId);
 }
 
@@ -23,14 +20,12 @@ async function getById(userID, idPurchase) {
   return purchase;
 }
 
-async function deletePurchase(userId, idPurchase) {
-  const rawData = await fs.readFile(path.resolve(__dirname, '..', 'products.json'), 'utf8');
-  const purchases = JSON.parse(rawData)
-    .filter(({ id, userID }) => id !== userId && userID !== idPurchase);
+async function deletePurchase(idPurchase) {
+  const rawData = await readFileJson('purchases');
+  const purchases = rawData.filter(({ id }) => id !== idPurchase);
 
   await modifyFile(purchases, 'purchases');
-
-  return purchases;
+  return 'Purchase excluded with success';
 }
 
 class Purchase {
@@ -42,8 +37,7 @@ class Purchase {
   }
 
   async add() {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'purchases.json'), 'utf8');
-    const purchases = JSON.parse(rawData);
+    const purchases = await readFileJson('purchases');
 
     this.id = uuidv4();
     purchases.push(this);
@@ -54,12 +48,10 @@ class Purchase {
   }
 
   async update(idPurchase) {
-    const rawData = await fs.readFile(path.resolve(__dirname, '..', 'purchases.json'), 'utf8');
-    const purchases = JSON.parse(rawData);
-
+    const purchases = await readFileJson('purchases');
     const purchase = purchases.find(({ id }) => id === idPurchase);
 
-    if (!purchase) return 'userID invalid';
+    if (!purchase) return 'idPurchase invalid';
 
     this.id = idPurchase;
     purchase.userID = this.userID;

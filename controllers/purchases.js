@@ -28,9 +28,10 @@ router.post('/:userID', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
-router.delete('/:userID/:id', async (req, res) => {
-  const { userID, id } = req.params;
-  await deletePurchase(userID, id);
+router.delete('/:id', async (req, res) => {
+  console.log(req.params)
+  const { id } = req.params;
+  await deletePurchase(id);
 
   res.status(204).end();
 });
@@ -42,7 +43,7 @@ router.put('/:id', async (req, res) => {
   const products = new Purchase(userID, productId, quantity);
   const updateProducts = await products.update(id);
 
-  if (updateProducts === 'userID invalid')
+  if (updateProducts === 'idPurchase invalid')
     return res.status(400).json({ message: updateProducts });
 
   res.status(200).json(products);
