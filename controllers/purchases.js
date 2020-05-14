@@ -30,16 +30,17 @@ router.post('/:userID', async (req, res) => {
 
 router.delete('/:userID/:id', async (req, res) => {
   const { userID, id } = req.params;
-  await deleteProduct(userID, id);
+  await deletePurchase(userID, id);
 
   res.status(204).end();
 });
 
 router.put('/:id', async (req, res) => {
   const { userID, productId, quantity } = req.body;
+  const { id } = req.params;
 
   const products = new Purchase(userID, productId, quantity);
-  const updateProducts = await products.update(req.params.id);
+  const updateProducts = await products.update(id);
 
   if (updateProducts === 'userID invalid')
     return res.status(400).json({ message: updateProducts });
