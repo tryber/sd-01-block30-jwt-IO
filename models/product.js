@@ -28,15 +28,14 @@ const addProduct = async (obj) => {
   const data = await getData(FILE_NAME);
   const objId = { ...obj, id: uuidv1() };
   const newArray = [...data, objId];
-  return setData(FILE_NAME, newArray)
+  await setData(FILE_NAME, newArray);
+  return objId;
 }
 
-const findOne = async ({ id, name }) => {
+const findOne = async ({ id }) => {
   const data = await getData(FILE_NAME);
-  const key = (id) ? 'id' : 'name';
-  const value = (id) ? id : name;
   const product = data.find((obj) => (
-    obj[key] === value
+    obj.id === id
   ));
   return product;
 }
@@ -58,7 +57,8 @@ const updateProduct = async (obj) => {
   const newArray = [...products.filter((product) => (
     searchProduct.id !== product.id
   )), obj];
-  return setData(FILE_NAME, newArray);
+  await setData(FILE_NAME, newArray);
+  return obj;
 }
 
 const getAllProduct = async () => {
@@ -72,7 +72,7 @@ const Product = {
   update: updateProduct,
   save: addProduct,
   getAll: getAllProduct,
-  findOne,
+  getOne: findOne,
 };
 
 module.exports = Product;

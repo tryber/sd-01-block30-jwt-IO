@@ -1,7 +1,8 @@
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
+const rescue = require('../rescue');
 
-module.exports = (secret) => async (req, res) => {
+const login = (secret) => async (req, res) => {
   const { username, password } = req.body
 
   if (!username || !password) return res.status(422).json({ message: 'Faltou algum campo' })
@@ -21,3 +22,5 @@ module.exports = (secret) => async (req, res) => {
     token,
   });
 };
+
+module.exports = (secret) => rescue(login(secret));

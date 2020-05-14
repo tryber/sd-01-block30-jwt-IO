@@ -5,6 +5,14 @@ const FILE_NAME = 'purchase';
 const FILE_PRODUCT = 'products';
 const FILE_USER = 'users';
 
+const findOne = (id) => {
+  const purchases = await getData(FILE_NAME);
+  const purchase = purchases
+    .find((purchase) => purchase.id === id);
+  if (!purchase) return false;
+  return purchase;
+}
+
 const isExists = (id, type) => {
   const data = await getData(type);
   return data.some((entidade) => entidade.id === id);
@@ -26,37 +34,43 @@ const validPurchase = ({ productId, quantity, userID }, update) => {
   return true;
 }
 
-const addPurchase = async (obj, userID) => {
+const addPurchase = async (obj) => {
   const data = await getData(FILE_NAME);
-  const objId = { ...obj, id: uuidv1(), userID };
+  const objId = { ...obj, id: uuidv1() };
   const newArray = [...data, objId];
-  return setData(FILE_NAME, newArray)
+  await setData(FILE_NAME, newArray);
+  return objId;
 }
 
-const updatePurchase = async (obj) => {
-  const searchPurchase = await findOne(obj);
+const updatePurchase = async (obj, id) => {
+  const searchPurchase = await findOne(id);
   if (!searchPurchase) return false;
-  const purchases = await getData(FILE_NAME);
   const newArray = [...purchases.filter((purchase) => (
     searchPurchase.id !== purchase.id
   )), { ...obj, id: searchPurchase.id }];
-  return setData(FILE_NAME, newArray);
+  await setData(FILE_NAME, newArray);
+  return { ...obj, id: searchPurchase.id };
 }
 
-const deletePurchase = async (obj) => {
-  const searchPurchase = await findOne(obj);
+const deletePurchase = async (id) => {
+  const searchPurchase = findOne(id);
   if (!searchPurchase) return false;
-  const purchases = await getData(FILE_NAME);
   const newArray = purchases.filter((purchase) => (
     searchPurchase.id !== purchase.id
   ));
   return setData(FILE_NAME, newArray);
 }
 
-const getPurchase = async (userID,id) => {
+const verifyUserPurchase = async (userID, id) => {
+  const data = await getData(FILE_NAME);
+  return data.find(purchase => purchase.id === id)
+    .userID === userID;
+}
+
+const getPurchase = async (userID, id) => {
   const data = await getData(FILE_NAME);
   return data.filter(purchase => purchase.userID === userID)
-  .filter(purchaseUser=>purchaseUser.id===id);
+    .find(purchaseUser => purchaseUser.id === id);
 }
 
 const getAllPurchase = async (userID) => {
@@ -70,7 +84,8 @@ const Purchase = {
   update: updatePurchase,
   save: addPurchase,
   getAll: getAllPurchase,
-  getPurchase,
+  getOne: getPurchase,
+  verifyUser: verifyUserPurchase,
 };
 
 module.exports = Purchase;

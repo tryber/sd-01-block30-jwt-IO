@@ -1,6 +1,7 @@
 const User = require('../../models/user');
+const rescue = require('../rescue');
 
-module.exports = async (req, res) => {
+const create = async (req, res) => {
   const { username, password, role } = req.body;
   if (!username || !password || !role) return res.status(422).json({ message: 'Faltou algum campo' });
 
@@ -18,10 +19,9 @@ module.exports = async (req, res) => {
     role,
   };
 
-  User.save(userData).then(() => {
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
-  }).catch((err) => {
-    console.error(err);
-    res.status(400).json({ message: 'Dados inválidos' });
-  });
-};
+  User.save(userData).then(({ password, ...user }) => {
+    res.status(201).json({ message: 'Usuário cadastrado com sucesso', data: user });
+  })
+}
+
+module.exports = rescue(create);
