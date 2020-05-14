@@ -1,7 +1,5 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const fs = require('fs').promises;
-const path = require('path');
 
 const { userValidMiddleware } = require('../middlewares/userValid');
 const { modifyFile, readFileJson } = require('../modifyFile');
@@ -11,7 +9,7 @@ const router = express.Router();
 router.use(userValidMiddleware);
 
 router.post('/', async (req, res) => {
-  const newUsersJson = await readFileJson(users);
+  const newUsersJson = await readFileJson('users');
   const user = { ...req.body, id: uuidv4() };
   newUsersJson.push(user);
 

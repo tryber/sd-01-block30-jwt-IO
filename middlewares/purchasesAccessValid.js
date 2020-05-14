@@ -12,7 +12,7 @@ function productQuantity(quantity = '') {
   return Number.isInteger(quantity) && quantity > 0;
 }
 
-function userIdValid(userID = '') {
+async function userIdValid(userID = '') {
   const userExists = await readFileJson('users');
   return userExists.find(({ id }) => id === productId);
 }

@@ -29,7 +29,6 @@ router.post('/:userID', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  console.log(req.params)
   const { id } = req.params;
   await deletePurchase(id);
 

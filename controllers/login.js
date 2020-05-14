@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { secret } = require('../config');
 
+const { secret } = require('../config');
 const { loginValidMiddleware, isLoginTrue } = require('../middlewares/loginValid');
 
 const router = express.Router();
