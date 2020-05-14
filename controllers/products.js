@@ -38,7 +38,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { name, description, price } = req.body;
 
-  const products = new Product(name, description, price)
+  const products = new Product(name, description, price);
   const updateProducts = await products.update(req.params.id);
 
   if (updateProducts === 'id invalid')

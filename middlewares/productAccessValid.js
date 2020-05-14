@@ -31,7 +31,6 @@ async function authorizationValidMiddleware(req, res, next) {
 
   const fileUsers = await fs.readFile(path.resolve(__dirname, '..', 'users.json'), 'utf-8');
   const parseFileUsers = JSON.parse(fileUsers);
-  console.log(parseFileUsers)
   const user = parseFileUsers
     .find(({ username, role }) => username === payload.username && role === 'funcionario');
 
