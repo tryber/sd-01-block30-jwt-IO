@@ -17,7 +17,7 @@ function productAccessMiddleware(req, res, next) {
   const { name, description, price } = req.body;
 
   if (!productNameValid(name) || !productPriceValid(price) || !description)
-    return res.status(400).json({ message: 'Nome ou preço inválido' });
+    return res.status(400).json({ message: 'Name or price invalid' });
 
   next();
 }
@@ -25,16 +25,17 @@ function productAccessMiddleware(req, res, next) {
 async function authorizationValidMiddleware(req, res, next) {
   const token = req.headers.authorization;
 
-  if (!token) return res.status(401).json({ message: 'no auth token provided' });
+  if (!token) return res.status(401).json({ message: 'No auth token provided' });
 
   const { payload } = jwt.verify(token, secret);
 
   const fileUsers = await fs.readFile(path.resolve(__dirname, '..', 'users.json'), 'utf-8');
   const parseFileUsers = JSON.parse(fileUsers);
+  console.log(parseFileUsers)
   const user = parseFileUsers
-    .find(({ username }) => username === payload.username && username === 'funcionario');
+    .find(({ username, role }) => username === payload.username && role === 'funcionario');
 
-  if (!user) return res.status(401).json({ message: 'invalid token user' });
+  if (!user) return res.status(403).json({ message: 'Access denied' });
 
   next();
 }
