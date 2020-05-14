@@ -10,7 +10,7 @@ const getFile = async () => {
 };
 
 const User = {
-  save: async userData => {
+  save: async (userData) => {
     const users = await getFile();
     userData.id = uuidv4();
     users.push(userData);
@@ -23,13 +23,13 @@ const User = {
       }
     );
   },
-  loginFind: async log => {
+  loginFind: async (log) => {
     const users = await getFile();
     return users.find(
       user => user.username === log.username && user.password === log.password
     );
   },
-  findByUser: async username => {
+  findByUser: async (username) => {
     const users = await getFile();
     return users.find(user => user.username === username);
   },
