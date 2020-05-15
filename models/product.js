@@ -1,7 +1,7 @@
 const { getData, setData } = require('./utils');
 const { v1: uuidv1 } = require('uuid');
 
-const FILE_NAME = 'product';
+const FILE_NAME = 'products';
 
 const isValidName = (name) => {
   const nameRegex = /[a-z0-9]*[A-Z0-9]*/g;
@@ -12,9 +12,7 @@ const isValidName = (name) => {
 const isEmployee = ({ role }) => role === 'funcionario';
 
 const isValidPrice = (price) => {
-  const priceRegex = /[0-9]*/g;
-  return price.match(priceRegex)
-    && (Number(price) > 0);
+  return (typeof price === 'number' && price > 0);
 }
 
 const validProduct = ({ price, name, description }) => {

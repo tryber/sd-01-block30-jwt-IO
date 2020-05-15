@@ -3,6 +3,7 @@ const rescue = require('../rescue');
 
 const create = async (req, res) => {
   const { username, password, role } = req.body;
+  console.log(req.body,'body')
   if (!username || !password || !role) return res.status(422).json({ message: 'Faltou algum campo' });
 
   if (!User.isValidDados({ username, password, role })) {

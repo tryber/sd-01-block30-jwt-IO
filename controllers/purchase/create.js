@@ -3,13 +3,14 @@ const rescue = require('../rescue');
 
 const create = async (req, res) => {
   const { productId, quantity } = req.body;
-  const { id } = req.user;
+  console.log(req.user,'user');
+  const userID = req.user.id
   if (!Purchase.validPurchase(req.body)) {
     return res.status(422).json({ message: 'Dados inválidos' });
   }
-
+  
   const purchaseData = {
-    userID: id,
+    userID,
     productId,
     quantity,
   };

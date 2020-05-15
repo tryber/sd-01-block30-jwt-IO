@@ -26,7 +26,8 @@ const addUser = async (obj) => {
   const data = await getData(FILE_NAME);
   const objId = { ...obj, id: uuidv1() };
   const newArray = [...data, objId];
-  return setData(FILE_NAME, newArray)
+  await setData(FILE_NAME, newArray);
+  return objId;
 }
 
 const findOne = async ({ username, password }) => {
@@ -34,7 +35,9 @@ const findOne = async ({ username, password }) => {
   const user = data.find((obj) => (
     obj.username === username && obj.password === password
   ));
-  return (user) ? { username, role: user.role, id: user.id } : user;
+  if (!user) return false;
+  const { role, id } = user;
+  return { username, role, id };
 }
 
 const findOneById = async ({ id }) => {
@@ -42,7 +45,9 @@ const findOneById = async ({ id }) => {
   const user = data.find((obj) => (
     obj.id === id
   ));
-  return (user) ? { username, role: user.role, id: user.id } : user;
+  if (!user) return false;
+  const { username, role, } = user;
+  return { username, role, id };
 }
 
 const User = {

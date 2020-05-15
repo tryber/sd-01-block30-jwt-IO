@@ -5,7 +5,7 @@ const FILE_NAME = 'purchase';
 const FILE_PRODUCT = 'products';
 const FILE_USER = 'users';
 
-const findOne = (id) => {
+const findOne = async (id) => {
   const purchases = await getData(FILE_NAME);
   const purchase = purchases
     .find((purchase) => purchase.id === id);
@@ -13,19 +13,17 @@ const findOne = (id) => {
   return purchase;
 }
 
-const isExists = (id, type) => {
+const isExists = async (id, type) => {
   const data = await getData(type);
   return data.some((entidade) => entidade.id === id);
 }
 
 const isValidQuantity = (quantity) => {
-  const quantityRegex = /[0-9]*/g;
-  return quantity.match(quantityRegex)
-    && (Number(quantity) > 0)
-    && (Number.isInteger(Number(quantity)));
+  return quantity > 0 && typeof quantity === 'number' && Number.isInteger(quantity);
 }
 
 const validPurchase = ({ productId, quantity, userID }, update) => {
+  console.log({ productId, quantity, userID }, update)
   if (!productId || !quantity) return false;
   if (!isValidQuantity(quantity)) return false;
   if (!isExists(productId, FILE_PRODUCT)) return false;
@@ -35,6 +33,7 @@ const validPurchase = ({ productId, quantity, userID }, update) => {
 }
 
 const addPurchase = async (obj) => {
+  console.log(obj, 'obj')
   const data = await getData(FILE_NAME);
   const objId = { ...obj, id: uuidv1() };
   const newArray = [...data, objId];

@@ -28,5 +28,29 @@
     "password": "senhasupersecreta",
     "role": "funcionario",
     "id": "ecbab4d0-9551-11ea-b6b4-6f0022fc3689"
+  },
+  {
+    "username": "Usuarioteste",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "3829f100-9634-11ea-bba3-6dcb475994f0"
+  },
+  {
+    "username": "Usuarioteste2",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "7aed4fa0-9634-11ea-bba3-6dcb475994f0"
+  },
+  {
+    "username": "Usuarioteste3",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "db1b32c0-9634-11ea-a1a8-43c234b525bc"
+  },
+  {
+    "username": "topzeira",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "aff18470-9637-11ea-a1a8-43c234b525bc"
   }
 ]
