@@ -10,12 +10,9 @@ const {
 
 const router = express.Router();
 
-// router.use(authorizationValidMiddleware);
-
 router.get('/:userID', authorizationValidMiddleware, async (req, res) => {
   const { userID } = req.params;
   const purchases = await getAll(userID);
-  console.log(req.params)
 
   res.status(200).json(purchases);
 });
