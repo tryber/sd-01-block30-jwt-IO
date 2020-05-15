@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function usernameValid(username = '') {
-  const regex = /^([a-zA-Z0-9 _-]+)$/;
+  const regex = /^([a-zA-Z]+)$/;
   return username.length >= 6 && regex.test(username);
 }
 
@@ -25,10 +25,10 @@ function isUserUnique(username) {
 function userValidMiddleware(req, res, next) {
   const { username, password, role } = req.body;
   if (!usernameValid(username) || !passwordValid(password) || !roleValid(role))
-    return res.status(400).json({ message: 'Campos inválidos' });
+    return res.status(400).json({ message: 'Invalid data' });
 
   if (isUserUnique(username))
-    return res.status(400).json({ message: 'Nome de usuário não disponível' });
+    return res.status(400).json({ message: 'Username not available!' });
 
   next();
 }

@@ -28,14 +28,14 @@ router.post('/:userID', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:userID/:id', async (req, res) => {
   const { id } = req.params;
   await deletePurchase(id);
 
   res.status(204).end();
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:userID/:id', async (req, res) => {
   const { userID, productId, quantity } = req.body;
   const { id } = req.params;
 

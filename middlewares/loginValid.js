@@ -1,6 +1,3 @@
-const fs = require('fs').promises;
-const path = require('path');
-
 const { readFileJson } = require('../modifyFile');
 
 async function isLoginTrue(username, password) {

@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 
   await modifyFile(newUsersJson, 'users');
 
-  res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
+  res.status(201).json({ message: 'User successfully registered!' });
 });
 
 module.exports = router;

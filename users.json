@@ -34,5 +34,11 @@
     "password": "senhasupersecreta",
     "role": "funcionario",
     "id": "3b2c1b1c-2132-4280-ab6f-90aaebe4d97e"
+  },
+  {
+    "username": "coguja",
+    "password": "senhasss",
+    "role": "entregador",
+    "id": "0bd571e2-716f-41ea-a845-52d89a4bd975"
   }
 ]
