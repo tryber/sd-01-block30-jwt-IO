@@ -19,14 +19,14 @@
   },
   {
     "id": "7f5e8297-ac89-4fd1-956e-c5e39fe62084",
-    "userID": "4b6471f0-946f-41ce-a0b7-e6e2da1bf12c",
+    "userID": "a124ceec-f975-44d6-8250-e0a5edf6b2f7",
     "productId": "b01d7576-8f43-4a21-82ca-03bdf1c52e4e",
     "quantity": 5
   },
   {
     "id": "b1da808b-d730-42f7-beb2-ab0fd3a159cd",
-    "userID": "4b6471f0-946f-41ce-a0b7-e6e2da1bf12b",
+    "userID": "a124ceec-f975-44d6-8250-e0a5edf6b2f7",
     "productId": "b01d7576-8f43-4a21-82ca-03bdf1c52e40",
-    "quantity": 10
+    "quantity": 9
   }
 ]

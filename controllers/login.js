@@ -10,9 +10,9 @@ router.use(loginValidMiddleware);
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
-  const { role } = await isLoginTrue(username, password);
+  const { role, id } = await isLoginTrue(username, password);
 
-  const payload = { username, role };
+  const payload = { username, role, id };
 
   const jwtConfig = {
     expiresIn: '3d',

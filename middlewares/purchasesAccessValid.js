@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs').promises;
+const path = require('path');
 
 const { secret } = require('../config');
 const { readFileJson } = require('../modifyFile');
@@ -18,19 +20,19 @@ async function userIdValid(userID = '') {
   return userExists.find(({ id }) => id === userID);
 }
 
-function increaseNewPurchase(req, res, next) {
+async function increaseNewPurchase(req, res, next) {
   const { productId, quantity } = req.body;
 
-  if (!productIdValid(productId) || !productQuantity(quantity))
+  if (!(await productIdValid(productId)) || !productQuantity(quantity))
     return res.status(400).json({ message: 'ProductId or quantity invalid' });
 
   next();
 }
 
-function updatePurchase(req, res, next) {
+async function updatePurchase(req, res, next) {
   const { userID, productId, quantity } = req.body;
 
-  if (!userIdValid(userID) || !productIdValid(productId))
+  if (!(await userIdValid(userID)) || !(await productIdValid(productId)))
     return res.status(400).json({ message: 'ProductId or userID invalid' });
 
   if (!productQuantity(quantity))
@@ -39,12 +41,11 @@ function updatePurchase(req, res, next) {
   next();
 }
 
-async function deletePurchase(req, res, next) {
+async function excludePurchase(req, res, next) {
   const { userID, id: idPurchase } = req.params;
 
   const filePurchases = await readFileJson('purchases');
   const findIdPurchases = filePurchases.find(({ id }) => id === idPurchase);
-  console.log(findIdPurchases);
 
   if (!userIdValid(userID) || !findIdPurchases)
     return res.status(400).json({ message: 'Invalid data' });
@@ -57,7 +58,7 @@ async function deletePurchase(req, res, next) {
   next();
 }
 
-async function authorizationValidMiddleware(req, res, next) {
+function authorizationValidMiddleware(req, res, next) {
   const token = req.headers.authorization;
   const { userID } = req.params;
 
@@ -71,4 +72,9 @@ async function authorizationValidMiddleware(req, res, next) {
   next();
 }
 
-module.exports = { increaseNewPurchase, updatePurchase, deletePurchase, authorizationValidMiddleware };
+module.exports = {
+  increaseNewPurchase,
+  updatePurchase,
+  excludePurchase,
+  authorizationValidMiddleware,
+};

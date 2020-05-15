@@ -22,3 +22,6 @@
 
 // const result = teste.filter(({ id, userID }) => id !== idPurchase && userID === userId);
 // console.log(result);
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjoiY29ndWphbyIsInJvbGUiOiJlbnRyZWdhZG9yIiwiaWQiOiJhMTI0Y2VlYy1mOTc1LTQ0ZDYtODI1MC1lMGE1ZWRmNmIyZjcifSwiaWF0IjoxNTg5NTEwODQ5LCJleHAiOjE1ODk3NzAwNDl9.aISEh9VY83NXw0WqXK3TPluoU6dUWLND7dCBHW3KHq0
