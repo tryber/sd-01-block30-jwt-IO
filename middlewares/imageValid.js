@@ -27,9 +27,9 @@ async function imageValidMiddleware(req, res, next) {
     return res.status(401).json({ message: 'Invalid productId' });
 
   if (!imageTextValid(image) || fieldname !== 'image' || !imageTextValid(originalname))
-    return res.status(401).json({ message: 'Invalid image name or image file' });
+    return res.status(422).json({ message: 'Missing file or fileName' });
 
-  if (await readFolderImages(image)) return res.status(401).json({ message: 'Image name unavailable' });
+  if (await readFolderImages(image)) return res.status(409).json({ message: 'File already exists' });
 
   next();
 }

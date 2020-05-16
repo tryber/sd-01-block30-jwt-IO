@@ -5,14 +5,14 @@ const express = require('express');
 
 const router = express.Router();
 
-// const { authorizationValidMiddleware } = require('../middlewares/productAccessValid');
+const { authorizationValidMiddleware } = require('../middlewares/productAccessValid');
 const { imageValidMiddleware } = require('../middlewares/imageValid');
 const Image = require('../models/imageModel');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// router.use(authorizationValidMiddleware);
+router.use(authorizationValidMiddleware);
 
 router.post('/', upload.single('image'), imageValidMiddleware, async (req, res) => {
   const newFileName = path.resolve(__dirname, '..', 'images', req.body.image);

@@ -3,8 +3,7 @@
     "id": "b01d7576-8f43-4a21-82ca-03bdf1c52e4e",
     "name": "Meu produto",
     "description": "Descriçãdo do meu produto",
-    "price": 69.99,
-    "image": "http://localhost:3000/minha-nova-image.png"
+    "price": 69.99
   },
   {
     "id": "b01d7576-8f43-4a21-82ca-03bdf1c52e40",
