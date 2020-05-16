@@ -15,7 +15,6 @@ const upload = multer({ storage });
 // router.use(authorizationValidMiddleware);
 
 router.post('/', upload.single('image'), imageValidMiddleware, async (req, res) => {
-
   const newFileName = path.resolve(__dirname, '..', 'images', req.body.image);
   await fs.writeFile(newFileName, req.file.buffer);
 

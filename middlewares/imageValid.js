@@ -5,7 +5,7 @@ const { readFileJson } = require('../modifyFile');
 
 async function productIdValid(productId = '') {
   const productIdExists = await readFileJson('products');
-  const findProductId = productIdExists.find(({ id }) => id === productId);
+  const findProductId = productIdExists.find(file => file.id === productId);
   return findProductId;
 }
 
