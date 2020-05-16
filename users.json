@@ -1,8 +1,8 @@
 [
   {
-    "username": "cogujao",
+    "id": "5e9a7b46-a8b2-4bde-a174-b444d15a47e1",
+    "username": "johndoe",
     "password": "senhasupersecreta",
-    "role": "entregador",
-    "id": "a124ceec-f975-44d6-8250-e0a5edf6b2f7"
+    "role": "entregador"
   }
 ]

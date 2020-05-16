@@ -4,7 +4,7 @@
     "name": "Meu produto",
     "description": "Descriçãdo do meu produto",
     "price": 69.99,
-    "image": "http://localhost:3000/minha-nova-image.png"
+    "image": "http://localhost:3000/minha-nova-imagem.png"
   },
   {
     "id": "b01d7576-8f43-4a21-82ca-03bdf1c52e40",

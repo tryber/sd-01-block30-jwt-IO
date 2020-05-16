@@ -10,7 +10,7 @@ router.use(userValidMiddleware);
 
 router.post('/', async (req, res) => {
   const newUsersJson = await readFileJson('users');
-  const user = { ...req.body, id: uuidv4() };
+  const user = { id: uuidv4(), ...req.body };
   newUsersJson.push(user);
 
   await modifyFile(newUsersJson, 'users');
