@@ -52,5 +52,23 @@
     "password": "senhashow",
     "role": "funcionario",
     "id": "aff18470-9637-11ea-a1a8-43c234b525bc"
+  },
+  {
+    "username": "SUPIMPA",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "8b1b3710-98c4-11ea-973a-03a03cf5cb15"
+  },
+  {
+    "username": "SUPIMPAa",
+    "password": "senhasupersecreta",
+    "role": "entregdor",
+    "id": "5855f8f0-98c5-11ea-9632-33f98d409af1"
+  },
+  {
+    "username": "SUPIMPAS",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "77e0ec70-98c5-11ea-801b-e75531bd3e72"
   }
 ]

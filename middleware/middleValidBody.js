@@ -1,14 +1,24 @@
 const Product = require('../models/product');
 const Purchase = require('../models/purchase');
+const User = require('../models/user');
 
-module.exports = (type) = async (req, res, next) => {
-  const objValid = {
-    'purchase': () => Purchase.validPurchase(req.body),
-    'product': () => Product.validProduct(req.body),
+const valid = type => async (req, res, next) => {
+  try {
+    const objValid = {
+      'purchase': Purchase.validPurchase(req.body),
+      'product': Product.validProduct(req.body),
+      'user': User.isValidDados(req.body),
+    };
+
+    if (!objValid[type])
+      return res.status(422).json({ message: 'Dados inválidos' });
+
+    next();
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  console.log(objValid[type])
-  if (!objValid[type])
-    return res.status(422).json({ message: 'Dados inválidos' });
+};
 
-  next()
+module.exports = {
+  valid,
 };
