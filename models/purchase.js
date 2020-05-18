@@ -62,8 +62,9 @@ const deletePurchase = async (id) => {
 
 const verifyUserPurchase = async (userID, id) => {
   const data = await getData(FILE_NAME);
-  return data.find(purchase => purchase.id === id)
-    .userID === userID;
+  const purchase = data.find(purchase => purchase.id === id);
+  if (!purchase) return false;
+  return (purchase.userID === userID);
 }
 
 const getPurchase = async (userID, id) => {

@@ -3,6 +3,7 @@ const readAll = require('./readAll');
 const readOne = require('./readOne');
 const remove = require('./remove');
 const update = require('./update');
+const images = require('./images');
 
 module.exports = {
   create,
@@ -10,4 +11,5 @@ module.exports = {
   readOne,
   remove,
   update,
+  images,
 }

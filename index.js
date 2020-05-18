@@ -1,7 +1,8 @@
 const express = require('express');
 const controllers = require('./controllers');
 const auth = require('./middleware/auth');
-
+const multer = require('multer');
+const path = require('path');
 
 const port = process.env.PORT || 8080;
 
@@ -14,11 +15,17 @@ const JWT_SECRET = 'itsasecret';
 const apiRoutes = express.Router();
 const authMiddleware = auth.factory(JWT_SECRET);
 
+apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 apiRoutes.post('/users', controllers.users.create);
 apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
 
 apiRoutes.post('/products', authMiddleware, controllers.products.create);
 apiRoutes.put('/products/:id', authMiddleware, controllers.products.update);
+apiRoutes.post('/images', authMiddleware, upload.single('image'), controllers.products.images);
 apiRoutes.get('/products/:id', controllers.products.readOne);
 apiRoutes.get('/products', controllers.products.readAll);
 apiRoutes.delete('/products/:id', authMiddleware, controllers.products.remove);
