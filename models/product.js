@@ -10,9 +10,9 @@ const isValidName = (name) => {
 
 const isEmployee = ({ role }) => role === 'funcionario';
 
-const isValidPrice = (price) => {
-  return (typeof price === 'number' && price > 0);
-};
+const isValidPrice = (price) => (
+  (typeof price === 'number' && price > 0)
+);
 
 const validProduct = ({ price, name, description }) => {
   if (!price || !name || !description) return false;
@@ -23,7 +23,7 @@ const validProduct = ({ price, name, description }) => {
 
 const findOne = async ({ id }) => {
   const data = await getData(FILE_NAME);
-  const product = data.find((obj) => (
+  const product = data.find(obj => (
     obj.id === id
   ));
   return product;
@@ -33,7 +33,7 @@ const deleteProduct = async (obj) => {
   const searchProduct = await findOne(obj);
   if (!searchProduct) return false;
   const products = await getData(FILE_NAME);
-  const newArray = products.filter((product) => (
+  const newArray = products.filter(product => (
     searchProduct.id !== product.id
   ));
   return setData(FILE_NAME, newArray);
@@ -43,16 +43,15 @@ const updateProduct = async (obj) => {
   const searchProduct = await findOne(obj);
   if (!searchProduct) return false;
   const products = await getData(FILE_NAME);
-  const newArray = [...products.filter((product) => (
+  const newArray = [...products.filter(product => (
     searchProduct.id !== product.id
   )), obj];
   await setData(FILE_NAME, newArray);
   return obj;
 };
 
-const getAllProduct = async () => {
-  return getData(FILE_NAME);
-};
+const getAllProduct = async () => getData(FILE_NAME);
+
 
 const Product = {
   validProduct,

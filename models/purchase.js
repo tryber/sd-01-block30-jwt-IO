@@ -7,32 +7,42 @@ const FILE_USER = 'users';
 
 const findOne = async (id) => {
   const purchases = await getData(FILE_NAME);
-  const purchase = purchases
+  const onePurchase = purchases
     .find((purchase) => purchase.id === id);
-  if (!purchase) return false;
-  return purchase;
+  if (!onePurchase) return false;
+  return onePurchase;
 };
 
 const isExists = async (id, type) => {
   const data = await getData(type);
-  return data.some((entidade) => entidade.id === id);
+  return data.some(obj => obj.id === id);
 };
 
-const isValidQuantity = (quantity) => {
-  return quantity > 0 && typeof quantity === 'number' && Number.isInteger(quantity);
-};
+const isValidQuantity = (quantity) => (
+  quantity > 0 && typeof quantity === 'number' && Number.isInteger(quantity)
+);
 
 const validUpdate = ({ userID }) => {
   if (!userID) return false;
-  if (!isExists(userID, FILE_USER)) return false
-  return true
-}
+  if (!isExists(userID, FILE_USER)) return false;
+  return true;
+};
 
 const validPurchase = ({ productId, quantity }) => {
   if (!productId || !quantity) return false;
   if (!isValidQuantity(quantity)) return false;
   if (!isExists(productId, FILE_PRODUCT)) return false;
   return true;
+};
+const deletePurchase = async (id) => {
+  const searchPurchase = findOne(id);
+  if (!searchPurchase) return false;
+  const purchases = await getData(FILE_NAME);
+  const newArray = purchases.filter(purchase => (
+    searchPurchase.id !== purchase.id
+  ));
+  await setData(FILE_NAME, newArray);
+  return newArray;
 };
 
 const updatePurchase = async (obj, id) => {
@@ -43,22 +53,11 @@ const updatePurchase = async (obj, id) => {
   return { ...obj, id: searchPurchase.id };
 };
 
-const deletePurchase = async (id) => {
-  const searchPurchase = findOne(id);
-  if (!searchPurchase) return false;
-  const purchases = await getData(FILE_NAME);
-  const newArray = purchases.filter((purchase) => (
-    searchPurchase.id !== purchase.id
-  ));
-  await setData(FILE_NAME, newArray);
-  return newArray;
-};
-
 const verifyUserPurchase = async (userID, id) => {
   const data = await getData(FILE_NAME);
-  const purchase = data.find(purchase => purchase.id === id);
-  if (!purchase) return false;
-  return (purchase.userID === userID);
+  const onePurchase = data.find(purchase => purchase.id === id);
+  if (!onePurchase) return false;
+  return (onePurchase.userID === userID);
 };
 
 const getPurchase = async (userID, id) => {

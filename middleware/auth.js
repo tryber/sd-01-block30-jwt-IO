@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 const factory = secret => async (req, res, next) => {
   try {
-    const token = req.headers['authorization'];
+    const token = req.headers.authorization;
     const payload = jwt.verify(token, secret);
 
     const user = await User.findOneById(payload.data);

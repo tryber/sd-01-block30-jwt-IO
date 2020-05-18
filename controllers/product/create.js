@@ -5,17 +5,14 @@ const FILE_NAME = 'products';
 
 const create = async (req, res) => {
   const { name, description, price } = req.body;
-  // const { role } = req.user;
-  
   const productData = {
     name,
     description,
     price,
   };
-
   Product.save(productData, FILE_NAME).then((product) => {
     res.status(201).json(product);
-  })
+  });
 };
 
-module.exports = rescue(create)
+module.exports = rescue(create);
