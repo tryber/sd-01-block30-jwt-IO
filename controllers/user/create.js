@@ -21,9 +21,8 @@ const create = async (req, res) => {
     role,
   };
 
-  User.save(userData, FILE_NAME).then(({ password, ...user }) => {
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso', data: user });
-  })
+  const { password, ...user } = await User.save(userData, FILE_NAME);
+  return res.status(201).json({ message: 'Usuário cadastrado com sucesso', data: user });
 }
 
 module.exports = rescue(create);
