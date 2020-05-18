@@ -22,4 +22,4 @@ const login = secret => async (req, res) => {
   });
 };
 
-module.exports = (secret) => rescue(login(secret));
+module.exports = secret => rescue(login(secret));

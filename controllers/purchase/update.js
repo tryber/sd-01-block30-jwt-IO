@@ -16,7 +16,7 @@ const update = async (req, res) => {
     productId,
     quantity,
     userID,
-  }
+  };
 
   Purchase.update(newObj, id).then((purchase) => {
     res.status(200).json({ purchase });

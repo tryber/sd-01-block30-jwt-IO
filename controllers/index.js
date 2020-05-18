@@ -6,4 +6,4 @@ module.exports = {
   users,
   products,
   purchases,
-}
+};

@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 const rescue = require('../rescue');
+
 const FILE_NAME = 'users';
 
 const create = async (req, res) => {

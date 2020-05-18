@@ -47,4 +47,4 @@ apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purcha
 app.use(apiRoutes);
 
 app.listen(port);
-console.log('Conectado na porta ' + port);
+console.log('Conectado na porta');
