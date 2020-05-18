@@ -10,9 +10,8 @@ const create = async (req, res) => {
     description,
     price,
   };
-  Product.save(productData, FILE_NAME).then((product) => {
-    res.status(201).json(product);
-  });
+  const resultProduct = await Product.save(productData, FILE_NAME)
+  res.status(201).json(resultProduct);
 };
 
 module.exports = rescue(create);
