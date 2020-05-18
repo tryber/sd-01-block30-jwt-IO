@@ -19,9 +19,9 @@ router.post('/', upload.single('image'), imageValidMiddleware, async (req, res) 
   await fs.writeFile(newFileName, req.file.buffer);
 
   const products = new Image(`http://localhost:3000/${req.body.image}`);
-  const updateProducts = await products.update(req.body.productId);
+  const increaseProducts = await products.increase(req.body.productId);
 
-  res.status(201).json({ image: updateProducts });
+  res.status(201).json({ image: increaseProducts });
 });
 
 module.exports = router;

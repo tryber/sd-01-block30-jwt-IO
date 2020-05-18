@@ -18,6 +18,16 @@ router.get('/:id', async (req, res) => {
 });
 
 router.use(authorizationValidMiddleware);
+
+router.delete('/:id', async (req, res) => {
+  const actionDelete = await deleteProduct(req.params.id);
+
+  if (actionDelete)
+    return res.status(400).json({ message: actionDelete });
+
+  res.status(204).end();
+});
+
 router.use(productAccessMiddleware);
 
 router.post('/', async (req, res) => {
@@ -29,19 +39,13 @@ router.post('/', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
-router.delete('/:id', async (req, res) => {
-  await deleteProduct(req.params.id);
-
-  res.status(204).end();
-});
-
 router.put('/:id', async (req, res) => {
   const { name, description, price } = req.body;
 
   const products = new Product(name, description, price);
   const updateProducts = await products.update(req.params.id);
 
-  if (updateProducts === 'id invalid')
+  if (updateProducts === 'Id invalid')
     return res.status(400).json({ message: updateProducts });
 
   res.status(200).json(products);

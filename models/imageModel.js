@@ -5,7 +5,7 @@ class Image {
     this.image = image;
   }
 
-  async update(productId) {
+  async increase(productId) {
     const images = await readFileJson('products');
     const image = images.find(({ id }) => id === productId);
 

@@ -17,8 +17,11 @@ async function deleteProduct(id) {
   const rawData = await readFileJson('products');
   const products = rawData.filter(product => product.id !== id);
 
+  if(rawData.length === products.length)
+    return 'Id invalid';
+
   await modifyFile(products, 'products');
-  return products;
+  return;
 }
 
 class Product {
@@ -45,7 +48,7 @@ class Product {
 
     const product = products.find(({ id }) => id === idProduct);
 
-    if (!product) return 'id invalid';
+    if (!product) return 'Id invalid';
 
     this.id = idProduct;
     product.name = this.name;

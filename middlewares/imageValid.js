@@ -21,13 +21,16 @@ async function readFolderImages(fileName = '') {
 
 async function imageValidMiddleware(req, res, next) {
   const { productId, image } = req.body;
-  const { fieldname, originalname } = req.file;
+  
+  if (!req.file)
+    return res.status(400).json({ message: 'Missing file' });
 
+  const { fieldname, originalname } = req.file;
   if (!(await productIdValid(productId)))
     return res.status(401).json({ message: 'Invalid productId' });
 
   if (!imageTextValid(image) || fieldname !== 'image' || !imageTextValid(originalname))
-    return res.status(422).json({ message: 'Missing file or fileName' });
+    return res.status(422).json({ message: 'File or fileName is not document .jpg or .png' });
 
   if (await readFolderImages(image)) return res.status(409).json({ message: 'File already exists' });
 
