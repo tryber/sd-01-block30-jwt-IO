@@ -6,7 +6,7 @@ const update = async (req, res) => {
   const { name, description, price } = req.body;
   const { role } = req.user;
   const { id } = req.params;
-  if (role !== EMPLOYEE) return res.status(401).json({ message: 'Não autorizado' })
+  if (role !== EMPLOYEE) return res.status(401).json({ message: 'Não autorizado' });
 
   if (!Product.validProduct(req.body)) {
     return res.status(422).json({ message: 'Dados inválidos' });

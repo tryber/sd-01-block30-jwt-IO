@@ -6,13 +6,13 @@ const FILE_NAME = 'users';
 const isUniqueUser = async (username) => {
   const data = await getData('users');
   return !data.some((user) => user.username === username);
-}
+};
 
 const isValidUser = (username) => {
   const usernameRegex = /[a-z0-9]*[A-Z0-9]*/g;
   return username.match(usernameRegex)
     && username.length >= 6;
-}
+};
 
 const isValidDados = ({ username, password, role }) => {
   if (password.length < 8) return false;
@@ -20,7 +20,7 @@ const isValidDados = ({ username, password, role }) => {
   if (!validRoles.includes(role)) return false;
   if (!isValidUser(username)) return false;
   return true;
-}
+};
 
 const addUser = async (obj) => {
   const data = await getData(FILE_NAME);
@@ -28,7 +28,7 @@ const addUser = async (obj) => {
   const newArray = [...data, objId];
   await setData(FILE_NAME, newArray);
   return objId;
-}
+};
 
 const findOne = async ({ username, password }) => {
   const data = await getData(FILE_NAME);
@@ -38,7 +38,7 @@ const findOne = async ({ username, password }) => {
   if (!user) return false;
   const { role, id } = user;
   return { username, role, id };
-}
+};
 
 const findOneById = async ({ id }) => {
   const data = await getData(FILE_NAME);
@@ -48,7 +48,7 @@ const findOneById = async ({ id }) => {
   if (!user) return false;
   const { username, role, } = user;
   return { username, role, id };
-}
+};
 
 const User = {
   isValidDados,
