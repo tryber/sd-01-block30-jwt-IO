@@ -17,11 +17,10 @@ async function deleteProduct(id) {
   const rawData = await readFileJson('products');
   const products = rawData.filter(product => product.id !== id);
 
-  if(rawData.length === products.length)
+  if (rawData.length === products.length)
     return 'Id invalid';
 
   await modifyFile(products, 'products');
-  return;
 }
 
 class Product {

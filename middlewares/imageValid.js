@@ -21,7 +21,7 @@ async function readFolderImages(fileName = '') {
 
 async function imageValidMiddleware(req, res, next) {
   const { productId, image } = req.body;
-  
+
   if (!req.file)
     return res.status(400).json({ message: 'Missing file' });
 
