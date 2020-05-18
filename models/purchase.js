@@ -8,7 +8,7 @@ const FILE_USER = 'users';
 const findOne = async (id) => {
   const purchases = await getData(FILE_NAME);
   const onePurchase = purchases
-    .find((purchase) => purchase.id === id);
+    .find(purchase => purchase.id === id);
   if (!onePurchase) return false;
   return onePurchase;
 };
@@ -18,7 +18,7 @@ const isExists = async (id, type) => {
   return data.some(obj => obj.id === id);
 };
 
-const isValidQuantity = (quantity) => (
+const isValidQuantity = quantity => (
   quantity > 0 && typeof quantity === 'number' && Number.isInteger(quantity)
 );
 

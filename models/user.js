@@ -4,7 +4,7 @@ const FILE_NAME = 'users';
 
 const isUniqueUser = async (username) => {
   const data = await getData('users');
-  return !data.some((user) => user.username === username);
+  return !data.some(user => user.username === username);
 };
 
 const isValidUser = (username) => {
@@ -24,7 +24,7 @@ const isValidDados = ({ username, password, role }) => {
 
 const findOne = async ({ username, password }) => {
   const data = await getData(FILE_NAME);
-  const user = data.find((obj) => (
+  const user = data.find(obj => (
     obj.username === username && obj.password === password
   ));
   if (!user) return false;
@@ -34,11 +34,11 @@ const findOne = async ({ username, password }) => {
 
 const findOneById = async ({ id }) => {
   const data = await getData(FILE_NAME);
-  const user = data.find((obj) => (
+  const user = data.find(obj => (
     obj.id === id
   ));
   if (!user) return false;
-  const { username, role, } = user;
+  const { username, role } = user;
   return { username, role, id };
 };
 

@@ -5,8 +5,6 @@ const fs = require('fs').promises;
 const rescue = require('../rescue');
 
 const updateImage = async (req, res) => {
-  // const { role } = req.user;
-  // if (role !== EMPLOYEE) return res.status(401).json({ message: 'Não autorizado' });
   if (!req.body.productId) return res.status(422).json({ message: 'Dados invalidos' });
   const product = await Product.getOne({ id: req.body.productId });
   if (!product) return res.status(422).json({ message: 'Dados invalidos' });

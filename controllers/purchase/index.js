@@ -10,4 +10,4 @@ module.exports = {
   readOne,
   remove,
   update,
-}
+};

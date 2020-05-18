@@ -10,7 +10,7 @@ const isValidName = (name) => {
 
 const isEmployee = ({ role }) => role === 'funcionario';
 
-const isValidPrice = (price) => (
+const isValidPrice = price => (
   (typeof price === 'number' && price > 0)
 );
 

@@ -21,10 +21,10 @@ const create = async (req, res) => {
   const usu = Object.entries(user)
     .reduce((acc, data) => {
       if (data[0] === 'password') return acc;
-      return { ...acc, [data[0]]: data[1] }
+      return { ...acc, [data[0]]: data[1] };
     }, {});
   console.log(usu);
   return res.status(201).json({ message: 'Usuário cadastrado com sucesso', data: usu });
-}
+};
 
 module.exports = rescue(create);
