@@ -22,12 +22,16 @@ const isValidQuantity = (quantity) => {
   return quantity > 0 && typeof quantity === 'number' && Number.isInteger(quantity);
 };
 
-const validPurchase = ({ productId, quantity, userID }, update) => {
+const validUpdate = ({ userID }) => {
+  if (!userID) return false;
+  if (!isExists(userID, FILE_USER)) return false
+  return true
+}
+
+const validPurchase = ({ productId, quantity }) => {
   if (!productId || !quantity) return false;
   if (!isValidQuantity(quantity)) return false;
   if (!isExists(productId, FILE_PRODUCT)) return false;
-  if (update && !userID) return false;
-  if (update && !isExists(userID, FILE_USER)) return false;
   return true;
 };
 
@@ -42,9 +46,7 @@ const addPurchase = async (obj) => {
 const updatePurchase = async (obj, id) => {
   const searchPurchase = await findOne(id);
   if (!searchPurchase) return false;
-  const newArray = [...purchases.filter((purchase) => (
-    searchPurchase.id !== purchase.id
-  )), { ...obj, id: searchPurchase.id }];
+  const newArray = [...deletePurchase(id), { ...obj, id: searchPurchase.id }];
   await setData(FILE_NAME, newArray);
   return { ...obj, id: searchPurchase.id };
 };
@@ -52,10 +54,12 @@ const updatePurchase = async (obj, id) => {
 const deletePurchase = async (id) => {
   const searchPurchase = findOne(id);
   if (!searchPurchase) return false;
+  const purchases = await getData(FILE_NAME);
   const newArray = purchases.filter((purchase) => (
     searchPurchase.id !== purchase.id
   ));
-  return setData(FILE_NAME, newArray);
+  await setData(FILE_NAME, newArray);
+  return newArray;
 };
 
 const verifyUserPurchase = async (userID, id) => {
@@ -78,6 +82,7 @@ const getAllPurchase = async (userID) => {
 
 const Purchase = {
   validPurchase,
+  validUpdate,
   delete: deletePurchase,
   update: updatePurchase,
   save: addPurchase,
