@@ -10,5 +10,11 @@
     "name": "Playstation 5",
     "description": "Jogo",
     "price": 999.99
+  },
+  {
+    "id": "ffe28486-2c35-4701-9092-c718dddb1270",
+    "name": "cafe grao",
+    "description": "moido",
+    "price": 10
   }
 ]

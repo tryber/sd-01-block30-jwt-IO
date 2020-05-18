@@ -23,40 +23,28 @@ async function deleteProduct(id) {
   await modifyFile(products, 'products');
 }
 
-class Product {
-  constructor(name, description, price) {
-    this.id = null;
-    this.name = name;
-    this.description = description;
-    this.price = price;
-  }
+async function addProduct(req) {
+  const products = await readFileJson('products');
+  const product = { id: uuidv4(), ...req };
+  products.push(product);
 
-  async add() {
-    const products = await readFileJson('products');
-
-    this.id = uuidv4();
-    products.push(this);
-
-    await modifyFile(products, 'products');
-
-    return this;
-  }
-
-  async update(idProduct) {
-    const products = await readFileJson('products');
-    const product = products.find(({ id }) => id === idProduct);
-
-    if (!product) return 'Id invalid';
-
-    this.id = idProduct;
-    product.name = this.name;
-    product.description = this.description;
-    product.price = this.price;
-
-    await modifyFile(products, 'products');
-
-    return products;
-  }
+  await modifyFile(products, 'products');
+  return product;
 }
 
-module.exports = { Product, getAll, getById, deleteProduct };
+async function updateProduct(idProduct, req) {
+  const products = await readFileJson('products');
+  const product = products.find(({ id }) => id === idProduct);
+
+  if (!product) return 'Id invalid';
+
+  const fileJson = products.indexOf(product);
+  const updateJson = { id: idProduct, ...req };
+  products[fileJson] = updateJson
+
+  await modifyFile(products, 'products');
+
+  return updateJson;
+}
+
+module.exports = { getAll, getById, deleteProduct, addProduct, updateProduct };

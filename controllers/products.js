@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Product, getAll, getById, deleteProduct } = require('../models/productModel');
+const { getAll, getById, deleteProduct, addProduct, updateProduct } = require('../models/productModel');
 const { productAccessMiddleware, authorizationValidMiddleware } = require('../middlewares/productAccessValid');
 
 const router = express.Router();
@@ -31,24 +31,18 @@ router.delete('/:id', async (req, res) => {
 router.use(productAccessMiddleware);
 
 router.post('/', async (req, res) => {
-  const { name, description, price } = req.body;
-
-  const newProduct = new Product(name, description, price);
-  await newProduct.add();
+  const newProduct = await addProduct(req.body)
 
   res.status(201).json(newProduct);
 });
 
 router.put('/:id', async (req, res) => {
-  const { name, description, price } = req.body;
-
-  const products = new Product(name, description, price);
-  const updateProducts = await products.update(req.params.id);
+  const updateProducts = await updateProduct(req.params.id, req.body);
 
   if (updateProducts === 'Id invalid')
     return res.status(400).json({ message: updateProducts });
 
-  res.status(200).json(products);
+  res.status(200).json(updateProducts);
 });
 
 module.exports = router;
