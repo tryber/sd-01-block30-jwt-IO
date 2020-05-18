@@ -24,11 +24,11 @@ async function deleteProduct(id) {
 }
 
 class Product {
-  constructor(name, description, price) {
+  constructor(req) {
     this.id = null;
-    this.name = name;
-    this.description = description;
-    this.price = price;
+    this.name = req.name;
+    this.description = req.description;
+    this.price = req.price;
   }
 
   async add() {
@@ -44,7 +44,6 @@ class Product {
 
   async update(idProduct) {
     const products = await readFileJson('products');
-
     const product = products.find(({ id }) => id === idProduct);
 
     if (!product) return 'Id invalid';

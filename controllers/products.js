@@ -31,18 +31,14 @@ router.delete('/:id', async (req, res) => {
 router.use(productAccessMiddleware);
 
 router.post('/', async (req, res) => {
-  const { name, description, price } = req.body;
-
-  const newProduct = new Product(name, description, price);
+  const newProduct = new Product(req.body);
   await newProduct.add();
 
   res.status(201).json(newProduct);
 });
 
 router.put('/:id', async (req, res) => {
-  const { name, description, price } = req.body;
-
-  const products = new Product(name, description, price);
+  const products = new Product(req.body);
   const updateProducts = await products.update(req.params.id);
 
   if (updateProducts === 'Id invalid')
