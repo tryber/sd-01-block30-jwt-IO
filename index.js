@@ -1,8 +1,7 @@
 const express = require('express');
 const controllers = require('./controllers');
 const auth = require('./middleware/auth');
-const middleProduct = require('./middleware/middleProduct');
-const middlePurchase = require('./middleware/middlePurchase');
+const middleValidBody = require('./middleware/middleValidBody')
 const token = require('./middleware/Token');
 const middleRole = require('./middleware/middleRole');
 const multer = require('multer');
@@ -19,11 +18,6 @@ const JWT_SECRET = 'itsasecret';
 const apiRoutes = express.Router();
 const authMiddleware = auth.factory(JWT_SECRET);
 
-const authProduct = middleProduct.valid;
-const authPurchase = middlePurchase.valid;
-const authRole = middleRole.valid;
-const authToken = token.isExist;
-
 apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
 
 const storage = multer.memoryStorage();
@@ -32,18 +26,18 @@ const upload = multer({ storage });
 apiRoutes.post('/users', controllers.users.create);
 apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
 
-apiRoutes.post('/products', authToken, authMiddleware, authRole, authProduct, controllers.products.create);
-apiRoutes.put('/products/:id', authToken, authMiddleware, authRole, authProduct, controllers.products.update);
-apiRoutes.post('/images', authToken, authMiddleware, authRole, upload.single('image'), controllers.products.images);
+apiRoutes.post('/products', token, authMiddleware, middleRole, middleValidBody('product'), controllers.products.create);
+apiRoutes.put('/products/:id', token, authMiddleware, middleRole, middleValidBody('product'), controllers.products.update);
+apiRoutes.post('/images', token, authMiddleware, middleRole, upload.single('image'), controllers.products.images);
 apiRoutes.get('/products/:id', controllers.products.readOne);
 apiRoutes.get('/products', controllers.products.readAll);
-apiRoutes.delete('/products/:id', authToken, authMiddleware, authRole, controllers.products.remove);
+apiRoutes.delete('/products/:id', token, authMiddleware, middleRole, controllers.products.remove);
 
-apiRoutes.post('/purchases', authToken, authMiddleware, authPurchase, controllers.purchases.create);
-apiRoutes.put('/purchases/:id', authToken, authMiddleware, authPurchase, controllers.purchases.update);
-apiRoutes.get('/purchases/:id', authToken, authMiddleware, controllers.purchases.readOne);
-apiRoutes.get('/purchases', authToken, authMiddleware, controllers.purchases.readAll);
-apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purchases.remove);
+apiRoutes.post('/purchases', token, authMiddleware, middleValidBody('purchase'), controllers.purchases.create);
+apiRoutes.put('/purchases/:id', token, authMiddleware, middleValidBody('purchase'), controllers.purchases.update);
+apiRoutes.get('/purchases/:id', token, authMiddleware, controllers.purchases.readOne);
+apiRoutes.get('/purchases', token, authMiddleware, controllers.purchases.readAll);
+apiRoutes.delete('/purchases/:id', token, authMiddleware, controllers.purchases.remove);
 
 app.use(apiRoutes);
 
