@@ -40,7 +40,7 @@ async function updateProduct(idProduct, req) {
 
   const fileJson = products.indexOf(product);
   const updateJson = { id: idProduct, ...req };
-  products[fileJson] = updateJson
+  products[fileJson] = updateJson;
 
   await modifyFile(products, 'products');
 

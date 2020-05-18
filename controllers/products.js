@@ -31,7 +31,7 @@ router.delete('/:id', async (req, res) => {
 router.use(productAccessMiddleware);
 
 router.post('/', async (req, res) => {
-  const newProduct = await addProduct(req.body)
+  const newProduct = await addProduct(req.body);
 
   res.status(201).json(newProduct);
 });
