@@ -24,11 +24,11 @@ async function deleteProduct(id) {
 }
 
 class Product {
-  constructor(req) {
+  constructor(name, description, price) {
     this.id = null;
-    this.name = req.name;
-    this.description = req.description;
-    this.price = req.price;
+    this.name = name;
+    this.description = description;
+    this.price = price;
   }
 
   async add() {
