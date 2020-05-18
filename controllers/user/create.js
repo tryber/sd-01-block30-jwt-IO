@@ -1,9 +1,10 @@
 const User = require('../../models/user');
 const rescue = require('../rescue');
+const FILE_NAME = 'users';
 
 const create = async (req, res) => {
   const { username, password, role } = req.body;
-  console.log(req.body,'body')
+  console.log(req.body, 'body')
   if (!username || !password || !role) return res.status(422).json({ message: 'Faltou algum campo' });
 
   if (!User.isValidDados({ username, password, role })) {
@@ -20,7 +21,7 @@ const create = async (req, res) => {
     role,
   };
 
-  User.save(userData).then(({ password, ...user }) => {
+  User.save(userData, FILE_NAME).then(({ password, ...user }) => {
     res.status(201).json({ message: 'Usuário cadastrado com sucesso', data: user });
   })
 }

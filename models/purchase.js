@@ -1,5 +1,5 @@
-const { getData, setData } = require('./utils');
-const { v1: uuidv1 } = require('uuid');
+const { getData, setData, addItem } = require('./utils');
+
 
 const FILE_NAME = 'purchase';
 const FILE_PRODUCT = 'products';
@@ -33,14 +33,6 @@ const validPurchase = ({ productId, quantity }) => {
   if (!isValidQuantity(quantity)) return false;
   if (!isExists(productId, FILE_PRODUCT)) return false;
   return true;
-};
-
-const addPurchase = async (obj) => {
-  const data = await getData(FILE_NAME);
-  const objId = { ...obj, id: uuidv1() };
-  const newArray = [...data, objId];
-  await setData(FILE_NAME, newArray);
-  return objId;
 };
 
 const updatePurchase = async (obj, id) => {
@@ -85,7 +77,7 @@ const Purchase = {
   validUpdate,
   delete: deletePurchase,
   update: updatePurchase,
-  save: addPurchase,
+  save: addItem,
   getAll: getAllPurchase,
   getOne: getPurchase,
   verifyUser: verifyUserPurchase,

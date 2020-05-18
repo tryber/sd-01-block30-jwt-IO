@@ -1,5 +1,4 @@
-const { getData, setData } = require('./utils');
-const { v1: uuidv1 } = require('uuid');
+const { getData, addItem } = require('./utils');
 
 const FILE_NAME = 'users';
 
@@ -22,13 +21,6 @@ const isValidDados = ({ username, password, role }) => {
   return true;
 };
 
-const addUser = async (obj) => {
-  const data = await getData(FILE_NAME);
-  const objId = { ...obj, id: uuidv1() };
-  const newArray = [...data, objId];
-  await setData(FILE_NAME, newArray);
-  return objId;
-};
 
 const findOne = async ({ username, password }) => {
   const data = await getData(FILE_NAME);
@@ -52,7 +44,7 @@ const findOneById = async ({ id }) => {
 
 const User = {
   isValidDados,
-  save: addUser,
+  save: addItem,
   findOne,
   findOneById,
   isUniqueUser,

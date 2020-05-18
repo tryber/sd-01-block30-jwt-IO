@@ -1,5 +1,4 @@
-const { getData, setData } = require('./utils');
-const { v1: uuidv1 } = require('uuid');
+const { getData, setData, addItem } = require('./utils');
 
 const FILE_NAME = 'products';
 
@@ -20,14 +19,6 @@ const validProduct = ({ price, name, description }) => {
   if (!isValidName(name)) return false;
   if (!isValidPrice(price)) return false;
   return true;
-};
-
-const addProduct = async (obj) => {
-  const data = await getData(FILE_NAME);
-  const objId = { ...obj, id: uuidv1() };
-  const newArray = [...data, objId];
-  await setData(FILE_NAME, newArray);
-  return objId;
 };
 
 const findOne = async ({ id }) => {
@@ -68,7 +59,7 @@ const Product = {
   isEmployee,
   delete: deleteProduct,
   update: updateProduct,
-  save: addProduct,
+  save: addItem,
   getAll: getAllProduct,
   getOne: findOne,
 };
