@@ -10,7 +10,7 @@ const create = async (req, res) => {
     description,
     price,
   };
-  const resultProduct = await Product.save(productData, FILE_NAME)
+  const resultProduct = await Product.save(productData, FILE_NAME);
   res.status(201).json(resultProduct);
 };
 

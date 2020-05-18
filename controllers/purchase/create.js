@@ -15,9 +15,8 @@ const create = async (req, res) => {
     quantity,
   };
 
-  Purchase.save(purchaseData, FILE_NAME).then((purchase) => {
-    res.status(201).json(purchase);
-  });
+  const resultPurchase = await Purchase.save(purchaseData, FILE_NAME);
+  res.status(201).json(resultPurchase);
 };
 
 module.exports = rescue(create);

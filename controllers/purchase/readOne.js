@@ -8,9 +8,8 @@ const read = async (req, res) => {
   if (!(await Purchase.verifyUser(userID, id))) return res.status(403)
     .json({ message: 'Id do comprador,nao bate com id do usuário' });
 
-  Purchase.getOne(userID, id).then((purchase) => {
-    res.status(200).json(purchase);
-  });
+  const onePurchase = Purchase.getOne(userID, id);
+  res.status(200).json(onePurchase);
 };
 
 module.exports = rescue(read);
