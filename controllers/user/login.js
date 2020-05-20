@@ -18,9 +18,9 @@ const login = secret => async (req, res) => {
   const date = new Date(0);
 
   const token = jwt.sign({ data: user }, secret, jwtConfig);
-  const {exp} = jwt.verify(token, secret);
+  const { exp } = jwt.verify(token, secret);
 
-  const expires = moment(date.setUTCSeconds(exp)).format('MMMM Do YYYY, h:mm:ss a');
+  const expires = moment(date.setUTCSeconds(exp)).format();
   res.status(200).json({
     token,
     expires,
