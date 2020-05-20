@@ -1,6 +1,5 @@
 const { getData, setData, addItem } = require('./utils');
 
-
 const FILE_NAME = 'purchase';
 const FILE_PRODUCT = 'products';
 const FILE_USER = 'users';

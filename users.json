@@ -62,7 +62,7 @@
   {
     "username": "SUPIMPAa",
     "password": "senhasupersecreta",
-    "role": "entregdor",
+    "role": "entregador",
     "id": "5855f8f0-98c5-11ea-9632-33f98d409af1"
   },
   {
@@ -70,5 +70,11 @@
     "password": "senhasupersecreta",
     "role": "entregador",
     "id": "77e0ec70-98c5-11ea-801b-e75531bd3e72"
+  },
+  {
+    "username": "wilson2",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "83a290e0-9546-11ea-ace4-4126ce9a963d"
   }
 ]
