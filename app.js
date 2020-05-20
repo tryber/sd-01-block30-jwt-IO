@@ -5,6 +5,7 @@ const auth = require('./middleware/auth');
 const authBody = require('./middleware/middleValidBody');
 const token = require('./middleware/Token');
 const middleRole = require('./middleware/middleRole');
+const middleExistData = require('./middleware/ExistData');
 const multer = require('multer');
 const path = require('path');
 
@@ -22,13 +23,14 @@ const authPurchase = authBody.valid('purchase');
 const authUser = authBody.valid('user');
 const authToken = token.isExist;
 const authRole = middleRole.valid;
+const authExist = middleExistData.valid;
 
 apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-apiRoutes.post('/users', authUser, controllers.users.create);
+apiRoutes.post('/users', authExist, authUser, controllers.users.create);
 apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
 
 apiRoutes.post('/products', authToken, authMiddleware, authRole, authProduct, controllers.products.create);

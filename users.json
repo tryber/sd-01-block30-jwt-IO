@@ -76,5 +76,29 @@
     "password": "senhasupersecreta",
     "role": "entregador",
     "id": "83a290e0-9546-11ea-ace4-4126ce9a963d"
+  },
+  {
+    "username": "SUPIMPAS2",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "757ca1a0-9abd-11ea-9446-83b175228a7a"
+  },
+  {
+    "username": "SUPIMPAS3",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "fe854390-9ac6-11ea-9c36-8b75ec146efc"
+  },
+  {
+    "username": "SUPIMPAS4",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "67f704c0-9ac8-11ea-9119-6d241e2e253a"
+  },
+  {
+    "username": "ADMINSUPREMO",
+    "password": "ADMINSUPREMO",
+    "role": "funcionario",
+    "id": "3c6824a0-9ace-11ea-a572-c3ca7ad331e5"
   }
 ]

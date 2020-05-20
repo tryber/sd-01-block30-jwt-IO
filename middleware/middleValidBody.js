@@ -5,12 +5,12 @@ const User = require('../models/user');
 const valid = type => async (req, res, next) => {
   try {
     const objValid = {
-      purchase: Purchase.validPurchase(req.body),
-      product: Product.validProduct(req.body),
-      user: User.isValidDados(req.body),
+      purchase: () => Purchase.validPurchase(req.body),
+      product: () => Product.validProduct(req.body),
+      user: () => User.isValidDados(req.body),
     };
 
-    if (!objValid[type])
+    if (!objValid[type]())
       return res.status(422).json({ message: 'Dados inválidos' });
 
     next();
