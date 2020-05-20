@@ -14,6 +14,7 @@ const apiRoutes = express.Router();
 apiRoutes.post('/users', routes.createUsers);
 apiRoutes.post('/login', routes.login);
 app.use('/products', validateJWT, routes.products);
+// app.use('/purchases', validateJWT, routes.purchases);
 
 app.use(apiRoutes);
 

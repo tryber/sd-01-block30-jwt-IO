@@ -4,7 +4,7 @@ const User = require('../../models/user');
 const segredo = 'seusecretdetoken';
 
 module.exports = async (req, res, next) => {
-  if (req.method === 'GET') return next();
+  if (req.method === 'GET' && req.baseUrl === '/products') return next();
 
   const token = req.headers.authorization;
 

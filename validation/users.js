@@ -3,7 +3,8 @@ const users = require('../users.json');
 const findUser = username => users.find(user => user.username === username);
 
 function validateUsername({ username }) {
-  if (!findUser(username) && /[0-9a-zA-Z]{6,}/.test(username)) return true;
+  if (username && !findUser(username) && /^([a-zA-Z0-9]+)$/.test(username))
+    return true;
   return false;
 }
 

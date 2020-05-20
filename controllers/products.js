@@ -23,8 +23,8 @@ router.post('/', async (req, res) => {
   if (req.user.role !== 'funcionario')
     return res.status(401).send({ message: 'Unauthorized' });
 
-  await Product.addProduct(req.body);
-  res.status(201).json({ message: 'Produto adicionado com sucessso!' });
+  const product = await Product.addProduct(req.body);
+  res.status(201).json(product);
 });
 
 router.put('/:id', async (req, res) => {
