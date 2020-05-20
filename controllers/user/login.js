@@ -1,6 +1,7 @@
 const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const rescue = require('../rescue');
+const moment = require('moment');
 
 const login = secret => async (req, res) => {
   const { username, password } = req.body;
@@ -14,11 +15,15 @@ const login = secret => async (req, res) => {
     expiresIn: '3d',
     algorithm: 'HS256',
   };
+  const date = new Date(0);
 
   const token = jwt.sign({ data: user }, secret, jwtConfig);
+  const {exp} = jwt.verify(token, secret);
 
+  const expires = moment(date.setUTCSeconds(exp)).format('MMMM Do YYYY, h:mm:ss a');
   res.status(200).json({
     token,
+    expires,
   });
 };
 
