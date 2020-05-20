@@ -21,7 +21,6 @@ const isValidDados = ({ username, password, role }) => {
   return true;
 };
 
-
 const findOne = async ({ username, password }) => {
   const data = await getData(FILE_NAME);
   const user = data.find(obj => (

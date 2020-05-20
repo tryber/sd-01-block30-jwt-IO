@@ -49,5 +49,4 @@ apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purcha
 app.use(apiRoutes);
 module.exports = {
   app,
-}
-
+};
