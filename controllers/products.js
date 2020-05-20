@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
   if (!validate(req.body))
     return res.status(422).json({ message: 'Dados inválidos!' });
 
-  if (req.user.role !== 'funcionario')
+  if (req.role !== 'funcionario')
     return res.status(401).send({ message: 'Unauthorized' });
 
   const product = await Product.addProduct(req.body);
