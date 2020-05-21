@@ -15,12 +15,11 @@ const login = secret => async (req, res) => {
     expiresIn: '3d',
     algorithm: 'HS256',
   };
-  const date = new Date(0);
 
   const token = jwt.sign({ data: user }, secret, jwtConfig);
   const { exp } = jwt.verify(token, secret);
 
-  const expires = moment(date.setUTCSeconds(exp)).format();
+  const expires = moment.unix(exp).format();
   res.status(200).json({
     token,
     expires,
