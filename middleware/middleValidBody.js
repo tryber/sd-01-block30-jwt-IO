@@ -6,9 +6,9 @@ const valid = type => async (req, res, next) => {
   const { body } = req;
   try {
     const objValid = {
-      purchase: (body) => Purchase.validPurchase(body),
-      product: (body) => Product.validProduct(body),
-      user: (body) => User.isValidDados(body),
+      purchase: (bodyReq) => Purchase.validPurchase(bodyReq),
+      product: (bodyReq) => Product.validProduct(bodyReq),
+      user: (bodyReq) => User.isValidDados(bodyReq),
     };
 
     if (!objValid[type](body))
