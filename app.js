@@ -47,6 +47,12 @@ apiRoutes.get('/purchases', authToken, authMiddleware, controllers.purchases.rea
 apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purchases.remove);
 
 app.use(apiRoutes);
+
+app.use('/', (req, res) => {
+  console.log('SHOW')
+  return res.status(404).json({ message: 'SHOW DE BOLA NADA APARECEU' });
+});
+
 module.exports = {
   app,
 };
