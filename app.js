@@ -53,8 +53,6 @@ apiRoutes.use((req, res) => {
 
 app.use(apiRoutes);
 
-
-
 module.exports = {
   app,
 };
