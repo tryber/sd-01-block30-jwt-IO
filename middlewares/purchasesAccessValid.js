@@ -20,6 +20,11 @@ async function userIdValid(userID = '') {
   return userExists.find(({ id }) => id === userID);
 }
 
+function tokenValid(token) {
+  const payload = jwt.verify(token, secret);
+  return payload;
+}
+
 async function increaseNewPurchase(req, res, next) {
   const { productId, quantity } = req.body;
 
@@ -31,6 +36,10 @@ async function increaseNewPurchase(req, res, next) {
 
 async function updatePurchase(req, res, next) {
   const { userID, productId, quantity } = req.body;
+  const token = req.headers.authorization;
+  const { id: idUser } = tokenValid(token);
+
+  if (userID !== idUser) return res.status(401).json({ message: 'UserID is not allowed' });
 
   if (!(await userIdValid(userID)) || !(await productIdValid(productId)))
     return res.status(400).json({ message: 'ProductId or userID invalid' });
@@ -60,11 +69,6 @@ async function excludePurchase(req, res, next) {
   if (!productIdExist) return res.status(400).json({ message: 'ProductId not found' });
 
   next();
-}
-
-function tokenValid(token) {
-  const payload = jwt.verify(token, secret);
-  return payload;
 }
 
 function authorizationValidMiddleware(req, res, next) {
