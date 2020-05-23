@@ -27,14 +27,15 @@ async function authorizationValidMiddleware(req, res, next) {
 
   if (!token) return res.status(401).json({ message: 'No auth token provided' });
 
-  const { payload } = jwt.verify(token, secret);
+  const payload = jwt.verify(token, secret);
 
   const fileUsers = await fs.readFile(path.resolve(__dirname, '..', 'users.json'), 'utf-8');
   const parseFileUsers = JSON.parse(fileUsers);
   const user = parseFileUsers
-    .find(({ username, role }) => username === payload.username && role === 'funcionario');
+    .find(({ username, role }) => username === payload.username && role === payload.role);
 
-  if (!user) return res.status(403).json({ message: 'Access denied' });
+  if (!user || payload.role !== 'funcionario')
+    return res.status(403).json({ message: 'Access denied' });
 
   next();
 }

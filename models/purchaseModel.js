@@ -22,7 +22,8 @@ async function getById(userID, idPurchase) {
 
 async function deletePurchase(idPurchase) {
   const rawData = await readFileJson('purchases');
-  const purchases = rawData.filter(({ id }) => id !== idPurchase);
+  const purchases = rawData
+    .filter(({ id }) => id !== idPurchase);
 
   await modifyFile(purchases, 'purchases');
   return 'Purchase excluded with success';

@@ -42,12 +42,16 @@ async function updatePurchase(req, res, next) {
 }
 
 async function excludePurchase(req, res, next) {
-  const { userID, id: idPurchase } = req.params;
+  const token = req.headers.authorization;
+  const { id: idPurchase } = req.params;
+
+  const { id: idUser } = tokenValid(token);
 
   const filePurchases = await readFileJson('purchases');
-  const findIdPurchases = filePurchases.find(({ id }) => id === idPurchase);
+  const findIdPurchases = filePurchases
+    .find(({ id, userID }) => id === idPurchase && userID === idUser);
 
-  if (!userIdValid(userID) || !findIdPurchases)
+  if (!findIdPurchases)
     return res.status(400).json({ message: 'Invalid data' });
 
   const productId = await readFileJson('products');
@@ -58,15 +62,19 @@ async function excludePurchase(req, res, next) {
   next();
 }
 
+function tokenValid(token) {
+  const payload = jwt.verify(token, secret);
+  return payload;
+}
+
 function authorizationValidMiddleware(req, res, next) {
   const token = req.headers.authorization;
-  const { userID } = req.params;
 
   if (!token) return res.status(401).json({ message: 'No auth token provided' });
 
-  const { payload } = jwt.verify(token, secret);
+  const payload = tokenValid(token);
 
-  if (userID !== payload.id || !userIdValid(userID))
+  if (!userIdValid(payload.id))
     return res.status(403).json({ message: 'Access Denied' });
 
   next();
@@ -76,5 +84,6 @@ module.exports = {
   increaseNewPurchase,
   updatePurchase,
   excludePurchase,
+  tokenValid,
   authorizationValidMiddleware,
 };

@@ -5,28 +5,34 @@ const {
   increaseNewPurchase,
   updatePurchase,
   excludePurchase,
+  tokenValid,
   authorizationValidMiddleware,
 } = require('../middlewares/purchasesAccessValid');
 
 const router = express.Router();
 
-router.get('/:userID', authorizationValidMiddleware, async (req, res) => {
-  const { userID } = req.params;
+router.use(authorizationValidMiddleware);
+
+router.get('/', async (req, res) => {
+  const { id: userID } = tokenValid(req.headers.authorization);
   const purchases = await getAll(userID);
 
   res.status(200).json(purchases);
 });
 
-router.get('/:userID/:id', authorizationValidMiddleware, async (req, res) => {
-  const { userID, id } = req.params;
+router.get('/:id', async (req, res) => {
+  const { id: userID } = tokenValid(req.headers.authorization);
+  const { id } = req.params;
   const purchases = await getById(userID, id);
+
+  if (!purchases) return res.status(400).json({ message: 'idPurchase invalid' });
 
   res.status(200).json(purchases);
 });
 
-router.post('/:userID', authorizationValidMiddleware, increaseNewPurchase, async (req, res) => {
+router.post('/', increaseNewPurchase, async (req, res) => {
+  const { id: userID } = tokenValid(req.headers.authorization);
   const { productId, quantity } = req.body;
-  const { userID } = req.params;
 
   const newProduct = new Purchase(userID, productId, quantity);
   await newProduct.add();
@@ -34,14 +40,14 @@ router.post('/:userID', authorizationValidMiddleware, increaseNewPurchase, async
   res.status(201).json(newProduct);
 });
 
-router.delete('/:userID/:id', authorizationValidMiddleware, excludePurchase, async (req, res) => {
+router.delete('/:id', excludePurchase, async (req, res) => {
   const { id } = req.params;
   await deletePurchase(id);
 
   res.status(204).end();
 });
 
-router.put('/:userID/:id', authorizationValidMiddleware, updatePurchase, async (req, res) => {
+router.put('/:id', updatePurchase, async (req, res) => {
   const { userID, productId, quantity } = req.body;
   const { id } = req.params;
 

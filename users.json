@@ -3,7 +3,7 @@
     "id": "5e9a7b46-a8b2-4bde-a174-b444d15a47e1",
     "username": "johndoe",
     "password": "senhasupersecreta",
-    "role": "entregador"
+    "role": "funcionario"
   },
   {
     "id": "e689b861-3155-49ca-b03f-062b88452f47",
@@ -21,6 +21,12 @@
     "id": "79bc9d05-6f60-4241-b7b6-8563b1beade9",
     "username": "coruja3",
     "password": "senhasupersecreta",
+    "role": "entregador"
+  },
+  {
+    "id": "206f4a48-21ef-47fb-84eb-baf1d83d4219",
+    "username": "vitaof",
+    "password": "dgconras",
     "role": "entregador"
   }
 ]

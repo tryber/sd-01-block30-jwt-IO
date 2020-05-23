@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function usernameValid(username = '') {
-  const regex = /^([a-zA-Z0-9 _-]+)$/;
+  const regex = /^([a-zA-Z0-9]+)$/;
   return username.length >= 6 && regex.test(username);
 }
 
