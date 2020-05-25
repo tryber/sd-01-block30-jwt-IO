@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
         .json({ message: 'Erro ao procurar usuario do token.' });
 
     req.user = user;
-    req.role = decoded.role;
+    req.decoded = decoded;
 
     next();
   } catch (err) {

@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
   if (!validate(req.body))
     return res.status(422).json({ message: 'Dados inválidos!' });
 
-  if (req.role !== 'funcionario')
+  if (req.decoded.role !== 'funcionario')
     return res.status(401).send({ message: 'Unauthorized' });
 
   const product = await Product.addProduct(req.body);
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  if (req.user.role !== 'funcionario')
+  if (req.decoded.role !== 'funcionario')
     return res.status(401).send({ message: 'Unauthorized' });
 
   if (!validate(req.body))
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  if (req.user.role !== 'funcionario')
+  if (req.decoded.role !== 'funcionario')
     return res.status(401).send({ message: 'Unauthorized' });
 
   const product = await Product.findById(req.params.id);

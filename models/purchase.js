@@ -5,7 +5,7 @@ const { getFile } = require('../service.js');
 
 const writing = async content =>
   fs.writeFile(
-    path.resolve(__dirname, '..', 'purchase.json'),
+    path.resolve(__dirname, '..', 'purchases.json'),
     JSON.stringify(content),
     err => {
       if (err) throw err;
@@ -13,7 +13,7 @@ const writing = async content =>
   );
 
 const userId = async data =>
-  await getFile('users.json').find(user => user.name === data.name);
+  await getFile('users.json');
 
 const Purchase = {
   allPurchases: async param => {
@@ -23,13 +23,16 @@ const Purchase = {
     );
     return purchases;
   },
-  addProduct: async (product, data) => {
-    const user = await findUser(data);
+  addPurchase: async (product, data) => {
+    const users = await userId(data);
+    const user = users.find(user => user.username === data.username);
     const purchases = await getFile('purchases.json');
     product.id = uuidv4();
-    purchase.push(product);
+    product.userID = user.id;
+    purchases.push(product);
 
-    await writing(purchase);
+    await writing(purchases);
+    return product;
   },
   findById: async (name, id) => {
     const user = await userId({ data: name }).id;
@@ -39,10 +42,12 @@ const Purchase = {
 
     return purchase;
   },
-  updateProduct: async (product, id) => {
-    const purchase = await getFile('purchases.json');
-    const newpurchase = purchase.filter(each => each.id !== id);
-    product.id = id;
+  updatePurchase: async (data) => {
+    const purchases = await getFile('purchases.json');
+    const currentyPurchase = purchases.filter(each => each.id === data.id);
+    if(currentyPurchase.userID !== data.userID) {
+      return '401';
+    }
     newpurchase.push(product);
 
     await writing(newpurchase);
@@ -55,4 +60,4 @@ const Purchase = {
   },
 };
 
-module.exports = Product;
+module.exports = Purchase;
