@@ -10,7 +10,7 @@ const factory = secret => async (req, res, next) => {
 
     if (!user) return res.status(401).json({ message: 'invalid token user' });
 
-    req.user = user;
+    req.user = payload.data;
 
     next();
   } catch (err) {

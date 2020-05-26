@@ -8,7 +8,7 @@ const read = async (req, res) => {
   if (!(await Purchase.verifyUser(userID, id))) return res.status(403)
     .json({ message: 'Id do comprador,nao bate com id do usuário' });
 
-  const onePurchase = Purchase.getOne(userID, id);
+  const onePurchase = await Purchase.getOne(userID, id);
   res.status(200).json(onePurchase);
 };
 

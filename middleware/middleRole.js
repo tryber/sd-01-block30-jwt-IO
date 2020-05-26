@@ -1,3 +1,4 @@
+
 const EMPLOYEE = 'funcionario';
 
 const valid = async (req, res, next) => {

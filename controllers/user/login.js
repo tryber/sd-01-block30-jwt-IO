@@ -9,6 +9,7 @@ const login = secret => async (req, res) => {
   if (!username || !password) return res.status(422).json({ message: 'Faltou algum campo' });
 
   const user = await User.findOne({ username, password });
+
   if (!user) res.status(401).json({ message: 'Inválido' });
 
   const jwtConfig = {
@@ -17,6 +18,7 @@ const login = secret => async (req, res) => {
   };
 
   const token = jwt.sign({ data: user }, secret, jwtConfig);
+  
   const { exp } = jwt.verify(token, secret);
 
   const expires = moment.unix(exp).format();

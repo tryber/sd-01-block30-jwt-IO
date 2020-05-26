@@ -6,12 +6,6 @@
     "id": "7593c7d0-9546-11ea-ace4-4126ce9a963d"
   },
   {
-    "username": "Outrocara",
-    "password": "senhasupersecreta",
-    "role": "entregador",
-    "id": "83a290e0-9546-11ea-ace4-4126ce9a963d"
-  },
-  {
     "username": "Manuel23",
     "password": "senha234",
     "role": "cliente",
@@ -124,5 +118,11 @@
     "password": "senhasupersecreta",
     "role": "entregador",
     "id": "37d26a50-9f78-11ea-a9c6-efbee571fad8"
+  },
+  {
+    "username": "usuarioshow",
+    "password": "Usuario10",
+    "role": "funcionario",
+    "id": "ad8d5a50-9f7a-11ea-9e54-137aabb2e2d9"
   }
 ]

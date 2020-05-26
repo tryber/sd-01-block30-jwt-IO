@@ -1,6 +1,6 @@
 const { getData, setData, addItem } = require('./utils');
 
-const FILE_NAME = 'purchase';
+const FILE_NAME = 'purchases';
 const FILE_PRODUCT = 'products';
 const FILE_USER = 'users';
 
@@ -60,9 +60,8 @@ const verifyUserPurchase = async (userID, id) => {
 };
 
 const getPurchase = async (userID, id) => {
-  const data = await getData(FILE_NAME);
-  return data.filter(purchase => purchase.userID === userID)
-    .find(purchaseUser => purchaseUser.id === id);
+  const purchaseBuyer = await getAllPurchase(userID);
+  return purchaseBuyer.find(purchaseUser => purchaseUser.id === id);
 };
 
 const getAllPurchase = async (userID) => {
