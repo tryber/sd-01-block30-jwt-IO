@@ -58,5 +58,11 @@
     "description": "Descriçãdo do meu produto",
     "price": 34.23,
     "id": "32d4ebb0-9f7b-11ea-bc0d-97d88b0c5b93"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "c6ed95a0-9f84-11ea-89dd-91a0b7c97ea1"
   }
 ]

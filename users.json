@@ -124,5 +124,11 @@
     "password": "Usuario10",
     "role": "funcionario",
     "id": "ad8d5a50-9f7a-11ea-9e54-137aabb2e2d9"
+  },
+  {
+    "username": "usuariocli",
+    "password": "Usuario10",
+    "role": "cliente",
+    "id": "f2590080-9f84-11ea-89dd-91a0b7c97ea1"
   }
 ]
