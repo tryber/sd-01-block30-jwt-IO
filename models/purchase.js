@@ -59,14 +59,14 @@ const verifyUserPurchase = async (userID, id) => {
   return (onePurchase.userID === userID);
 };
 
-const getPurchase = async (userID, id) => {
-  const purchaseBuyer = await getAllPurchase(userID);
-  return purchaseBuyer.find(purchaseUser => purchaseUser.id === id);
-};
-
 const getAllPurchase = async (userID) => {
   const data = await getData(FILE_NAME);
   return data.filter(purchase => purchase.userID === userID);
+};
+
+const getPurchase = async (userID, id) => {
+  const purchaseBuyer = await getAllPurchase(userID);
+  return purchaseBuyer.find(purchaseUser => purchaseUser.id === id);
 };
 
 const Purchase = {
