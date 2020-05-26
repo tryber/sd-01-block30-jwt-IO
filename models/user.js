@@ -8,7 +8,7 @@ const isUniqueUser = async (username) => {
 };
 
 const isValidUser = (username) => {
-  const usernameRegex = /[a-z0-9]*[A-Z0-9]*/g;
+  const usernameRegex = /^[a-z0-9_-]{8,30}$/g;
   return username.match(usernameRegex)
     && username.length >= 6;
 };

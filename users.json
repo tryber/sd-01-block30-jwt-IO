@@ -100,5 +100,29 @@
     "password": "ADMINSUPREMO",
     "role": "funcionario",
     "id": "3c6824a0-9ace-11ea-a572-c3ca7ad331e5"
+  },
+  {
+    "username": "ADMINSUPREMO2",
+    "password": "ADMINSUPREMO",
+    "role": "funcionario",
+    "id": "078fd520-9c68-11ea-99c0-eb7604c69def"
+  },
+  {
+    "username": "testes",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "84e5f8d0-9f77-11ea-b5e0-cd75ed48085f"
+  },
+  {
+    "username": "testes!",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "87f95350-9f77-11ea-b5e0-cd75ed48085f"
+  },
+  {
+    "username": "testessss",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "37d26a50-9f78-11ea-a9c6-efbee571fad8"
   }
 ]
