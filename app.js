@@ -9,16 +9,7 @@ const middleExistData = require('./middleware/ExistData');
 const multer = require('multer');
 const path = require('path');
 
-
-function factory () {
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
 const JWT_SECRET = 'itsasecret';
-
-const apiRoutes = express.Router();
 const authMiddleware = auth.factory(JWT_SECRET);
 const authProduct = authBody.valid('product');
 const authPurchase = authBody.valid('purchase');
@@ -27,11 +18,15 @@ const authToken = token.isExist;
 const authRole = middleRole.valid;
 const authExist = middleExistData.valid;
 
-apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
 
+function factory () {
+const app = express();
+app.use(cors());
+app.use(express.json());
+const apiRoutes = express.Router();
+apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-
 apiRoutes.post('/users', authExist, authUser, controllers.users.create);
 apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
 
