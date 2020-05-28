@@ -40,12 +40,12 @@ function factory() {
   apiRoutes.get('/purchases/:id', authToken, authMiddleware, controllers.purchases.readOne);
   apiRoutes.get('/purchases', authToken, authMiddleware, controllers.purchases.readAll);
   apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purchases.remove);
-  apiRoutes.use((req, res) => {
-    return res.status(404).json({ message: 'SHOW DE BOLA NADA APARECEU' });
-  });
+  apiRoutes.use((req, res) => (
+    res.status(404).json({ message: 'SHOW DE BOLA NADA APARECEU' })
+  ));
   app.use(apiRoutes);
   return app;
-};
+}
 
 module.exports = {
   factory,
