@@ -9,6 +9,8 @@ const middleExistData = require('./middleware/ExistData');
 const multer = require('multer');
 const path = require('path');
 
+
+function factory () {
 const app = express();
 
 app.use(cors());
@@ -53,6 +55,9 @@ apiRoutes.use((req, res) => {
 
 app.use(apiRoutes);
 
+return app;
+}
+
 module.exports = {
-  app,
+  factory,
 };

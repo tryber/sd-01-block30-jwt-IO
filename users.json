@@ -130,5 +130,11 @@
     "password": "Usuario10",
     "role": "cliente",
     "id": "f2590080-9f84-11ea-89dd-91a0b7c97ea1"
+  },
+  {
+    "username": "usuariofunc",
+    "password": "Usuario10",
+    "role": "funcionario",
+    "id": "d3cafe00-a05d-11ea-b27f-e57d9a46ceed"
   }
 ]
