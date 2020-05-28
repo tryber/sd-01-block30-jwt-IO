@@ -64,10 +64,9 @@ const getAllPurchase = async (userID) => {
   return data.filter(purchase => purchase.userID === userID);
 };
 
-const getPurchase = async (userID, id) => {
-  const purchaseBuyer = await getAllPurchase(userID);
-  return purchaseBuyer.find(purchaseUser => purchaseUser.id === id);
-};
+const getPurchase = async (userID, id) => (
+  getAllPurchase(userID).find(purchaseUser => purchaseUser.id === id)
+);
 
 const Purchase = {
   validPurchase,
