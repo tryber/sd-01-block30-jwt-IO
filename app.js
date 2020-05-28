@@ -23,29 +23,29 @@ app.use(cors());
 app.use(express.json());
 const apiRoutes = express.Router();
 
-function factory () {
-apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-apiRoutes.post('/users', authExist, authUser, controllers.users.create);
-apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
-apiRoutes.post('/products', authToken, authMiddleware, authRole, authProduct, controllers.products.create);
-apiRoutes.put('/products/:id', authToken, authMiddleware, authRole, authProduct, controllers.products.update);
-apiRoutes.post('/images', authToken, authMiddleware, authRole, upload.single('image'), controllers.products.images);
-apiRoutes.get('/products/:id', controllers.products.readOne);
-apiRoutes.get('/products', controllers.products.readAll);
-apiRoutes.delete('/products/:id', authToken, authMiddleware, authRole, controllers.products.remove);
-apiRoutes.post('/purchases', authToken, authMiddleware, authPurchase, controllers.purchases.create);
-apiRoutes.put('/purchases/:id', authToken, authMiddleware, authPurchase, controllers.purchases.update);
-apiRoutes.get('/purchases/:id', authToken, authMiddleware, controllers.purchases.readOne);
-apiRoutes.get('/purchases', authToken, authMiddleware, controllers.purchases.readAll);
-apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purchases.remove);
-apiRoutes.use((req, res) => {
-  return res.status(404).json({ message: 'SHOW DE BOLA NADA APARECEU' });
-});
-app.use(apiRoutes);
-return app;
-}
+function factory() {
+  apiRoutes.use(express.static(path.resolve(__dirname, 'images')));
+  const storage = multer.memoryStorage();
+  const upload = multer({ storage });
+  apiRoutes.post('/users', authExist, authUser, controllers.users.create);
+  apiRoutes.post('/login', controllers.users.login(JWT_SECRET));
+  apiRoutes.post('/products', authToken, authMiddleware, authRole, authProduct, controllers.products.create);
+  apiRoutes.put('/products/:id', authToken, authMiddleware, authRole, authProduct, controllers.products.update);
+  apiRoutes.post('/images', authToken, authMiddleware, authRole, upload.single('image'), controllers.products.images);
+  apiRoutes.get('/products/:id', controllers.products.readOne);
+  apiRoutes.get('/products', controllers.products.readAll);
+  apiRoutes.delete('/products/:id', authToken, authMiddleware, authRole, controllers.products.remove);
+  apiRoutes.post('/purchases', authToken, authMiddleware, authPurchase, controllers.purchases.create);
+  apiRoutes.put('/purchases/:id', authToken, authMiddleware, authPurchase, controllers.purchases.update);
+  apiRoutes.get('/purchases/:id', authToken, authMiddleware, controllers.purchases.readOne);
+  apiRoutes.get('/purchases', authToken, authMiddleware, controllers.purchases.readAll);
+  apiRoutes.delete('/purchases/:id', authToken, authMiddleware, controllers.purchases.remove);
+  apiRoutes.use((req, res) => {
+    return res.status(404).json({ message: 'SHOW DE BOLA NADA APARECEU' });
+  });
+  app.use(apiRoutes);
+  return app;
+};
 
 module.exports = {
   factory,
