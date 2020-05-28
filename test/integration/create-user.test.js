@@ -1,6 +1,6 @@
 const axiosist = require('axiosist');
 const app = require('../../app');
-const fs = require('fs').promises
+const fs = require('fs').promises;
 const utils = require('../../models/utils');
 const spyGetData = jest.spyOn(utils, 'getData');
 fs.writeFile = jest.fn();
