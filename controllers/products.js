@@ -1,4 +1,5 @@
 const express = require('express');
+const rescue = require('../utils');
 
 const { getAll, getById, deleteProduct, addProduct, updateProduct } = require('../models/productModel');
 const { productAccessMiddleware, authorizationValidMiddleware } = require('../middlewares/productAccessValid');
@@ -17,7 +18,7 @@ router.get('/:id', async (req, res) => {
   res.status(200).json(product);
 });
 
-router.use(authorizationValidMiddleware);
+router.use(rescue(authorizationValidMiddleware));
 
 router.delete('/:id', async (req, res) => {
   const actionDelete = await deleteProduct(req.params.id);

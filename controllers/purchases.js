@@ -1,5 +1,7 @@
 const express = require('express');
 
+const rescue = require('../utils');
+
 const { Purchase, getAll, getById, deletePurchase } = require('../models/purchaseModel');
 const {
   increaseNewPurchase,
@@ -11,7 +13,7 @@ const {
 
 const router = express.Router();
 
-router.use(authorizationValidMiddleware);
+router.use(rescue(authorizationValidMiddleware));
 
 router.get('/', async (req, res) => {
   const { id: userID } = tokenValid(req.headers.authorization);

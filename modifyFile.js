@@ -3,7 +3,7 @@ const path = require('path');
 
 async function modifyFile(newData, file) {
   await fs.writeFile(path.resolve(__dirname, `${file}.json`),
-    JSON.stringify(newData), 'utf8', (err) => {
+    JSON.stringify(newData, null, 2), 'utf8', (err) => {
       if (err) throw err;
       console.log('Ocorreu algum erro!');
     });
