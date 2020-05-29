@@ -7,10 +7,9 @@ async function validateUser(username, password, role) {
   const usersData = await utils.getData('users');
   const uniqueUsername = usersData.some(userDetails => userDetails.username === username);
   if (uniqueUsername) return false;
-  if (username.length < 6) return false;
-  if (password.length < 8) return false;
   if (!validateRole.includes(role)) return false;
-  if (!username.match(validUsernameRegex)) return false;
+  if (username.length < 6 || password.length < 8 || !username.match(validUsernameRegex))
+    return false;
   return true;
 }
 
