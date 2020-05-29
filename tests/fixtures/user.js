@@ -40,5 +40,5 @@ module.exports = {
   invalidUsernameSpecialCharacters,
   invalidPassword,
   invalidRole,
-  validUser
+  validUser,
 };

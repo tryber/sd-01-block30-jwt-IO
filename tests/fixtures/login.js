@@ -1,6 +1,6 @@
-const invalidEmail = { email: 'asdasdf', '123456' };
+const invalidEmail = { email: 'asdasdf', password: '123456' };
 
-const validData = { email: 'guiiluiz44@gmail.com', '123456' };
+const validData = { email: 'guiiluiz44@gmail.com', password: '123456' };
 
 module.exports = {
   invalidEmail,
