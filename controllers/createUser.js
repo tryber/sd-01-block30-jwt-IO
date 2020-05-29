@@ -1,14 +1,18 @@
 const User = require('../models/user');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+  const { username, password, role } = req.body;
   const userData = {
-    username: req.body.username,
-    password: req.body.password
+    username,
+    password,
+    role,
   };
 
-  User.save(userData).then((user) => {
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
-  }).catch((err) => {
-    res.status(400).json({ message: 'Dados inválidos' });
-  });
+  if (!username || !password || !role)
+    return res.status(400).json({ message: 'missing fields' });
+
+  if (!(await User.validate(username, password, role)))
+    return res.status(400).json({ message: 'Dados inválidos' });
+
+  User.save(userData).then(() => res.status(201).json({ message: 'Usuário cadastrado com sucesso' }));
 };
