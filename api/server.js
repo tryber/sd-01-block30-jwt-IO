@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -15,6 +15,8 @@ apiRoutes.post('/login', routes.login)
 
 app.use(apiRoutes);
 
-app.listen(port);
+// app.listen(port);
 
-console.log('Conectado na porta ' + port);
+module.exports = app;
+
+// console.log('Conectado na porta ' + port);
