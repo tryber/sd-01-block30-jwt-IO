@@ -1,14 +1,17 @@
 const User = require('../models/user');
 
-module.exports = (req, res) => {
-  const userData = {
-    username: req.body.username,
-    password: req.body.password
-  };
 
-  User.save(userData).then((user) => {
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
-  }).catch((err) => {
-    res.status(400).json({ message: 'Dados inválidos' });
-  });
+module.exports = async (req, res) => {
+
+const {username, password, role } = req.body
+
+const user = new User(username, password, role)
+
+  await user.addNewUser().then((body) => {
+    const {password, ...user} = body
+    res.status(201).json(user);
+  })
+  // .catch((err) => {
+  //   res.status(400).json({ message: 'Dados inválidos' });
+  // });
 };

@@ -26,7 +26,8 @@
             }
         ],
         "no-alert": "off",
-        "no-confusing-arrow": "off"
+        "no-confusing-arrow": "off",
+        "prettier/prettier": "error"
     },
     "globals": {
         "localStorage": false,

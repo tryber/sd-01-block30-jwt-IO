@@ -1,11 +1,6 @@
-const { fileModifier } = require('../api/utils')
-
-// const User = {
-//   save: (userData) => {
-//     // Mude a criação de usuário aqui
-//     return Promise.resolve(userData); 
-//   }
-// };
+const readAndWrite = require('../validations/readAndWrite')
+const verifyUser = require('../validations/verifyUser')
+const { v4: uuidv4 } = require('uuid');
 
 class User {
   constructor (username, password, role) {
@@ -16,40 +11,41 @@ class User {
   }
 
   async getAll () {
-    const allUsers = await fileModifier('read')
+    const allUsers = await readAndWrite('read', file)
     return allUsers
   }
 
   async getById (id) {
-    const allUsers = await fileModifier('read')
+    const allUsers = await readAndWrite('read', file)
     const oneUser = allUsers.find((person)=>person.id === parseInt(id))
     return oneUser
   }
 
   async addNewUser () {
-    const allUsers = await fileModifier('read')
-
-    this.id = allUsers[allUsers.length - 1].id + 1
+    const allUsers = await readAndWrite('read', 'users.json')
+    const verifyUsername = allUsers.some(select => select.username === this.username)
+    if (!verifyUser(this) || verifyUsername) throw new Error('Something broke! 😱')
+    this.id = uuidv4()
     allUsers.push(this);
-    await fileModifier('write', allUsers)
+    await readAndWrite('write', 'users.json', allUsers)
     return this
   }
 
   async delete (id) {
-    const allUsers = await fileModifier('read')
+    const allUsers = await readAndWrite('read', file)
 
     const newAllUsers = allUsers.filter(
       (person) => person.id !== parseInt(id)
     )
 
-    await fileModifier('write', newAllUsers)
+    await readAndWrite('write', file, newAllUsers)
 
     return newAllUsers
 
   }
 
-  async addOrUpdateUsers (id) {
-    const allUsers = await fileModifier('read')
+  async addOrUpdateUsers (id, file) {
+    const allUsers = await readAndWrite('read', file)
 
     const oneUser = allUsers.find((person)=>person.id === parseInt(id))
 
@@ -58,14 +54,13 @@ class User {
       this.password = password;
       this.role = role;
     } else {
-      this.id = allUsers[allUsers.length - 1].id + 1
+      this.id = uuidv4()
     allUsers.push(this);
     }
 
-    await fileModifier('write', allUsers)
+    await readAndWrite('write',file, allUsers)
     return allUsers
   }
-
 }
 
 module.exports = User;

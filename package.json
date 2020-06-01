@@ -3,15 +3,37 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "jest": "^26.0.1",
     "jwt-simple": "^0.5.6",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "npm-windows-upgrade": "^6.0.1",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "axiosist": "^0.9.0",
-    "nock": "^12.0.3"
-  }
+    "nock": "^12.0.3",
+    "supertest": "^4.0.2"
+  },
+  "description": "Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por _Slack_! #vqv 🚀",
+  "scripts": {
+    "start": "nodemon api/index.js",
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tryber/sd-01-block30-jwt-IO.git"
+  },
+  "keywords": [],
+  "author": "dougfunny <douglaseduardo220483@gmail.com>",
+  "license": "“MIT”",
+  "bugs": {
+    "url": "https://github.com/tryber/sd-01-block30-jwt-IO/issues"
+  },
+  "homepage": "https://github.com/tryber/sd-01-block30-jwt-IO#readme"
 }
