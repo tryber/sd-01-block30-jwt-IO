@@ -1,4 +1,4 @@
 module.exports = {
-  createUsers: require('../controllers/createUser'),
-  login: require('../controllers/login')
+  users: require('../controllers/users'),
+  products: require('../controllers/products')
 };
