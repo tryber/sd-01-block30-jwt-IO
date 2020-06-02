@@ -1,14 +1,24 @@
-const User = require('../models/user');
+const Login = require('../models/login');
+const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
 module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username, password } = req.body;
 
-  if (!username || !password) return res.send(401);
+  const loginUser = new Login(username, password);
 
-  const user = await User.findOne({ username });
+  if (!username || !password) return res.status(417).json({ message: 'Expectation Failed' });
 
-  if (!user) res.status(401).json(false);
+  const listUsers = await loginUser.findOne()
 
-  res.status(200).json(true);
+  const expires = moment().add(3, 'days').valueOf();
+
+  const jwtConfig = {
+    expiresIn: expires,
+    algorithm: 'HS256',
+  };
+
+  const token = jwt.sign({ data: listUsers }, secret, jwtConfig);
+  // if (!listUsers) res.status(401).json({ message: 'Expectation Failed' });
+  return res.status(200).json({ token, expires });
 };

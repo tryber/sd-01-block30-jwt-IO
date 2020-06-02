@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-const rescue = require('./rescue')
+const rescue = require('./rescue');
+//const validateJWT = require('./auth/validateJWT');
 
 const app = express();
 

@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "id": "cce00f4a-5f52-46f0-bd99-f876f818203b",
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "entregador"
+  }
+]

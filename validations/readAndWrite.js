@@ -20,6 +20,4 @@ const readAndWrite = async (fileModifierType, file, newContent) => {
   return choices[fileModifierType](newContent) || choices.default;
 };
 
-
-
-module.exports = readAndWrite
+module.exports = readAndWrite;
