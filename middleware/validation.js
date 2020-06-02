@@ -27,6 +27,16 @@ async function validateRole(req, res, next) {
   }
 }
 
+async function validateProductId(req, res, next) {
+  try {
+    if (!req.params.id) return res.status(400).json({ message: 'Dados incompletos' });
+    if (!Products.viewProducts(req.params.id)) return res.status(404).json({ message: 'Item não encontrado' });
+    next();
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 async function validateProduct(req, res, next) {
   try {
     if (!req.body.name || !req.body.price) return res.status(400).json({ message: 'Dados incompletos' });
@@ -37,4 +47,9 @@ async function validateProduct(req, res, next) {
   }
 }
 
-module.exports = { validateToken, validateRole, validateProduct };
+module.exports = {
+  validateToken,
+  validateRole,
+  validateProduct,
+  validateProductId,
+};

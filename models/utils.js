@@ -25,4 +25,4 @@ async function addItemWithId(fileName, data) {
   return item;
 }
 
-module.exports = { getData, addItem, addItemWithId };
+module.exports = { getData, addItem, addItemWithId, setData };

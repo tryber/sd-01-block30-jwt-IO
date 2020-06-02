@@ -15,8 +15,8 @@ async function validateUser(username, password, role) {
 
 async function userLogin({ username, password }) {
   const usersList = await utils.getData('users');
-  const user = usersList.find(user => user.username === username && user.password === password);
-  if (user) return { username: user.username, role: user.role };
+  const userData = usersList.find(user => user.username === username && user.password === password);
+  if (userData) return { username: userData.username, role: userData.role };
   return false;
 }
 

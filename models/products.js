@@ -13,9 +13,8 @@ async function viewAllProducts() {
   return productData;
 }
 
-async function viewProducts(product) {
-  const productData = await utils.getData('products');
-  return productData.filter(item => item === product);
+async function viewProducts(productId) {
+  return (await viewAllProducts()).find(item => item.id === productId);
 }
 
 async function createProducts(product) {
@@ -23,12 +22,25 @@ async function createProducts(product) {
   return item;
 }
 
+async function deleteProducts(productId) {
+  const productList = (await viewAllProducts()).filter(item => item.id !== productId);
+  utils.setData('products', productList);
+  return productList;
+}
+
+async function updateProducts(productId, newProduct) {
+  const product = await viewProducts(productId);
+  newProduct.id = product.id;
+  await deleteProducts(productId);
+  utils.addItem('products', newProduct);
+}
+
 const Products = {
   viewAllProducts,
   viewProducts,
   createProducts,
-  // deleteProducts,
-  // updateProducts,
+  deleteProducts,
+  updateProducts,
   validateProduct,
 };
 
