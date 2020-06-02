@@ -1,14 +1,21 @@
-const User = require('../models/user');
+const express = require('express');
+const { v4: uuidv4 } = require('uuid');
 
-module.exports = (req, res) => {
-  const userData = {
-    username: req.body.username,
-    password: req.body.password
-  };
+const { userValidMiddleware } = require('../middlewares/userValid');
+const { modifyFile, readFileJson } = require('../modifyFile');
 
-  User.save(userData).then((user) => {
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
-  }).catch((err) => {
-    res.status(400).json({ message: 'Dados inválidos' });
-  });
-};
+const router = express.Router();
+
+router.use(userValidMiddleware);
+
+router.post('/', async (req, res) => {
+  const newUsersJson = await readFileJson('users');
+  const user = { id: uuidv4(), ...req.body };
+  newUsersJson.push(user);
+
+  await modifyFile(newUsersJson, 'users');
+
+  res.status(201).json({ message: 'User successfully registered!' });
+});
+
+module.exports = router;

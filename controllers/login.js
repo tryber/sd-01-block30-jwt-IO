@@ -1,14 +1,28 @@
-const User = require('../models/user');
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
-module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+const { secret } = require('../config');
+const { loginValidMiddleware, isLoginTrue } = require('../middlewares/loginValid');
 
-  if (!username || !password) return res.send(401);
+const router = express.Router();
 
-  const user = await User.findOne({ username });
+router.use(loginValidMiddleware);
 
-  if (!user) res.status(401).json(false);
+router.post('/', async (req, res) => {
+  const { username, password } = req.body;
+  const { role, id } = await isLoginTrue(username, password);
 
-  res.status(200).json(true);
-};
+  const expires = new Date(moment().add(3, 'days').valueOf());
+  const payload = { username, role, id };
+
+  const jwtConfig = {
+    expiresIn: '3d',
+    algorithm: 'HS256',
+  };
+
+  const token = jwt.sign(payload, secret, jwtConfig);
+  res.status(200).json({ token, expires });
+});
+
+module.exports = router;

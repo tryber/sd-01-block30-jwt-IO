@@ -1,0 +1,32 @@
+[
+  {
+    "id": "b01d7576-8f43-4a21-82ca-03bdf1c52e4e",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 69.99
+  },
+  {
+    "id": "b01d7576-8f43-4a21-82ca-03bdf1c52e40",
+    "name": "Playstation 5",
+    "description": "Jogo",
+    "price": 999.99
+  },
+  {
+    "id": "936e7298-6aa4-4308-b161-3abda6db8164",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 49.99
+  },
+  {
+    "id": "967a420c-8064-4724-9d07-cf86d3015ac0",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 49.99
+  },
+  {
+    "id": "74c5f155-e539-4e41-a9bb-ba59ceda80b4",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 49.99
+  }
+]
