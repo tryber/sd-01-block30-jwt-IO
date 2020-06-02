@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  if (!username || !password) return res.status(422).json({ message: 'Faltou algum campo' });
+  if (!username || !password) return res.status(422).json({ message: 'Campos vazios!' });
 
   const user = await User.userLogin({ username, password });
 

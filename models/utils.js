@@ -17,9 +17,12 @@ async function addItem(fileName, data) {
   setData(fileName, fileData);
 }
 
-async function addItemWithId(fileName, data) {
+async function addItemWithId(fileName, data, id) {
   let fileData = await getData(fileName);
-  const item = { id: uuidv1(), ...data };
+  let item;
+  if (id) item = { id, ...data };
+  else item = { id: uuidv1(), ...data };
+
   fileData = [...fileData, item];
   await setData(fileName, fileData);
   return item;

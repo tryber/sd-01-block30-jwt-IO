@@ -3,10 +3,5 @@
     "username": "johndoe",
     "password": "senhasupersecreta",
     "role": "entregador"
-  },
-  {
-    "username": "guilhermoso",
-    "password": "abecedeeefe",
-    "role": "funcionario"
   }
 ]

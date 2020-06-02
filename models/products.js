@@ -29,10 +29,8 @@ async function deleteProducts(productId) {
 }
 
 async function updateProducts(productId, newProduct) {
-  const product = await viewProducts(productId);
-  newProduct.id = product.id;
   await deleteProducts(productId);
-  utils.addItem('products', newProduct);
+  utils.addItemWithId('products', newProduct, productId);
 }
 
 const Products = {

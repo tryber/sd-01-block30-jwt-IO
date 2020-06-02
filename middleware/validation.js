@@ -10,7 +10,7 @@ async function validateToken(req, res, next) {
     const payload = jwt.verify(token, secret);
     const user = await User.findByUsername(payload.data);
 
-    if (!user) return res.status(401).json({ message: 'invalid token user' });
+    if (!user) return res.status(401).json({ message: 'Token inválido!' });
     req.user = payload.data;
     next();
   } catch (err) {
