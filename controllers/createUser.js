@@ -3,7 +3,8 @@ const User = require('../models/user');
 module.exports = (req, res) => {
   const userData = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    role: req.body.role,
   };
 
   User.save(userData).then((user) => {
