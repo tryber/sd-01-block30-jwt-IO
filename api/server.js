@@ -16,20 +16,20 @@ app.use(express.json());
 
 const apiRoutes = express.Router();
 
-//USERS
+// USERS
 apiRoutes.post('/users', routes.users.createUsers);
 
-//LOGIN
+// LOGIN
 apiRoutes.post('/login', routes.users.login);
 
-//PRODUCTS
+// PRODUCTS
 apiRoutes.get('/products', routes.products.viewAllProducts);
 apiRoutes.get('/products/:id', validateProductId, routes.products.viewProducts);
 apiRoutes.post('/products', validateToken, validateRole, validateProduct, routes.products.createProducts);
 apiRoutes.delete('/products/:id', validateToken, validateRole, validateProductId, routes.products.deleteProducts);
 apiRoutes.put('/products/:id', validateToken, validateRole, validateProductId, validateProduct, routes.products.updateProducts);
 
-//PURCHASES
+// PURCHASES
 apiRoutes.get('/purchases', validateToken, routes.purchases.viewAllPurchases);
 apiRoutes.get('/purchases/:id', validateToken, validatePurchaseId, routes.purchases.viewPurchases);
 apiRoutes.post('/purchases', validateToken, validatePurchase, routes.purchases.createPurchases);
