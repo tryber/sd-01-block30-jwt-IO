@@ -1,0 +1,140 @@
+[
+  {
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "7593c7d0-9546-11ea-ace4-4126ce9a963d"
+  },
+  {
+    "username": "Manuel23",
+    "password": "senha234",
+    "role": "cliente",
+    "id": "ecb0a3b0-9546-11ea-9cd6-3ba89285c933"
+  },
+  {
+    "username": "OutrocaraShow",
+    "password": "senhasupersecreta",
+    "role": "funcionario",
+    "id": "b58540c0-9551-11ea-9ffc-415352b4f59b"
+  },
+  {
+    "username": "OutrocaraShowAINDAMAISLEGAL",
+    "password": "senhasupersecreta",
+    "role": "funcionario",
+    "id": "ecbab4d0-9551-11ea-b6b4-6f0022fc3689"
+  },
+  {
+    "username": "Usuarioteste",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "3829f100-9634-11ea-bba3-6dcb475994f0"
+  },
+  {
+    "username": "Usuarioteste2",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "7aed4fa0-9634-11ea-bba3-6dcb475994f0"
+  },
+  {
+    "username": "Usuarioteste3",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "db1b32c0-9634-11ea-a1a8-43c234b525bc"
+  },
+  {
+    "username": "topzeira",
+    "password": "senhashow",
+    "role": "funcionario",
+    "id": "aff18470-9637-11ea-a1a8-43c234b525bc"
+  },
+  {
+    "username": "SUPIMPA",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "8b1b3710-98c4-11ea-973a-03a03cf5cb15"
+  },
+  {
+    "username": "SUPIMPAa",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "5855f8f0-98c5-11ea-9632-33f98d409af1"
+  },
+  {
+    "username": "SUPIMPAS",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "77e0ec70-98c5-11ea-801b-e75531bd3e72"
+  },
+  {
+    "username": "wilson2",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "83a290e0-9546-11ea-ace4-4126ce9a963d"
+  },
+  {
+    "username": "SUPIMPAS2",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "757ca1a0-9abd-11ea-9446-83b175228a7a"
+  },
+  {
+    "username": "SUPIMPAS3",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "fe854390-9ac6-11ea-9c36-8b75ec146efc"
+  },
+  {
+    "username": "SUPIMPAS4",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "67f704c0-9ac8-11ea-9119-6d241e2e253a"
+  },
+  {
+    "username": "ADMINSUPREMO",
+    "password": "ADMINSUPREMO",
+    "role": "funcionario",
+    "id": "3c6824a0-9ace-11ea-a572-c3ca7ad331e5"
+  },
+  {
+    "username": "ADMINSUPREMO2",
+    "password": "ADMINSUPREMO",
+    "role": "funcionario",
+    "id": "078fd520-9c68-11ea-99c0-eb7604c69def"
+  },
+  {
+    "username": "testes",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "84e5f8d0-9f77-11ea-b5e0-cd75ed48085f"
+  },
+  {
+    "username": "testes!",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "87f95350-9f77-11ea-b5e0-cd75ed48085f"
+  },
+  {
+    "username": "testessss",
+    "password": "senhasupersecreta",
+    "role": "entregador",
+    "id": "37d26a50-9f78-11ea-a9c6-efbee571fad8"
+  },
+  {
+    "username": "usuarioshow",
+    "password": "Usuario10",
+    "role": "funcionario",
+    "id": "ad8d5a50-9f7a-11ea-9e54-137aabb2e2d9"
+  },
+  {
+    "username": "usuariocli",
+    "password": "Usuario10",
+    "role": "cliente",
+    "id": "f2590080-9f84-11ea-89dd-91a0b7c97ea1"
+  },
+  {
+    "username": "usuariofunc",
+    "password": "Usuario10",
+    "role": "funcionario",
+    "id": "d3cafe00-a05d-11ea-b27f-e57d9a46ceed"
+  }
+]

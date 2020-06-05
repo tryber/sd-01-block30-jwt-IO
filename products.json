@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "24fb88b0-9ad4-11ea-8aa0-593989ab647f"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "291c5b90-9ad4-11ea-8aa0-593989ab647f"
+  },
+  {
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 49.99,
+    "id": "b3a62040-9ad2-11ea-8aa0-593989ab647f"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "6b87c440-9ad6-11ea-a5fc-3ba45820dbb8"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "6c38ebd0-9ad6-11ea-a5fc-3ba45820dbb8"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "6cc65ec0-9ad6-11ea-a5fc-3ba45820dbb8"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "723ed260-9ad6-11ea-a5fc-3ba45820dbb8"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "cc52b3e0-9f7a-11ea-9e54-137aabb2e2d9"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "32d4ebb0-9f7b-11ea-bc0d-97d88b0c5b93"
+  },
+  {
+    "name": "Mesadsad",
+    "description": "Descriçãdo do meu produto",
+    "price": 34.23,
+    "id": "c6ed95a0-9f84-11ea-89dd-91a0b7c97ea1"
+  },
+  {
+    "id": "75ae0f40-a75d-11ea-be6f-3babaa297078",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 50
+  }
+]
