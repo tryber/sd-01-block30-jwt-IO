@@ -9,7 +9,7 @@ async function validateUserPurchase(req, res, next) {
     if (!purchaseId) return res.status(400).json({ message: 'Dados incompletos' });
     const purchase = await Purchases.viewPurchases(purchaseId);
     if (!purchase) return res.status(404).json({ message: 'Item não encontrado' });
-    if ((req.body.userID && purchase.userID !== req.body.userID) || purchase.userID !== user.id)
+    if (purchase.userID !== user.id)
       return res.status(401).json({ message: 'Compra de outra pessoa' });
     next();
   } catch (err) {

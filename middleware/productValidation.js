@@ -20,7 +20,8 @@ async function validateToken(req, res, next) {
 
 async function validateRole(req, res, next) {
   try {
-    if (!(await User.validateRole(req.user))) return res.status(401).json({ message: 'Usuário sem permissão.' });
+    const roleValidation = await User.validateRole(req.user);
+    if (!roleValidation) return res.status(401).json({ message: 'Usuário sem permissão.' });
     next();
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -40,7 +41,8 @@ async function validateProductId(req, res, next) {
 async function validateProduct(req, res, next) {
   try {
     if (!req.body.name || !req.body.price) return res.status(400).json({ message: 'Dados incompletos' });
-    if (!(await Products.validateProduct(req.body))) return res.status(400).json({ message: 'Dados incorretos' });
+    const productValidation = await Products.validateProduct(req.body);
+    if (!productValidation) return res.status(400).json({ message: 'Dados incorretos' });
     next();
   } catch (err) {
     res.status(500).json({ message: err.message });
