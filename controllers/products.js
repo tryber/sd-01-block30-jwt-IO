@@ -8,8 +8,6 @@ const Products = require('../models/products');
 
 const validateToken = require('../middlewares/products');
 
-const readAndWrite = require('../service/readAndWrite');
-
 const callBackCreateProducts = async (req, res) => {
   const { name, description, price, image } = req.body;
   const product = new Products(name, description, price, image);
