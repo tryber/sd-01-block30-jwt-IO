@@ -16,9 +16,10 @@ async function createPurchases(purchase, userID) {
 }
 
 async function deletePurchases(purchaseId) {
-  const purchases = (await viewAllPurchases()).filter(purchase => purchase.id !== purchaseId);
-  utils.setData('purchases', purchases);
-  return purchases;
+  const purchaseList = await viewAllPurchases();
+  const purchase = purchaseList.filter(purchase => purchase.id !== purchaseId);
+  utils.setData('purchases', purchase);
+  return purchase;
 }
 
 async function updatePurchases(purchaseId, newPurchase, userID) {

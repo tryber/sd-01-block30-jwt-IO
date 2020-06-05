@@ -1,5 +1,5 @@
 const Products = require('../../models/products');
 
 module.exports = async (req, res) => (
-  Products.viewProducts(req.params.id).then(product => res.status(200).json(product))
+  Products.viewProducts(req.params.id).then(item => res.status(200).json(item))
 );
