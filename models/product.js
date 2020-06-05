@@ -46,7 +46,7 @@ const updateProduct = async (obj) => {
   const newArray = [...products.filter(product => (
     searchProduct.id !== product.id
   )), obj];
-  await setData(FILE_NAME, newArray);
+  await setData(FILE_NAME, newArray, obj.id);
   return obj;
 };
 

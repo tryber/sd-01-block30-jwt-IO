@@ -11,9 +11,9 @@ const setData = async (fileName, data) => (
   fs.writeFile(path.resolve(__dirname, '..', `${fileName}.json`), JSON.stringify(data, null, 2))
 );
 
-const addItem = async (obj, fileName) => {
+const addItem = async (obj, fileName, id) => {
   const data = await getData(fileName);
-  const objId = { ...obj, id: uuidv1() };
+  const objId = id ? { ...obj, id } : { ...obj, id: uuidv1() };
   const newArray = [...data, objId];
   await setData(fileName, newArray);
   return objId;

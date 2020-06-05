@@ -58,5 +58,11 @@
     "description": "Descriçãdo do meu produto",
     "price": 34.23,
     "id": "c6ed95a0-9f84-11ea-89dd-91a0b7c97ea1"
+  },
+  {
+    "id": "75ae0f40-a75d-11ea-be6f-3babaa297078",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 50
   }
 ]

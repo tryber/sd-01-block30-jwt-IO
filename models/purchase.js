@@ -48,7 +48,7 @@ const updatePurchase = async (obj, id) => {
   const searchPurchase = await findOne(id);
   if (!searchPurchase) return false;
   const newArray = [...deletePurchase(id), { ...obj, id: searchPurchase.id }];
-  await setData(FILE_NAME, newArray);
+  await setData(FILE_NAME, newArray, searchPurchase.id);
   return { ...obj, id: searchPurchase.id };
 };
 
