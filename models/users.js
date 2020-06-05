@@ -1,5 +1,5 @@
-const readAndWrite = require('../validations/readAndWrite');
-const verifyUser = require('../validations/verifyUser');
+const readAndWrite = require('../service/readAndWrite');
+const {verifyUser} = require('../service/checkers');
 const { v4: uuidv4 } = require('uuid');
 
 class User {
@@ -12,7 +12,7 @@ class User {
 
   async getById(id) {
     const allUsers = await readAndWrite('read', 'users.json');
-    const oneUser = allUsers.find(person => person.id === parseInt(id));
+    const oneUser = allUsers.find(person => person.id === id);
     return oneUser;
   }
 

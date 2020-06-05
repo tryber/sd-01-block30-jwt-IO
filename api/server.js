@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
-const rescue = require('./rescue');
+const { users, login, products } = require('./routes');
 //const validateJWT = require('./auth/validateJWT');
 
 const app = express();
@@ -9,11 +8,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const apiRoutes = express.Router();
-
-apiRoutes.post('/users', rescue(routes.createUsers));
-apiRoutes.post('/login', rescue(routes.login))
-
-app.use(apiRoutes);
+app.use(users)
+app.use(login)
+app.use(products)
 
 module.exports = app;

@@ -9,4 +9,11 @@ const verifyUser = values => {
   return verifyusername && verifyRole && verifyPassword;
 };
 
-module.exports = verifyUser;
+const verifyProducts = values => {
+  const { name, price } = values;
+  const namePresents = name.length >= 5;
+  const pricePresent = typeof price === 'number'  && price > 0;
+  return namePresents && pricePresent;
+};
+
+module.exports = { verifyUser, verifyProducts };

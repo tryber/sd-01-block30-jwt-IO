@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "4c671781-8e8c-4880-8388-0f56db211b22",
+    "name": "Meu produto",
+    "description": "Descriçãdo do meu produto",
+    "price": 49.99
+  },
+  {
+    "id": "47950206-7eea-47e5-ad7c-8fdbd90078c7",
+    "name": "mouser",
+    "description": "um rato",
+    "price": 3.5
+  },
+  {
+    "id": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
+    "name": "cadeira",
+    "description": "um lugar de sentar a bunda",
+    "price": 99.56
+  },
+  {
+    "id": "c2bbdf1c-f41c-44a8-acf8-ffa79294d80e",
+    "name": "mesas",
+    "description": "lugar de comer",
+    "price": 558.98
+  }
+]

@@ -1,4 +1,4 @@
-const readAndWrite = require('../validations/readAndWrite');
+const readAndWrite = require('../service/readAndWrite');
 
 class Login {
   constructor(username, password) {
@@ -6,13 +6,10 @@ class Login {
     this.password = password;
   }
 
-  async findOne(id) {
-      const listUser = await readAndWrite('read', 'users.json');
-      if (id) {
-        return listUser.find(person => person.id === parseInt(id));  
-      }
+  async findOne(users) {
+    const listUser = await readAndWrite('read', 'users.json');
     if (listUser.length <= 0) throw new Error('User not create');
-    return listUsers.find(user => (user.username = this.username));
+    return listUser.find(user => user.username === users);
   }
 }
 
