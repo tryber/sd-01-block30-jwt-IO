@@ -23,8 +23,8 @@ describe('POST /users', () => {
       expect(response.status).toBe(400);
     });
 
-    it('returns a `missing fields` error message', () => {
-      expect(response.data.message).toBe('missing fields');
+    it('returns a `Campos vazios!` error message', () => {
+      expect(response.data.message).toBe('Campos vazios!');
     });
   });
 
@@ -42,12 +42,12 @@ describe('POST /users', () => {
         response = await axios.post('/users', fixtures.invalidUsernameNotUnique);
       });
   
-      it('returns 400 a HTTP status code', () => {
-        expect(response.status).toBe(400);
+      it('returns 422 a HTTP status code', () => {
+        expect(response.status).toBe(422);
       });
 
       it('returns a `Dados inválidos` message', () => {
-        expect(response.data.message).toBe('Dados inválidos');
+        expect(response.data.message).toBe('Dados inválidos!');
       });
     });
 
@@ -56,12 +56,12 @@ describe('POST /users', () => {
         response = await axios.post('/users', fixtures.invalidUsername);
       });
   
-      it('returns 400 a HTTP status code', () => {
-        expect(response.status).toBe(400);
+      it('returns 422 a HTTP status code', () => {
+        expect(response.status).toBe(422);
       });
   
       it('returns a `Dados inválidos` message', () => {
-        expect(response.data.message).toBe('Dados inválidos');
+        expect(response.data.message).toBe('Dados inválidos!');
       });
     });
 
@@ -70,12 +70,12 @@ describe('POST /users', () => {
         response = await axios.post('/users', fixtures.invalidUsernameSpecialCharacters);
       });
   
-      it('returns 400 a HTTP status code', () => {
-        expect(response.status).toBe(400);
+      it('returns 422 a HTTP status code', () => {
+        expect(response.status).toBe(422);
       });
   
       it('returns a `Dados inválidos` message', () => {
-        expect(response.data.message).toBe('Dados inválidos');
+        expect(response.data.message).toBe('Dados inválidos!');
       });
     });
   });
@@ -87,12 +87,12 @@ describe('POST /users', () => {
       response = await axios.post('/users', fixtures.invalidPassword);
     });
 
-    it('returns 400 a HTTP status code', () => {
-      expect(response.status).toBe(400);
+    it('returns 422 a HTTP status code', () => {
+      expect(response.status).toBe(422);
     });
 
     it('returns a `Dados inválidos` message', () => {
-      expect(response.data.message).toBe('Dados inválidos');
+      expect(response.data.message).toBe('Dados inválidos!');
     });
   });
 
@@ -103,12 +103,12 @@ describe('POST /users', () => {
       response = await axios.post('/users', fixtures.invalidRole);
     });
 
-    it('returns 400 a HTTP status code', () => {
-      expect(response.status).toBe(400);
+    it('returns 422 a HTTP status code', () => {
+      expect(response.status).toBe(422);
     });
 
     it('returns a `Dados inválidos` message', () => {
-      expect(response.data.message).toBe('Dados inválidos');
+      expect(response.data.message).toBe('Dados inválidos!');
     });
   });
 

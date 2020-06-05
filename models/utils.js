@@ -11,12 +11,6 @@ function setData(fileName, data) {
   return fs.writeFile(path.resolve(__dirname, '..', `${fileName}.json`), JSON.stringify(data, null, 2));
 }
 
-async function addItem(fileName, data) {
-  let fileData = await getData(fileName);
-  fileData = [...fileData, data];
-  setData(fileName, fileData);
-}
-
 async function addItemWithId(fileName, data, id) {
   let fileData = await getData(fileName);
   let item;
@@ -28,4 +22,4 @@ async function addItemWithId(fileName, data, id) {
   return item;
 }
 
-module.exports = { getData, addItem, addItemWithId, setData };
+module.exports = { getData, addItemWithId, setData };

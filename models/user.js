@@ -16,7 +16,14 @@ async function validateUser(username, password, role) {
 async function userLogin({ username, password }) {
   const usersList = await utils.getData('users');
   const userData = usersList.find(user => user.username === username && user.password === password);
-  if (userData) return { username: userData.username, role: userData.role };
+  if (userData) return { id: userData.id, username: userData.username, role: userData.role };
+  return false;
+}
+
+async function findById({ id }) {
+  const usersList = await utils.getData('users');
+  const userData = usersList.find(user => user.id === id);
+  if (userData) return userData;
   return false;
 }
 
@@ -32,11 +39,12 @@ async function validateRole({ role }) {
 
 const User = {
   save: (userData) => {
-    utils.addItem('users', userData);
+    utils.addItemWithId('users', userData);
     return Promise.resolve(userData);
   },
   validate: validateUser,
   userLogin,
+  findById,
   findByUsername,
   validateRole,
 };
