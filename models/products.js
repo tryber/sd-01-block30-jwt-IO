@@ -3,7 +3,7 @@ const { verifyProducts } = require('../service/checkers');
 const { v4: uuidv4 } = require('uuid');
 
 class Products {
-  constructor(name, description, price, image,) {
+  constructor(name, description, price, image) {
     this.id = null;
     this.name = name;
     this.description = description;
@@ -11,21 +11,19 @@ class Products {
     this.image = image;
   }
 
-  async getAllProducts() {
+  static async getAllProducts() {
     const allUsers = await readAndWrite('read', 'products.json');
     return allUsers.map(product => product);
   }
 
-  async getByIdProducts(id) {
+  static async getByIdProducts(id) {
     const allUsers = await readAndWrite('read', 'products.json');
-    const oneUser = allUsers.find(person => person.id === parseInt(id));
-    return oneUser;
+    return allUsers.find(person => person.id === id);
   }
 
   async addNewProducts(image) {
     const allProducts = await readAndWrite('read', 'products.json');
-    if (!verifyProducts(this))
-      throw new Error('Valores invalidos! 😱');
+    if (!verifyProducts(this)) throw new Error('Valores invalidos! 😱');
     this.id = uuidv4();
     this.image = image;
     allProducts.push(this);
