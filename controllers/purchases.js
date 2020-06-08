@@ -7,14 +7,15 @@ const {
 } = require('../validation');
 
 router.get('/', async (req, res) => {
-  const allPurchases = await Purchase.allPurchases(req.decoded);
+  const allPurchases = await Purchase.getAllPurchases(req.decoded);
   res.status(200).json(allPurchases);
 });
 
-// router.get('/:id', async (req, res) => {
-//   const purchases = await Purchase.findById(req.user.name, req.params.id);
-//   res.status(200).json(purchases);
-// });
+router.get('/:id', async (req, res) => {
+  const purchases = await Purchase.findPurchaseById(req.decoded, req.params.id);
+  if(!purchases) return res.status(404).send({ message: "id not found"});
+  res.status(200).json(purchases);
+});
 
 router.post('/', async (req, res) => {
   if (validateBuy(req.body)) {
@@ -25,12 +26,14 @@ router.post('/', async (req, res) => {
   return res.status(422).json({ message: 'Dados inválidos!' });
 });
 
-// router.put('/:id', async (req, res) => {
-//   if (validateUpdate(req.body)) {
-//     const updatePurchase = await Purchase.updatePurchase(req.body);
-//     r;
-//   }
-// });
+router.put('/:id', async (req, res) => {
+  if (validateUpdate(req.body)) {
+    const updatePurchase = await Purchase.updatePurchase(req.decoded, req.body, req.params.id);
+    if(!updatePurchase) return res.status(422).json({ message: 'Dados inválidos!' });
+    return res.status(200).json({message: 'sucess'});
+  }
+  return res.status(422).json({ message: 'Dados inválidos!' });
+});
 
 router.delete('/:id', async (req, res) => {
   const deletePurchase = await Purchase.deletePurchase(req.decoded, req.params.id);

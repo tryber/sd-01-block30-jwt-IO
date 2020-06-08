@@ -31,7 +31,7 @@ const allPurchases = async (data) => {
 }
 
 const Purchase = {
-  allPurchases: async data => {
+  getAllPurchases: async data => {
     return await allPurchases(data);
   },
   addPurchase: async (product, data) => {
@@ -57,12 +57,30 @@ const Purchase = {
       return purchase;
     }
     );
-    if(findPurchase.length === purchases.length) {
+    if (findPurchase.length === purchases.length) {
       return false;
     }
     await writing(findPurchase);
     return true;
   },
+  findPurchaseById: async (decoded, id) => {
+    const allUserPurchases = await allPurchases(decoded);
+    const purchase = allUserPurchases.find(purc => purc.id === id);
+    if (!purchase) return false;
+    return purchase;
+  },
+  updatePurchase: async (decoded, purchase, id) => {
+    const allUserPurchases = await allPurchases(decoded);
+    const currentyPurchase = allUserPurchases.filter(purchase => purchase.id === id);
+    if(!currentyPurchase) return false;
+    purchase.id = id;
+    const purchases = await getFile('purchases.json');
+    const oldPurchases = purchases.filter(pur => pur.id !== id);
+    oldPurchases.push(purchase);
+
+    await writing(oldPurchases);
+    return true;
+  }
 };
 
 module.exports = Purchase;
