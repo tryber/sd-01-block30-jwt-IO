@@ -5,7 +5,7 @@ const path = require('path');
 function userNameValidation(username = '') {
   const regex = /[a-zA-Z0-9]+/;
   return username.match(regex) && username.length >= 6;
-};
+}
 
 function passwordValidation(password = '') {
   return password.length >= 8;
@@ -16,7 +16,7 @@ function roleValidation(role = '') {
   return roleOptions.includes(role);
 }
 
-function userUniqueValidation (username) {
+function userUniqueValidation(username) {
   const content = fs.readFileSync(path.resolve(__dirname, '..', 'users.json'), 'utf-8');
   const uniqueUser = JSON.parse(content);
 

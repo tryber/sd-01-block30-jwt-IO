@@ -16,9 +16,9 @@ router.post('/', validLoginMiddleware, async (req, res) => {
   const jwtConfig = {
     expiresIn: '3d',
     algorithm: 'HS256',
-  }
+  };
 
-  const token = jwt.sign({ username, role }, secret, jwtConfig)
+  const token = jwt.sign({ username, role }, secret, jwtConfig);
 
   res.status(201).json({ token, expires });
 });
