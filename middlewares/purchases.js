@@ -9,8 +9,7 @@ async function validateToken(req, res, next) {
     const payload = jwt.verify(token, secret);
     const users = new User(username, password, role);
     const user = await users.getById(payload.data.id);
-    console.log('user ☻6→→→', user);
-    if (!user || user.role !== 'funcionario') return res.status(401).json({ message: 'Token inválido!' });
+    if (!user) return res.status(401).json({ message: 'Token inválido!' });
     req.user = payload;
     next();
   } catch (err) {

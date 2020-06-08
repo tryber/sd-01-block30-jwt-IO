@@ -31,10 +31,10 @@ class Products {
     return this;
   }
 
-  async deleteProducts(id) {
+  static async deleteProducts(id) {
     const allUsers = await readAndWrite('read', 'products.json');
 
-    const newAllUsers = allUsers.filter(person => person.id !== parseInt(id));
+    const newAllUsers = allUsers.filter(person => person.id !== id);
 
     await readAndWrite('write', 'products.json', newAllUsers);
 
@@ -42,22 +42,16 @@ class Products {
   }
 
   async addOrUpdateProducts(id) {
-    const allUsers = await readAndWrite('read', 'products.json');
-
-    const oneUser = allUsers.find(person => person.id === parseInt(id));
-
-    if (oneUser) {
-      this.name = name;
-      this.description = description;
-      this.price = price;
-      this.image = image;
-    } else {
-      this.id = uuidv4();
-      allUsers.push(this);
+    const allProducts = await readAndWrite('read', 'products.json');
+    const isValidPoductId = allProducts.some(product => product.id === id)
+    if (isValidPoductId) {
+      const filtredProducts = allProducts.filter(product => product.id !== id);
+      this.id = id;
+      filtredProducts.push(this);
+      await readAndWrite('write', 'products.json', filtredProducts);
+      return this;
     }
-
-    await readAndWrite('write', 'products.json', allUsers);
-    return allUsers;
+    return false;
   }
 }
 

@@ -4,5 +4,17 @@
     "username": "johndoe",
     "password": "senhasupersecreta",
     "role": "entregador"
+  },
+  {
+    "id": "860edc62-8733-43ed-b949-40d884d5e235",
+    "username": "coruja",
+    "password": "senhasupersecreta2",
+    "role": "cliente"
+  },
+  {
+    "id": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
+    "username": "toninho",
+    "password": "senhasupersecreta2",
+    "role": "funcionario"
   }
 ]

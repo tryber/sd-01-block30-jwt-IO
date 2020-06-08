@@ -24,15 +24,46 @@ const callBackGetAllProducts = async (_req, res) => {
   return res.status(200).json(products);
 };
 
-const callBackGetProductsBarraID = async (req, res) => {
+const callBackGetOneProductsForID = async (req, res) => {
   const { id } = req.params;
   const oneUser = await Products.getByIdProducts(id);
   if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
   return res.status(200).json(oneUser);
 };
 
-router.post('/products', rescue(validateToken), rescue(callBackCreateProducts));
+const callBackDeleteOneProductsForID = async (req, res) => {
+  const { id } = req.params;
+  const oneUser = await Products.deleteProducts(id);
+  if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
+  return res.status(200).json(oneUser);
+};
+
+const callBackPutOneProductsForID = async (req, res) => {
+  const { id } = req.params;
+  const { name, description, price, image } = req.body;
+  console.log('name', name);
+  const product = new Products(name, description, price, image);
+  const oneUser = await product.addOrUpdateProducts(id);
+  if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
+  return res.status(200).json(oneUser);
+};
+
+router.post(
+  '/products',
+  rescue(validateToken),
+  rescue(callBackCreateProducts),
+);
 router.get('/products', rescue(callBackGetAllProducts));
-router.get('/products/:id', rescue(callBackGetProductsBarraID));
+router.get('/products/:id', rescue(callBackGetOneProductsForID));
+router.put(
+  '/products/:id',
+  rescue(validateToken),
+  rescue(callBackPutOneProductsForID),
+);
+router.delete(
+  '/products/:id',
+  rescue(validateToken),
+  rescue(callBackDeleteOneProductsForID),
+);
 
 module.exports = router;
