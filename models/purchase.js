@@ -72,7 +72,7 @@ const Purchase = {
   updatePurchase: async (decoded, purchase, id) => {
     const allUserPurchases = await allPurchases(decoded);
     const currentyPurchase = allUserPurchases.filter(purchase => purchase.id === id);
-    if(!currentyPurchase) return false;
+    if (!currentyPurchase) return false;
     purchase.id = id;
     const purchases = await getFile('purchases.json');
     const oldPurchases = purchases.filter(pur => pur.id !== id);
