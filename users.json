@@ -1,0 +1,20 @@
+[
+  {
+    "id": "12b1fc42-4e27-418b-b2f5-3466e6cfec33",
+    "username": "Fernanda Nunes",
+    "password": "senhasinistra",
+    "role": "cliente"
+  },
+  {
+    "id": "f39dbef7-ae94-41c1-af0a-ab1e03150d05",
+    "username": "Victor Felipe",
+    "password": "12345678",
+    "role": "cliente"
+  },
+  {
+    "id": "5175bc55-7a5e-40f5-90ae-2db879c2288f",
+    "username": "Ana Lúcia",
+    "password": "63498721",
+    "role": "entregador"
+  }
+]
