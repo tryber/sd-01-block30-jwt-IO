@@ -1,28 +1,26 @@
-const users = require('../users.json');
+const { getFile } = require('../service.js');
 
-const findUser = username => users.find(user => user.username === username);
+const findUser = async username => {
+  const users = await getFile('users.json');
+  const hasUser = users.some(user => user.username === username);
+  return hasUser;
+}
 
-function validateUsername({ username }) {
-  if (username && !findUser(username) && /^([a-zA-Z0-9]+)$/.test(username))
-    return true;
-  return false;
+async function validateUsername({ username }) {
+  const user = await findUser(username);
+  return username && !user && /^([a-zA-Z0-9]+){6,}$/.test(username);
 }
 
 function validatePassword({ password }) {
-  if (password && /^.{8,}$/.test(password)) return true;
-  return false;
+  return password && /^.{8,}$/.test(password);
 }
 
 function validateRole({ role }) {
-  if (role && ['funcionario', 'entregador', 'cliente'].includes(role))
-    return true;
-  return false;
+  return role && ['funcionario', 'entregador', 'cliente'].includes(role);
 }
 
-function validate(obj) {
-  if (validateUsername(obj) && validatePassword(obj) && validateRole(obj))
-    return true;
-  return false;
+async function validate(obj) {
+  return await validateUsername(obj) && validatePassword(obj) && validateRole(obj);
 }
 
 module.exports = { validate };

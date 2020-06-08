@@ -12,21 +12,34 @@ const writing = async content =>
     }
   );
 
-const userId = async data =>
-  await getFile('users.json');
+const findUser = async data => {
+  const users = await getFile('users.json');
+  const user = users.find(user => user.username === data.username);
+  return user;
+}
+
+const productExists = async ({ productId }) => {
+  const products = await getFile('products.json');
+  const exists = products.some(product => product.id === productId);
+  return exists;
+}
+
+const allPurchases = async (data) => {
+  const user = await findUser(data);
+  const purchases = await getFile('purchases.json');
+  return purchases.filter(purchase => purchase.userID === user.id);
+}
 
 const Purchase = {
-  allPurchases: async param => {
-    const id = await userId(param).id;
-    const purchases = await getFile('purchases.json').filter(
-      purchase => purchase.userID === id
-    );
-    return purchases;
+  allPurchases: async data => {
+    return await allPurchases(data);
   },
   addPurchase: async (product, data) => {
-    const users = await userId(data);
-    const user = users.find(user => user.username === data.username);
+    const exist = await productExists(product);
+    if (!exist) return false;
+    const user = await findUser(data);
     const purchases = await getFile('purchases.json');
+
     product.id = uuidv4();
     product.userID = user.id;
     purchases.push(product);
@@ -34,29 +47,21 @@ const Purchase = {
     await writing(purchases);
     return product;
   },
-  findById: async (name, id) => {
-    const user = await userId({ data: name }).id;
-    const purchase = await getFile('purchases.json').filter(
-      purchase => purchase.userID === user && purchase.id === id
-    );
-
-    return purchase;
-  },
-  updatePurchase: async (data) => {
+  deletePurchase: async (data, id) => {
+    const user = await findUser(data);
     const purchases = await getFile('purchases.json');
-    const currentyPurchase = purchases.filter(each => each.id === data.id);
-    if(currentyPurchase.userID !== data.userID) {
-      return '401';
+    const findPurchase = purchases.filter(purchase => {
+      if (purchase.id === id && purchase.userID === user.id) {
+        return null;
+      }
+      return purchase;
     }
-    newpurchase.push(product);
-
-    await writing(newpurchase);
-  },
-  deleteProduct: async id => {
-    const purchase = await getFile('purchases.json');
-    const newpurchase = purchase.filter(each => each.id !== id);
-
-    await writing(newpurchase);
+    );
+    if(findPurchase.length === purchases.length) {
+      return false;
+    }
+    await writing(findPurchase);
+    return true;
   },
 };
 

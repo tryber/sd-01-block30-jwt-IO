@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     role: req.body.role,
   };
 
-  if (validate(userData)) {
+  if (await validate(userData)) {
     await User.save(userData);
     return res.status(201).json({ message: 'Usuário cadastrado com sucesso' });
   }
