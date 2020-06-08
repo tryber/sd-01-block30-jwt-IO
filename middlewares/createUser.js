@@ -34,4 +34,4 @@ function validCreateUserMiddleware(req, res, next) {
   next();
 }
 
-module.exports = { validCreateUserMiddleware };
+module.exports = { validCreateUserMiddleware, userUniqueValidation };

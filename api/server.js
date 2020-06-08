@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/users', routes.createUsers);
-// app.use('/login', routes.login);
+app.use('/login', routes.login);
 
 app.listen(port);
 console.log('Conectado na porta ' + port);
