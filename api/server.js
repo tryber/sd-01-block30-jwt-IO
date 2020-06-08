@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
 const routes = require('./routes');
 const {
   validateToken,
@@ -13,8 +15,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, '..', 'images')));
 
 const apiRoutes = express.Router();
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // USERS
 apiRoutes.post('/users', routes.users.createUsers);
@@ -28,6 +33,7 @@ apiRoutes.get('/products/:id', validateProductId, routes.products.viewProducts);
 apiRoutes.post('/products', validateToken, validateRole, validateProduct, routes.products.createProducts);
 apiRoutes.delete('/products/:id', validateToken, validateRole, validateProductId, routes.products.deleteProducts);
 apiRoutes.put('/products/:id', validateToken, validateRole, validateProductId, validateProduct, routes.products.updateProducts);
+apiRoutes.post('/images', validateToken, upload.single('image'), validateProductId, routes.products.setImages);
 
 // PURCHASES
 apiRoutes.get('/purchases', validateToken, routes.purchases.viewAllPurchases);

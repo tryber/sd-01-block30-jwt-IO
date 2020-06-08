@@ -3,6 +3,7 @@ const createProducts = require('./createProduct');
 const viewProducts = require('./viewProduct');
 const deleteProducts = require('./deleteProduct');
 const updateProducts = require('./updateProduct');
+const setImages = require('./setImage');
 
 module.exports = {
   viewAllProducts,
@@ -10,4 +11,5 @@ module.exports = {
   createProducts,
   deleteProducts,
   updateProducts,
+  setImages,
 };

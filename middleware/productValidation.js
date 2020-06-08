@@ -30,8 +30,9 @@ async function validateRole(req, res, next) {
 
 async function validateProductId(req, res, next) {
   try {
-    if (!req.params.id) return res.status(400).json({ message: 'Dados incompletos' });
-    if (!(await Products.viewProducts(req.params.id))) return res.status(404).json({ message: 'Item não encontrado' });
+    const productId = req.params.id || req.body.productId;
+    if (!productId) return res.status(400).json({ message: 'Dados incompletos' });
+    if (!(await Products.viewProducts(productId))) return res.status(404).json({ message: 'Item não encontrado' });
     next();
   } catch (err) {
     res.status(500).json({ message: err.message });
