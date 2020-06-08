@@ -1,5 +1,5 @@
 const readAndWrite = require('../service/readAndWrite');
-const {verifyUser} = require('../service/checkers');
+const { verifyUser } = require('../service/checkers');
 const { v4: uuidv4 } = require('uuid');
 
 class User {
@@ -40,21 +40,16 @@ class User {
   }
 
   async addOrUpdateUsers(id) {
-    const allUsers = await readAndWrite('read', 'users.json');
-
-    const oneUser = allUsers.find(person => person.id === parseInt(id));
-
-    if (oneUser) {
-      this.username = username;
-      this.password = password;
-      this.role = role;
-    } else {
-      this.id = uuidv4();
-      allUsers.push(this);
+    const allUsers = await readAndWrite('read', 'products.json');
+    const isValidUserId = allUsers.some(users => users.id === id);
+    if (isValidUserId) {
+      const filtredUsers = allUsers.filter(users => users.id !== id);
+      this.id = id;
+      filtredUsers.push(this);
+      await readAndWrite('write', 'userss.json', filtredUsers);
+      return this;
     }
-
-    await readAndWrite('write', 'users.json', allUsers);
-    return allUsers;
+    return false;
   }
 }
 
