@@ -42,5 +42,4 @@ router.post('/', upload.single('image'), async (req, res) => {
   await fs.writeFile(newFileName, req.file.buffer);
   res.status(201).json({ image: productURL });
 });
-
 module.exports = router;
