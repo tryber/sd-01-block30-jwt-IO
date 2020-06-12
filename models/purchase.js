@@ -3,8 +3,8 @@ const { getFile, writing, dataExists } = require('../service.js');
 
 const findUser = async (data) => {
   const users = await getFile('users.json');
-  const user = users.find(user => user.username === data.username);
-  return user;
+  const findedUser = users.find(user => user.username === data.username);
+  return findedUser;
 };
 
 const allPurchases = async (data) => {
