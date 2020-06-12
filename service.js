@@ -6,4 +6,13 @@ const getFile = async file => {
   return JSON.parse(content.toString('utf-8'));
 };
 
-module.exports = { getFile };
+const writing = async (content, file) =>
+  fs.writeFile(
+    path.resolve(__dirname, '..', file),
+    JSON.stringify(content),
+    (err) => {
+      if (err) throw err;
+    },
+  );
+
+module.exports = { getFile, writing };

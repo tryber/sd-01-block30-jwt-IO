@@ -1,16 +1,5 @@
-const fs = require('fs').promises;
-const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const { getFile } = require('../service.js');
-
-const writing = async content =>
-  fs.writeFile(
-    path.resolve(__dirname, '..', 'purchases.json'),
-    JSON.stringify(content),
-    err => {
-      if (err) throw err;
-    }
-  );
+const { getFile, writing } = require('../service.js');
 
 const findUser = async (data) => {
   const users = await getFile('users.json');
@@ -40,7 +29,7 @@ const Purchase = {
     const newProduct = { ...product, id: uuidv4(), userID: user.id};
     purchases.push(newProduct);
 
-    await writing(purchases);
+    await writing(purchases, 'purchases.json');
     return product;
   },
   deletePurchase: async (data, id) => {
@@ -54,7 +43,7 @@ const Purchase = {
     );
     if (findPurchase.length === purchases.length)
       return false;
-    await writing(findPurchase);
+    await writing(findPurchase, 'purchases.json');
     return true;
   },
   findPurchaseById: async (decoded, id) => {
@@ -72,7 +61,7 @@ const Purchase = {
     const oldPurchases = purchases.filter((pur) => pur.id !== id);
     oldPurchases.push(newPurchase);
 
-    await writing(oldPurchases);
+    await writing(oldPurchases, 'purchases.json');
     return true;
   },
 };

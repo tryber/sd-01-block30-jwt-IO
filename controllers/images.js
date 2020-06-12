@@ -3,19 +3,11 @@ const path = require('path');
 const multer = require('multer');
 const express = require('express');
 
+const { writing } = require('../service');
 const Product = require('../models/product');
 const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-
-const writing = async content =>
-  fs.writeFile(
-    path.resolve(__dirname, '..', 'products.json'),
-    JSON.stringify(content),
-    err => {
-      if (err) throw err;
-    }
-  );
 
 function validateData({ originalname, fieldname }, productId) {
   return /^.+.((png)|(jpg))$/.test(originalname) || fieldname !== "image" || !productId;
@@ -37,7 +29,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     return each;
   });
 
-  await writing(newProducts);
+  await writing(newProducts, 'products.json');
   const newFileName = path.resolve(__dirname, '..', 'images', `${productId}.png`);
   await fs.writeFile(newFileName, req.file.buffer);
   res.status(201).json({ image: productURL });

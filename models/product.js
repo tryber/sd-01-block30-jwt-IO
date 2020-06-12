@@ -1,16 +1,6 @@
-const fs = require('fs').promises;
-const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const { getFile } = require('../service.js');
+const { getFile, writing } = require('../service.js');
 
-const writing = async content =>
-  fs.writeFile(
-    path.resolve(__dirname, '..', 'products.json'),
-    JSON.stringify(content),
-    (err) => {
-      if (err) throw err;
-    },
-  );
 const Product = {
   allProducts: async () => {
     const products = await getFile('products.json');
@@ -21,7 +11,7 @@ const Product = {
     const newProduct = { ...product, id: uuidv4()};
     products.push(newProduct);
 
-    await writing(products);
+    await writing(products, 'products.json');
     return newProduct;
   },
   findById: async (id) => {
@@ -34,13 +24,13 @@ const Product = {
     const newProduct = { ...product, id: uuidv4()};
     newProducts.push(newProduct);
 
-    await writing(newProducts);
+    await writing(newProducts, 'products.json');
   },
   deleteProduct: async (id) => {
     const products = await getFile('products.json');
     const newProducts = products.filter(each => each.id !== id);
 
-    await writing(newProducts);
+    await writing(newProducts, 'products.json');
   },
 };
 
