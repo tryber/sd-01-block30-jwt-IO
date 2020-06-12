@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const { getFile, writing } = require('../service.js');
+const { getFile, writing, findByParam } = require('../service.js');
 
 const Product = {
   allProducts: async () => {
@@ -14,9 +14,8 @@ const Product = {
     await writing(products, 'products.json');
     return newProduct;
   },
-  findById: async (id) => {
-    const products = await getFile('products.json');
-    return products.find(product => product.id === id);
+  findById: (id) => {
+    return findByParam('products.json', id, 'id');
   },
   updateProduct: async (product, id) => {
     const products = await getFile('products.json');

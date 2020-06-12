@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const { getFile } = require('../service.js');
+const { getFile, findByParam } = require('../service.js');
 
 const User = {
   save: async (userData) => {
@@ -23,9 +23,8 @@ const User = {
       user => user.username === log.username && user.password === log.password
     );
   },
-  findByUser: async (username) => {
-    const users = await getFile('users.json');
-    return users.find(user => user.username === username);
+  findByUser: (username) => {
+    return findByParam('users.json', username, 'username');
   },
 };
 

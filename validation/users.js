@@ -1,13 +1,7 @@
-const { getFile } = require('../service.js');
-
-const findUser = async username => {
-  const users = await getFile('users.json');
-  const hasUser = users.some(user => user.username === username);
-  return hasUser;
-}
+const { dataExists } = require('../service.js');
 
 async function validateUsername({ username }) {
-  const user = await findUser(username);
+  const user = await dataExists('users.json', username, 'username');
   return username && !user && /^([a-zA-Z0-9]+){6,}$/.test(username);
 }
 
