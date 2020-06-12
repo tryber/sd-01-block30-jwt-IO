@@ -1,0 +1,20 @@
+[
+    {
+        "username": "antoniopaolillo",
+        "password": "antonio123",
+        "role": "funcionario",
+        "id": "c918da64-44fc-446d-81f1-ac8b9cc99bd6"
+    },
+    {
+        "username": "antoniopaolillo123",
+        "password": "antonio123",
+        "role": "funcionario",
+        "id": "86664050-2987-4bab-a51b-3fa0de661e2f"
+    },
+    {
+        "username": "antonioauu",
+        "password": "antonio123",
+        "role": "funcionario",
+        "id": "c7c507ec-b4a2-47f8-bf19-c45c0dca34ea"
+    }
+]
