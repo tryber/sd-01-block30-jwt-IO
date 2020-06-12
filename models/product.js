@@ -8,19 +8,17 @@ const Product = {
   },
   addProduct: async (product) => {
     const products = await getFile('products.json');
-    const newProduct = { ...product, id: uuidv4()};
+    const newProduct = { ...product, id: uuidv4() };
     products.push(newProduct);
 
     await writing(products, 'products.json');
     return newProduct;
   },
-  findById: (id) => {
-    return findByParam('products.json', id, 'id');
-  },
+  findById: id => findByParam('products.json', id, 'id'),
   updateProduct: async (product, id) => {
     const products = await getFile('products.json');
     const newProducts = products.filter(each => each.id !== id);
-    const newProduct = { ...product, id: uuidv4()};
+    const newProduct = { ...product, id: uuidv4() };
     newProducts.push(newProduct);
 
     await writing(newProducts, 'products.json');

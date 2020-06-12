@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const purchases = await Purchase.findPurchaseById(req.decoded, req.params.id);
-  if (!purchases) return res.status(404).send({ message: "id not found" });
+  if (!purchases) return res.status(404).send({ message: 'id not found' });
   res.status(200).json(purchases);
 });
 
@@ -37,9 +37,8 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   const deletePurchase = await Purchase.deletePurchase(req.decoded, req.params.id);
-  if (!deletePurchase) {
+  if (!deletePurchase)
     return res.status(401);
-  }
   return res.status(204).json(deletePurchase);
 });
 

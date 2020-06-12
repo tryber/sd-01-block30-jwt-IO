@@ -6,8 +6,8 @@ const { getFile, findByParam } = require('../service.js');
 const User = {
   save: async (userData) => {
     const users = await getFile('users.json');
-    userData.id = uuidv4();
-    users.push(userData);
+    const newUse = { ...userData, id: uuidv4() };
+    users.push(newUse);
 
     fs.writeFile(
       path.resolve(__dirname, '..', 'users.json'),
