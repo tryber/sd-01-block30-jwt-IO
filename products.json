@@ -22,5 +22,11 @@
     "name": "fonte",
     "description": "fonte game 500w",
     "price": 801.21
+  },
+  {
+    "id": "a41b5290-778f-4daa-8aa7-d9a051c106e2",
+    "name": "fonte2",
+    "description": "fonte game 1500w",
+    "price": 80.21
   }
 ]

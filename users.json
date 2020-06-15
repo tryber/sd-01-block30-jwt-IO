@@ -16,5 +16,11 @@
     "username": "toninho",
     "password": "senhasupersecreta2",
     "role": "funcionario"
+  },
+  {
+    "id": "0cfeff64-7c35-4398-99f6-3a0abd2ab7f7",
+    "username": "joaoaramuni",
+    "password": "trybe20205144ffder",
+    "role": "funcionario"
   }
 ]

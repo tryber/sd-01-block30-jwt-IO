@@ -10,7 +10,7 @@ class User {
     this.role = role;
   }
 
-  async getById(id) {
+  static async getById(id) {
     const allUsers = await readAndWrite('read', 'users.json');
     const oneUser = allUsers.find(person => person.id === id);
     return oneUser;
@@ -29,7 +29,7 @@ class User {
     return this;
   }
 
-  async delete(id) {
+  static async delete(id) {
     const allUsers = await readAndWrite('read', 'users.json');
 
     const newAllUsers = allUsers.filter(person => person.id !== parseInt(id));

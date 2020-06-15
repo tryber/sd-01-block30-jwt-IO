@@ -2,18 +2,30 @@ const readAndWrite = require('../service/readAndWrite');
 // const { verifyProducts } = require('../service/checkers');
 const { v4: uuidv4 } = require('uuid');
 
-class Purcheses {
-  constructor(id, userID, productId, quantity) {
-    this.id = id;
+class Purchases {
+  constructor(userID, productId, quantity) {
+    this.id = null;
     this.userID = userID;
     this.productId = productId;
     this.quantity = quantity;
   }
 
-  //   static async getAllProducts() {
-  //     const allUsers = await readAndWrite('read', 'products.json');
-  //     return allUsers.map(product => product);
-  //   }
+  async addPurchase(idProduct) {
+    const products = await readAndWrite('read', 'products.json');
+    const oneProduct = products.find(product => product.id === idProduct);
+    if (!oneProduct) throw new Error('Something broke! 😱');
+    const purchases = await readAndWrite('read', 'purchases.json');
+    this.id = uuidv4();
+    purchases.push({
+      id: this.id,
+      userID: this.userID,
+      productId: this.productId,
+      quantity: this.quantity,
+    });
+    await readAndWrite('write', 'purchases.json', purchases);
+
+    return this;
+  }
 
   //   static async getByIdProducts(id) {
   //     const allUsers = await readAndWrite('read', 'products.json');
@@ -54,4 +66,4 @@ class Purcheses {
   //   }
 }
 
-module.exports = Purcheses;
+module.exports = Purchases;

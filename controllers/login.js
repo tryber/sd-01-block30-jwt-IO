@@ -13,9 +13,9 @@ const moment = require('moment');
 const callBackDoLogin = async (req, res) => {
   const { username, password } = req.body;
   const loginUser = new Login(username, password);
-  if (!username || !password)
-    return res.status(417).json({ message: 'Expectation Failed' });
   const listUsers = await loginUser.findOne(username);
+  if (!username || !password || !listUsers)
+    return res.status(417).json({ message: 'Expectation Failed' });
   const jwtConfig = {
     expiresIn: '3d',
     algorithm: 'HS256',

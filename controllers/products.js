@@ -41,7 +41,6 @@ const callBackDeleteOneProductsForID = async (req, res) => {
 const callBackPutOneProductsForID = async (req, res) => {
   const { id } = req.params;
   const { name, description, price, image } = req.body;
-  console.log('name', name);
   const product = new Products(name, description, price, image);
   const oneUser = await product.addOrUpdateProducts(id);
   if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
