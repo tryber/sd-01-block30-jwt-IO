@@ -16,5 +16,11 @@
     "username": "Ana Lúcia",
     "password": "63498721",
     "role": "entregador"
+  },
+  {
+    "id": "8475afa9-d163-4a49-afb1-2ee8204bca01",
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "funcionario"
   }
 ]

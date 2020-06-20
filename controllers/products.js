@@ -1,27 +1,32 @@
 const express = require('express');
 
-const { v4: uuid4 } = require('uuid');
-
 const router = express.Router();
 
-const { validProductMiddleware } = require('../middlewares/products');
+const productMiddleware = require('../middlewares/products');
 
-const { readFileJson, writeFileJson } = require('../fs-functions');
+const producsModel = require('../models/productsModel');
 
 router.get('/', async (_req, res) => {
-  const readProducts = await readFileJson('products');
+  const readProducts = await producsModel.getAllProducts();
 
   res.status(200).json(readProducts);
 });
 
-router.post('/', validProductMiddleware, async (req, res) => {
-  const newProduct = await readFileJson('products');
-  const product = { id: uuid4(), ...req.body };
-  newProduct.push(product);
+router.use(productMiddleware.authorizationValidMiddleware);
 
-  await writeFileJson(newProduct, 'products');
+router.post('/', productMiddleware.validProductMiddleware, async (req, res) => {
+  await producsModel.addProduct(req.body);
 
   res.status(200).json({ message: 'Product successfully registered' });
+});
+
+router.delete('/:id', async (req, res) => {
+  const actionDelete = await producsModel.deleteProduct(req.params.id);
+
+  if (actionDelete)
+    return res.status(400).json({ message: actionDelete });
+
+  res.status(204).end();
 });
 
 module.exports = router;
