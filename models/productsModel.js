@@ -2,8 +2,8 @@ const { readFileJson, writeFileJson } = require('../fs-functions');
 const { v4: uuid4 } = require('uuid');
 
 async function getAllProducts() {
-    const products = await readFileJson('products');
-    return products;
+  const products = await readFileJson('products');
+  return products;
 }
 
 async function addProduct(req) {
@@ -31,9 +31,25 @@ async function deleteProduct(id) {
   await writeFileJson(products, 'products');
 }
 
+async function updateProduct(idProduct, req) {
+  const products = await readFileJson('products');
+  const product = products.find(({ id }) => id === idProduct);
+
+  if (!product) return 'Id invalid';
+
+  const fileJson = products.indexOf(product);
+  const updateJson = { id: idProduct, ...req };
+  products[fileJson] = updateJson;
+
+  await writeFileJson(products, 'products');
+
+  return updateJson;
+}
+
 module.exports = {
   addProduct,
   deleteProduct,
   getAllProducts,
   getById,
+  updateProduct,
 };

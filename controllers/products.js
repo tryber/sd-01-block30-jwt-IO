@@ -26,11 +26,19 @@ router.post('/', productMiddleware.validProductMiddleware, async (req, res) => {
   res.status(200).json({ message: 'Product successfully registered' });
 });
 
-router.delete('/:id', async (req, res) => {
-  const actionDelete = await producsModel.deleteProduct(req.params.id);
+router.put('/:id', productMiddleware.validProductMiddleware, async (req, res) => {
+  const updateProducts = await producsModel.updateProduct(req.params.id, req.body);
 
-  if (actionDelete)
-    return res.status(400).json({ message: actionDelete });
+  if (updateProducts === 'Id invalid')
+    return res.status(400).json({ message: updateProducts });
+
+  res.status(200).json(updateProducts);
+});
+
+router.delete('/:id', async (req, res) => {
+  const productDelete = await producsModel.deleteProduct(req.params.id);
+
+  if (productDelete) return res.status(400).json({ message: productDelete });
 
   res.status(204).end();
 });
