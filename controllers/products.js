@@ -12,6 +12,12 @@ router.get('/', async (_req, res) => {
   res.status(200).json(readProducts);
 });
 
+router.get('/:id', async (req, res) => {
+  const product = await producsModel.getById(req.params.id);
+
+  res.status(200).json(product);
+});
+
 router.use(productMiddleware.authorizationValidMiddleware);
 
 router.post('/', productMiddleware.validProductMiddleware, async (req, res) => {

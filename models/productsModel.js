@@ -15,6 +15,12 @@ async function addProduct(req) {
   return product;
 }
 
+async function getById(idProduct) {
+  const data = await readFileJson('products');
+  const product = data.find(({ id }) => id === idProduct);
+  return product;
+}
+
 async function deleteProduct(id) {
   const getProduct = await readFileJson('products');
   const products = getProduct.filter(product => product.id !== id);
@@ -26,7 +32,8 @@ async function deleteProduct(id) {
 }
 
 module.exports = {
-  getAllProducts,
   addProduct,
   deleteProduct,
+  getAllProducts,
+  getById,
 };
