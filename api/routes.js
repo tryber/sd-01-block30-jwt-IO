@@ -1,4 +1,7 @@
+const createUsers = require('../controllers/createUser');
+const login = require('../controllers/login');
+
 module.exports = {
-  createUsers: require('../controllers/createUser'),
-  login: require('../controllers/login')
+  createUsers,
+  login,
 };
