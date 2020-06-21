@@ -12,16 +12,12 @@ const User = require('../models/users');
 
 const callBackDoPurchases = async (req, res) => {
   const { productId, quantity, userID } = req.body;
-
   const {
     data: { id },
   } = req.user;
-
   const user = User.getById(id);
-
   if (userID !== user.id)
     return res.status(401).json({ message: 'Não autorizado' });
-
   const product = new Purchases(id, productId, quantity);
   await product.addPurchase(productId).then(body => {
     const { image, ...product } = body;
@@ -50,21 +46,23 @@ const callBackDoPurchases = async (req, res) => {
 //   return res.status(200).json(oneUser);
 // };
 
-// const callBackPutOneProductsForID = async (req, res) => {
-//   const { id } = req.params;
-//   const { name, description, price, image } = req.body;
-//   console.log('name', name);
-//   const product = new Products(name, description, price, image);
-//   const oneUser = await product.addOrUpdateProducts(id);
-//   if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
-//   return res.status(200).json(oneUser);
-// };
+const callBackPutOneProductsForID = async (req, res) => {
+  const { userID, productId, quantity } = req.body;
+  const product = new Purchases(userID, productId, quantity);
+  const oneUser = await product.editProductCart(userID);
+  console.log('cadê o oneUser?', oneUser);
+  if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
+  return res.status(200).json(oneUser);
+};
 
 router.post(
   '/purchases',
   rescue(validateTokenPurchases),
   rescue(callBackDoPurchases),
 );
+
+router.put('/purchases', rescue(validateTokenPurchases), rescue(callBackPutOneProductsForID))
+
 // router.get('/products', rescue(callBackGetAllProducts));
 // router.get('/products/:id', rescue(callBackGetOneProductsForID));
 // router.put(

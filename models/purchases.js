@@ -52,18 +52,19 @@ class Purchases {
   //     return newAllUsers;
   //   }
 
-  //   async addOrUpdateProducts(id) {
-  //     const allProducts = await readAndWrite('read', 'products.json');
-  //     const isValidPoductId = allProducts.some(product => product.id === id)
-  //     if (isValidPoductId) {
-  //       const filtredProducts = allProducts.filter(product => product.id !== id);
-  //       this.id = id;
-  //       filtredProducts.push(this);
-  //       await readAndWrite('write', 'products.json', filtredProducts);
-  //       return this;
-  //     }
-  //     return false;
-  //   }
+    async editProductCart(userID) {
+      const allProducts = await readAndWrite('read', 'purchases.json');
+      const isValidPoductId = allProducts.filter(product => product.userID === userID)
+      if (!isValidPoductId) throw new Error('Something broke! 😱');
+      return isValidPoductId;
+    }
+
+    // async editProductCart() {
+    //   const allProducts = await readAndWrite('read', 'purchases.json');
+    //   const isValidPoductId = allProducts.some(product => product.id === id)
+    //   if (!isValidPoductId) throw new Error('Something broke! 😱');
+    //   return isValidPoductId;
+    // }
 }
 
 module.exports = Purchases;
