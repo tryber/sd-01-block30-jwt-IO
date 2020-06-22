@@ -2,7 +2,7 @@ const express = require('express');
 
 const { v4: uuid4 } = require('uuid');
 
-const { writeFileJson, readFileJson } = require('../fs-functions');
+const { readFileJson, writeFileJson } = require('../fs-functions');
 
 const router = express.Router();
 

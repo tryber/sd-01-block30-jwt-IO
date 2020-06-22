@@ -1,26 +1,26 @@
 [
   {
-    "id": "12b1fc42-4e27-418b-b2f5-3466e6cfec33",
-    "username": "Fernanda Nunes",
-    "password": "senhasinistra",
+    "id": "1ab5518c-e293-423d-9989-67899e781f00",
+    "username": "johndoe",
+    "password": "senhasupersecreta",
     "role": "cliente"
   },
   {
-    "id": "f39dbef7-ae94-41c1-af0a-ab1e03150d05",
-    "username": "Victor Felipe",
-    "password": "12345678",
-    "role": "cliente"
-  },
-  {
-    "id": "5175bc55-7a5e-40f5-90ae-2db879c2288f",
-    "username": "Ana Lúcia",
-    "password": "63498721",
+    "id": "3e79e9fe-a62b-4a08-a6ad-4e803c192663",
+    "username": "Cadillac",
+    "password": "megacarro",
     "role": "entregador"
   },
   {
-    "id": "8475afa9-d163-4a49-afb1-2ee8204bca01",
-    "username": "johndoe",
-    "password": "senhasupersecreta",
+    "id": "03c1d292-53a8-47c4-aff6-5b4de3dd2989",
+    "username": "Lelo Lelo",
+    "password": "lelitoleludo",
+    "role": "cliente"
+  },
+  {
+    "id": "a80545ca-93fe-4fe7-abf4-18a50780945c",
+    "username": "Victor",
+    "password": "victor00005",
     "role": "funcionario"
   }
 ]

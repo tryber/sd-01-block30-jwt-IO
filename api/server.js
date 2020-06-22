@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use('/users', routes.createUsers);
 app.use('/login', routes.login);
 app.use('/products', routes.products);
+app.use('/purchases', routes.purchases);
 
 app.listen(port);
 console.log('Conectado na porta ' + port);
