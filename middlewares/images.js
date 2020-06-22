@@ -22,8 +22,6 @@ async function isFolderImageValid(fileName = '') {
 async function validImageMiddleware(req, res, next) {
   const { productId } = req.body;
 
-  console.log(productId)
-
   if (!req.file) return res.status(400).json({ message: 'Missing file' });
 
   if (!(await isProductValid(productId))) return res.status(401).json({ message: 'Invalid productId' });
