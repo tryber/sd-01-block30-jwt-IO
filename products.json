@@ -9,6 +9,7 @@
     "id": "e40e658c-82fd-4a48-9934-e87de9942d9a",
     "name": "Mouse",
     "description": "Mouse 18000 DPI",
-    "price": 449.99
+    "price": 449.99,
+    "image": "http://localhost:3000/e40e658c-82fd-4a48-9934-e87de9942d9a.png"
   }
 ]
