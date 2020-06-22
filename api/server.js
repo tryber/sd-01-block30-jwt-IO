@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
-
-const port = process.env.PORT || 8080;
+const { createUsers, login } = require('./routes');
 
 const app = express();
 
@@ -10,10 +8,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const apiRoutes = express.Router();
-apiRoutes.post('/users', routes.createUsers);
-apiRoutes.post('/login', routes.login)
+apiRoutes.post('/users', createUsers);
+apiRoutes.post('/login', login);
 
 app.use(apiRoutes);
 
-app.listen(port);
-console.log('Conectado na porta ' + port);
+module.exports = app;
