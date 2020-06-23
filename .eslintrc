@@ -27,7 +27,12 @@
         ],
         "no-alert": "off",
         "no-confusing-arrow": "off",
-        "prettier/prettier": "error"
+        "no-unused-vars": [
+            1,
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ]
     },
     "globals": {
         "localStorage": false,
