@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+
 async function validateTokenPurchases(req, res, next) {
   const secret = 'doug';
   try {
