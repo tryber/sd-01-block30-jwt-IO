@@ -25,35 +25,55 @@ const callBackDoPurchases = async (req, res) => {
   });
 };
 
-// const callBackGetAllProducts = async (_req, res) => {
-//   const products = await Products.getAllProducts();
-//   if (!products)
-//     return res.status(400).json({ message: 'Não existe cadastrados produtos' });
-//   return res.status(200).json(products);
-// };
+const callBackGetAllPurchases = async (req, res) => {
+  const {
+    data: { id },
+  } = req.user;
+  const purchases = await Purchases.getAllPurchases(id);
+  if (!purchases)
+    return res.status(400).json({ message: 'Não existe cadastrados produtos' });
+  return res.status(200).json(purchases);
+};
 
-// const callBackGetOneProductsForID = async (req, res) => {
-//   const { id } = req.params;
-//   const oneUser = await Products.getByIdProducts(id);
-//   if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
-//   return res.status(200).json(oneUser);
-// };
+const callBackGetOnePurchaseForID = async (req, res) => {
+  const {
+    data: { id },
+  } = req.user;
+  const { id: idPurchase} = req.params;
+  const purchase = await Purchases.getByIdPurchase(id, idPurchase);
+  if (!purchase) return res.status(400).json({ message: 'compra não exite' });
+  return res.status(200).json(purchase);
+};
 
-// const callBackDeleteOneProductsForID = async (req, res) => {
-//   const { id } = req.params;
-//   const oneUser = await Products.deleteProducts(id);
-//   if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
-//   return res.status(200).json(oneUser);
-// };
+const callBackDeleteOnePurchasesForID = async (req, res) => {
+  const {
+    data: { id },
+  } = req.user;
+  const { id: idPurchase } = req.params;
+  const allNewPurchases = await Purchases.deletePurchases(id, idPurchase);
+  if (!allNewPurchases) return res.status(400).json({ message: 'compra não exite' });
+  return res.status(204).json();
+};
 
 const callBackPutOneProductsForID = async (req, res) => {
   const { userID, productId, quantity } = req.body;
-  const product = new Purchases(userID, productId, quantity);
-  const oneUser = await product.editProductCart(userID);
-  console.log('cadê o oneUser?', oneUser);
-  if (!oneUser) return res.status(400).json({ message: 'produto não exite' });
-  return res.status(200).json(oneUser);
+  const { id } = req.params;
+  const purchase = new Purchases(userID, productId, quantity);
+  const editPurchase = await purchase.editProductCart(id);
+  if (!editPurchase) return res.status(400).json({ message: 'compra não exite' });
+  return res.status(200).json(editPurchase);
 };
+
+router.get(
+  '/purchases',
+  rescue(validateTokenPurchases),
+  rescue(callBackGetAllPurchases),
+);
+router.get(
+  '/purchases/:id',
+  rescue(validateTokenPurchases),
+  rescue(callBackGetOnePurchaseForID),
+);
 
 router.post(
   '/purchases',
@@ -61,19 +81,16 @@ router.post(
   rescue(callBackDoPurchases),
 );
 
-router.put('/purchases', rescue(validateTokenPurchases), rescue(callBackPutOneProductsForID))
+router.put(
+  '/purchases/:id',
+  rescue(validateTokenPurchases),
+  rescue(callBackPutOneProductsForID),
+);
 
-// router.get('/products', rescue(callBackGetAllProducts));
-// router.get('/products/:id', rescue(callBackGetOneProductsForID));
-// router.put(
-//   '/products/:id',
-//   rescue(validateToken),
-//   rescue(callBackPutOneProductsForID),
-// );
-// router.delete(
-//   '/products/:id',
-//   rescue(validateToken),
-//   rescue(callBackDeleteOneProductsForID),
-// );
+router.delete(
+  '/purchases/:id',
+  rescue(validateTokenPurchases),
+  rescue(callBackDeleteOnePurchasesForID),
+);
 
 module.exports = router;

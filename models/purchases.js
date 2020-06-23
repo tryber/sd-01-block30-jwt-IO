@@ -1,5 +1,4 @@
 const readAndWrite = require('../service/readAndWrite');
-// const { verifyProducts } = require('../service/checkers');
 const { v4: uuidv4 } = require('uuid');
 
 class Purchases {
@@ -27,44 +26,50 @@ class Purchases {
     return this;
   }
 
-  //   static async getByIdProducts(id) {
-  //     const allUsers = await readAndWrite('read', 'products.json');
-  //     return allUsers.find(person => person.id === id);
-  //   }
+  static async getByIdPurchase(idClient, idPurchase) {
+    const onePurchase = await readAndWrite('read', 'purchases.json');
+    if (!onePurchase) throw new Error('Something broke! 😱');
+    const purchases = onePurchase.filter(({ userID }) => userID === idClient);
+    return purchases.find(({ id }) => id === idPurchase);
+  }
 
-  //   async addNewProducts(image) {
-  //     const allProducts = await readAndWrite('read', 'products.json');
-  //     if (!verifyProducts(this)) throw new Error('Valores invalidos! 😱');
-  //     this.id = uuidv4();
-  //     this.image = image;
-  //     allProducts.push(this);
-  //     await readAndWrite('write', 'products.json', allProducts);
-  //     return this;
-  //   }
+  static async getAllPurchases(idClient) {
+    const allPurchases = await readAndWrite('read', 'purchases.json');
+    const purchases = allPurchases.filter(({ userID }) => userID === idClient);
+    if (!purchases) throw new Error('Something broke! 😱');
+    return purchases;
+  }
 
-  //   static async deleteProducts(id) {
-  //     const allUsers = await readAndWrite('read', 'products.json');
+  static async deletePurchases(idClient, idPurchase) {
+    const onePurchase = await readAndWrite('read', 'purchases.json');
+    if (!onePurchase) throw new Error('Something broke! 😱');
+    const newPurchases = onePurchase.find(
+      ({ id, userID }) => id === idPurchase && userID === idClient,
+    );
+    const newOnePurchases = onePurchase.filter(
+      element => element !== newPurchases,
+    );
+    await readAndWrite('write', 'purchases.json', newOnePurchases);
+    return newPurchases;
+  }
 
-  //     const newAllUsers = allUsers.filter(person => person.id !== id);
+  async editProductCart(idPurchase) {
+    const allPurchases = await readAndWrite('read', 'purchases.json');
+    const purchase = allPurchases.filter(
+      ({  id }) =>  id !== idPurchase,
+    );
+    if (!purchase) throw new Error('Something broke! 😱');
+    const newPurchase = {
+      id: idPurchase,
+      userID: this.userID,
+      productId: this.productId,
+      quantity: this.quantity,
+    };
+    purchase.push(newPurchase);
+    await readAndWrite('write', 'purchases.json', purchase);
+    return newPurchase;
+  }
 
-  //     await readAndWrite('write', 'products.json', newAllUsers);
-
-  //     return newAllUsers;
-  //   }
-
-    async editProductCart(userID) {
-      const allProducts = await readAndWrite('read', 'purchases.json');
-      const isValidPoductId = allProducts.filter(product => product.userID === userID)
-      if (!isValidPoductId) throw new Error('Something broke! 😱');
-      return isValidPoductId;
-    }
-
-    // async editProductCart() {
-    //   const allProducts = await readAndWrite('read', 'purchases.json');
-    //   const isValidPoductId = allProducts.some(product => product.id === id)
-    //   if (!isValidPoductId) throw new Error('Something broke! 😱');
-    //   return isValidPoductId;
-    // }
 }
 
 module.exports = Purchases;

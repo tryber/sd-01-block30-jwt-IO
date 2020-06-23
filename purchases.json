@@ -1,38 +1,38 @@
 [
   {
     "id": "17a53def-1c62-470b-80f1-7db32df11dd0",
-    "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
+    "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e2",
     "productId": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
-    "quantity": 51
+    "quantity": 1
   },
   {
     "id": "38ea955c-435d-4f66-a2b6-bbbc64c5e031",
     "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
     "productId": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
-    "quantity": 5
+    "quantity": 2
   },
   {
     "id": "009166e3-3751-4daa-be92-910b19b53568",
     "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
     "productId": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
-    "quantity": 1
+    "quantity": 3
   },
   {
     "id": "89778114-a6c0-452e-86ca-da136a5861ee",
     "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
     "productId": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
-    "quantity": 1
+    "quantity": 4
   },
   {
-    "id": "177b4a93-7d68-453a-b3cd-be36838f25b8",
-    "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
+    "id": "177b4a93-7d68-453a-b3cd-be36838f2",
+    "userID": "68ddba17-0d8f-4930-a583-f3f13b9d6e",
     "productId": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
-    "quantity": 1
+    "quantity": 5
   },
   {
     "id": "177b4a93-7d68-453a-b3cd-be36838f25b8",
     "userID": "68",
     "productId": "7f4d1903-610e-4043-a9e0-cf27846a89c5",
-    "quantity": 1
+    "quantity": 6
   }
 ]
