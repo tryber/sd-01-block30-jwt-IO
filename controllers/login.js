@@ -1,8 +1,8 @@
-const express = require('express')
+const express = require('express');
 
 const router = express.Router();
 
-const rescue = require('../service/rescue')
+const rescue = require('../service/rescue');
 
 const Login = require('../models/login');
 
@@ -20,14 +20,13 @@ const callBackDoLogin = async (req, res) => {
     expiresIn: '3d',
     algorithm: 'HS256',
   };
-  const secret = 'doug'
+  const secret = 'doug';
   const token = jwt.sign({ data: listUsers }, secret, jwtConfig);
   const { exp } = jwt.verify(token, secret);
   const expires = moment.unix(exp).format();
   res.status(200).json({ token, expires });
 };
 
-
 router.post('/login', rescue(callBackDoLogin));
 
-module.exports = router
+module.exports = router;

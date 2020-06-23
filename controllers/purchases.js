@@ -18,9 +18,10 @@ const callBackDoPurchases = async (req, res) => {
   const user = User.getById(id);
   if (userID !== user.id)
     return res.status(401).json({ message: 'Não autorizado' });
-  const product = new Purchases(id, productId, quantity);
-  await product.addPurchase(productId).then(body => {
+  const products = new Purchases(id, productId, quantity);
+  await products.addPurchase(productId).then((body) => {
     const { image, ...product } = body;
+    console.log(image);
     return res.status(201).json(product);
   });
 };
@@ -39,7 +40,7 @@ const callBackGetOnePurchaseForID = async (req, res) => {
   const {
     data: { id },
   } = req.user;
-  const { id: idPurchase} = req.params;
+  const { id: idPurchase } = req.params;
   const purchase = await Purchases.getByIdPurchase(id, idPurchase);
   if (!purchase) return res.status(400).json({ message: 'compra não exite' });
   return res.status(200).json(purchase);
@@ -51,7 +52,8 @@ const callBackDeleteOnePurchasesForID = async (req, res) => {
   } = req.user;
   const { id: idPurchase } = req.params;
   const allNewPurchases = await Purchases.deletePurchases(id, idPurchase);
-  if (!allNewPurchases) return res.status(400).json({ message: 'compra não exite' });
+  if (!allNewPurchases)
+    return res.status(400).json({ message: 'compra não exite' });
   return res.status(204).json();
 };
 
@@ -60,7 +62,8 @@ const callBackPutOneProductsForID = async (req, res) => {
   const { id } = req.params;
   const purchase = new Purchases(userID, productId, quantity);
   const editPurchase = await purchase.editProductCart(id);
-  if (!editPurchase) return res.status(400).json({ message: 'compra não exite' });
+  if (!editPurchase)
+    return res.status(400).json({ message: 'compra não exite' });
   return res.status(200).json(editPurchase);
 };
 

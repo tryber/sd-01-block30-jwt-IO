@@ -32,7 +32,7 @@ class User {
   static async delete(id) {
     const allUsers = await readAndWrite('read', 'users.json');
 
-    const newAllUsers = allUsers.filter(person => person.id !== parseInt(id));
+    const newAllUsers = allUsers.filter(person => person.id !== parseInt(id, 10));
 
     await readAndWrite('write', 'users.json', newAllUsers);
 

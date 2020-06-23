@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs').promises;
 
 const readAndWrite = async (fileModifierType, file, newContent) => {
-
   const filePath = path.resolve(__dirname, '..', file);
 
   const readFile = () =>

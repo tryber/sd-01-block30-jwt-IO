@@ -1,4 +1,4 @@
-const verifyUser = values => {
+const verifyUser = (values) => {
   const { username, password, role } = values;
   const regex = /^([a-zA-Z0-9]{6,})$/;
   const verifyusername = regex.test(username);
@@ -9,10 +9,10 @@ const verifyUser = values => {
   return verifyusername && verifyRole && verifyPassword;
 };
 
-const verifyProducts = values => {
+const verifyProducts = (values) => {
   const { name, price } = values;
   const namePresents = name.length >= 5;
-  const pricePresent = typeof price === 'number'  && price > 0;
+  const pricePresent = typeof price === 'number' && price > 0;
   return namePresents && pricePresent;
 };
 

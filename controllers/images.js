@@ -12,7 +12,7 @@ const path = require('path');
 
 const Images = require('../models/images');
 
-const multer = require('multer')
+const multer = require('multer');
 
 const storage = multer.memoryStorage();
 
@@ -41,4 +41,4 @@ router.post(
   rescue(callBackDoImage),
 );
 
-module.exports = router
+module.exports = router;

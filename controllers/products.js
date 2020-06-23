@@ -9,10 +9,11 @@ const Products = require('../models/products');
 const validateToken = require('../middlewares/products');
 
 const callBackCreateProducts = async (req, res) => {
-  const { name, description, price, image } = req.body;
-  const product = new Products(name, description, price, image);
-  await product.addNewProducts().then(body => {
+  const { name, description, price, image : imagens } = req.body;
+  const products = new Products(name, description, price, imagens);
+  await products.addNewProducts().then((body) => {
     const { image, ...product } = body;
+    console.log(image);
     return res.status(201).json(product);
   });
 };
@@ -47,11 +48,7 @@ const callBackPutOneProductsForID = async (req, res) => {
   return res.status(200).json(oneUser);
 };
 
-router.post(
-  '/products',
-  rescue(validateToken),
-  rescue(callBackCreateProducts),
-);
+router.post('/products', rescue(validateToken), rescue(callBackCreateProducts));
 router.get('/products', rescue(callBackGetAllProducts));
 router.get('/products/:id', rescue(callBackGetOneProductsForID));
 router.put(

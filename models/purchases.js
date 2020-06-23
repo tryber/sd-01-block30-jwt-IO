@@ -55,9 +55,7 @@ class Purchases {
 
   async editProductCart(idPurchase) {
     const allPurchases = await readAndWrite('read', 'purchases.json');
-    const purchase = allPurchases.filter(
-      ({  id }) =>  id !== idPurchase,
-    );
+    const purchase = allPurchases.filter(({ id }) => id !== idPurchase);
     if (!purchase) throw new Error('Something broke! 😱');
     const newPurchase = {
       id: idPurchase,
@@ -69,7 +67,6 @@ class Purchases {
     await readAndWrite('write', 'purchases.json', purchase);
     return newPurchase;
   }
-
 }
 
 module.exports = Purchases;

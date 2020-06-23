@@ -43,7 +43,7 @@ class Products {
 
   async addOrUpdateProducts(id) {
     const allProducts = await readAndWrite('read', 'products.json');
-    const isValidPoductId = allProducts.some(product => product.id === id)
+    const isValidPoductId = allProducts.some(product => product.id === id);
     if (isValidPoductId) {
       const filtredProducts = allProducts.filter(product => product.id !== id);
       this.id = id;
