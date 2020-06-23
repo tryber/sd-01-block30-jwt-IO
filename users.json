@@ -7,9 +7,9 @@
   },
   {
     "id": "860edc62-8733-43ed-b949-40d884d5e235",
-    "username": "coruja",
+    "username": "corujaODeus",
     "password": "senhasupersecreta2",
-    "role": "cliente"
+    "role": "funcionario"
   },
   {
     "id": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
@@ -21,6 +21,6 @@
     "id": "0cfeff64-7c35-4398-99f6-3a0abd2ab7f7",
     "username": "joaoaramuni",
     "password": "trybe20205144ffder",
-    "role": "funcionario"
+    "role": "cliente"
   }
 ]
