@@ -1,14 +1,32 @@
-const User = require('../models/user');
+const express = require('express');
 
-module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+const router = express.Router();
 
-  if (!username || !password) return res.send(401);
+const rescue = require('../service/rescue');
 
-  const user = await User.findOne({ username });
+const Login = require('../models/login');
 
-  if (!user) res.status(401).json(false);
+const jwt = require('jsonwebtoken');
 
-  res.status(200).json(true);
+const moment = require('moment');
+
+const callBackDoLogin = async (req, res) => {
+  const { username, password } = req.body;
+  const loginUser = new Login(username, password);
+  const listUsers = await loginUser.findOne(username);
+  if (!username || !password || !listUsers)
+    return res.status(417).json({ message: 'Expectation Failed' });
+  const jwtConfig = {
+    expiresIn: '3d',
+    algorithm: 'HS256',
+  };
+  const secret = 'doug';
+  const token = jwt.sign({ data: listUsers }, secret, jwtConfig);
+  const { exp } = jwt.verify(token, secret);
+  const expires = moment.unix(exp).format();
+  res.status(200).json({ token, expires });
 };
+
+router.post('/login', rescue(callBackDoLogin));
+
+module.exports = router;

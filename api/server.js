@@ -1,19 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
-
-const port = process.env.PORT || 8080;
+const path = require('path')
+const { users, login, products, purchases, images } = require('./routes');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const apiRoutes = express.Router();
-apiRoutes.post('/users', routes.createUsers);
-apiRoutes.post('/login', routes.login)
+app.use(express.static(path.resolve(__dirname, '..', 'images')));
 
-app.use(apiRoutes);
+app.use(users);
+app.use(login);
+app.use(products);
+app.use(purchases);
+app.use(images);
 
-app.listen(port);
-console.log('Conectado na porta ' + port);
+module.exports = app;

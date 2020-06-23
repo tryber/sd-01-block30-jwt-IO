@@ -1,0 +1,26 @@
+[
+  {
+    "id": "73d590ff-c5e9-4501-b3f1-678eccff407d",
+    "username": "johndoe",
+    "password": "senhasupersecreta",
+    "role": "entregador"
+  },
+  {
+    "id": "860edc62-8733-43ed-b949-40d884d5e235",
+    "username": "corujaODeus",
+    "password": "senhasupersecreta2",
+    "role": "funcionario"
+  },
+  {
+    "id": "68ddba17-0d8f-4930-a583-f3f13b9d6e21",
+    "username": "toninho",
+    "password": "senhasupersecreta2",
+    "role": "funcionario"
+  },
+  {
+    "id": "0cfeff64-7c35-4398-99f6-3a0abd2ab7f7",
+    "username": "joaoaramuni",
+    "password": "trybe20205144ffder",
+    "role": "cliente"
+  }
+]
