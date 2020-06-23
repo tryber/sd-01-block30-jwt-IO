@@ -9,7 +9,7 @@ const Products = require('../models/products');
 const validateToken = require('../middlewares/products');
 
 const callBackCreateProducts = async (req, res) => {
-  const { name, description, price, image : imagens } = req.body;
+  const { name, description, price, image: imagens } = req.body;
   const products = new Products(name, description, price, imagens);
   await products.addNewProducts().then((body) => {
     const { image, ...product } = body;
