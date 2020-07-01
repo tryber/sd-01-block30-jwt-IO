@@ -27,7 +27,7 @@ const User = {
     );
   },
 
-  findUser: username => {
+  findUser: (username) => {
     return findByParam('users.json', username, 'username');
   },
 };
