@@ -3,12 +3,11 @@ const Purchase = require('../models/purchases');
 
 const router = express.Router();
 const {
-  validateBuy, validateUpdate
+  validateBuy, validateUpdate,
 } = require('../middlewares/purchasesValid');
 
 router.get('/', async (req, res) => {
   const allPurchases = await Purchase.getAllPurchases(req.user);
-  console.log('req', req.user)
   res.status(200).json(allPurchases);
 });
 

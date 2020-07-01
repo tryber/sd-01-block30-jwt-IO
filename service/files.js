@@ -4,7 +4,7 @@ const path = require('path');
 const getFile = async (fileName) => {
   const data = await fs.readFile(path.resolve(__dirname, '..', `${fileName}`), 'utf-8');
   return JSON.parse(data);
-}
+};
 
 const writeFile = async (content, file) =>
   fs.writeFile(

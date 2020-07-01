@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const payload = jwt.verify(token, secret);
-    
+
     if (!payload) return res.status(401).json({ message: 'Token inválido!' });
     req.user = payload;
     next();

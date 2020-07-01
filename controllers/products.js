@@ -3,8 +3,6 @@ const rescue = require('../rescue/index');
 const Product = require('../models/products');
 const { productAccess, authorizationValid } = require('../middlewares/productsValid');
 
-
-
 const router = express.Router();
 
 router.get('/', async (_req, res) => {
@@ -40,10 +38,10 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const updateProducts = await Product.updateProduct(req.body, req.params.id);
-  
+
   if (updateProducts === 'Id invalid')
     return res.status(400).json({ message: updateProducts });
-  
+
   res.status(200).json(updateProducts);
 });
 

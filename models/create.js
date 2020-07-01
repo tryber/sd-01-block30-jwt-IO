@@ -15,7 +15,7 @@ const User = {
       JSON.stringify(users),
       (err) => {
         if (err) throw err;
-      }
+      },
     );
   },
 
@@ -23,11 +23,11 @@ const User = {
     const users = await getFile('users.json');
 
     return users.find(
-      user => user.username === log.username && user.password === log.password
+      user => user.username === log.username && user.password === log.password,
     );
   },
 
-  findUser: (username) => {
+  findUser: username => {
     return findByParam('users.json', username, 'username');
   },
 };

@@ -1,13 +1,8 @@
-const validateQuantity = ({ quantity }) => {
-  return quantity > 0 && Number.isInteger(quantity);
-}
+const validateQuantity = ({ quantity }) => quantity > 0 && Number.isInteger(quantity);
 
-const validateUpdate = (obj) => {
-  return obj.userID && obj.productId && obj.quantity;
-}
 
-const validateBuy = (obj) => {
-  return obj.productId && obj.quantity && validateQuantity(obj);
-}
+const validateUpdate = obj => obj.userID && obj.productId && obj.quantity;
+
+const validateBuy = obj => obj.productId && obj.quantity && validateQuantity(obj);
 
 module.exports = { validateBuy, validateUpdate };

@@ -4,9 +4,6 @@ const products = require('../controllers/products');
 const purchases = require('../controllers/purchases');
 const images = require('../controllers/images');
 
-
-
-
 module.exports = {
   createUsers,
   login,

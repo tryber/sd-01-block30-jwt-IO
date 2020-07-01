@@ -3,7 +3,6 @@ const { getFile, writeFile, dataExists } = require('../service/files');
 
 const findUser = async (data) => {
   const users = await getFile('users.json');
-  console.log('data', data)
   const findedUser = users.find(user => user.username === data.username);
   return findedUser;
 };

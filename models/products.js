@@ -20,7 +20,6 @@ const Product = {
     const newProducts = products.filter(each => each.id !== id);
     const newProduct = { ...product, id };
     newProducts.push(newProduct);
-    console.log("newProduct", newProduct)
     await writeFile(newProducts, 'products.json');
   },
   deleteProduct: async (id) => {

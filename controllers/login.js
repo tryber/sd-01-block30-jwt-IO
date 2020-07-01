@@ -7,8 +7,8 @@ const router = express.Router();
 
 
 const login = (req, res) => {
-  const { password, username} = req.body;
-  if (!username || !password) return res.status(422).json({ message: 'Campos vazios' })
+  const { password, username } = req.body;
+  if (!username || !password) return res.status(422).json({ message: 'Campos vazios' });
   const user = userValid(username, password);
 
   if (!user) return res.status(401).json({ message: 'Usuário não encontrado' });
