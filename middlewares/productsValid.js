@@ -4,9 +4,7 @@ const productNameValid = (name = '') => {
   return name.length >= 5 && regex.test(name);
 }
 
-const productPriceValid(price = '') {
-  return typeof price === 'number' && price > 0;
-}
+const productPriceValid = (price = '') => typeof price === 'number' && price > 0;
 
 const productAccess = (req, res, next) => {
   const { name, description, price } = req.body;

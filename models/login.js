@@ -10,7 +10,7 @@ const userUnique = (username, password) => {
 const userValid = (username, password) => {
   if (!userUnique(username, password))
     return { message: 'Username not available!' };
-    return true;
+  return true;
 };
 
 module.exports = { userValid, userUnique };

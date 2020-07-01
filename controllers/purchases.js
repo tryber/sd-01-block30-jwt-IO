@@ -6,10 +6,7 @@ const {
   validateBuy, validateUpdate,
 } = require('../middlewares/purchasesValid');
 
-router.get('/', async (req, res) => {
-  const allPurchases = await Purchase.getAllPurchases(req.user);
-  res.status(200).json(allPurchases);
-});
+router.get('/', async (req, res) => Purchase.getAllPurchases(req.user).then(result => res.status(200).json(result)));
 
 router.get('/:id', async (req, res) => {
   const purchases = await Purchase.findPurchaseById(req.user, req.params.id);
