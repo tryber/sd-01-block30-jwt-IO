@@ -27,9 +27,7 @@ const User = {
     );
   },
 
-  findUser: (username) => {
-    return findByParam('users.json', username, 'username');
-  },
+  findUser: (username) => findByParam('users.json', username, 'username'),
 };
 
 module.exports = User;
