@@ -1,14 +1,23 @@
-const User = require('../models/user');
+const express = require('express');
+const rescue = require('../rescue');
+const { userValid, userUnique } = require('../models/login');
+const generateJWT = require('../service/generateJWT');
 
-module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+const router = express.Router();
 
-  if (!username || !password) return res.send(401);
 
-  const user = await User.findOne({ username });
+const login = (req, res) => {
+  const { password, username } = req.body;
+  if (!username || !password) return res.status(422).json({ message: 'Campos vazios' });
+  const user = userValid(username, password);
 
-  if (!user) res.status(401).json(false);
+  if (!user) return res.status(401).json({ message: 'Usuário não encontrado' });
+  const { username: users, role, id } = userUnique(username, password);
+  const token = generateJWT(users, role, id);
 
-  res.status(200).json(true);
+  res.status(200).json({ token });
 };
+
+router.post('/', rescue(login));
+
+module.exports = router;

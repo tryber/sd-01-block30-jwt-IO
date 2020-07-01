@@ -1,19 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
-
-const port = process.env.PORT || 8080;
+const { createUsers, login, products, purchases, images } = require('./routes');
+const verifyJWT = require('../middlewares/verifyJWT');
+const path = require('path');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.resolve(__dirname, '..', 'images')));
 
-const apiRoutes = express.Router();
-apiRoutes.post('/users', routes.createUsers);
-apiRoutes.post('/login', routes.login)
+app.use('/users', createUsers);
+app.use('/login', login);
+app.use('/product', verifyJWT, products);
+app.use('/purchases', verifyJWT, purchases);
+app.use('/images', verifyJWT, images);
 
-app.use(apiRoutes);
+app.use('*', (_req, res) => res.status(404).json({ message: 'page not found' }));
 
-app.listen(port);
-console.log('Conectado na porta ' + port);
+module.exports = app;
