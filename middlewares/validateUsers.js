@@ -20,18 +20,16 @@ const validateRole = (role = '') => {
 const userUnique = (user) => {
   const usersRegister = fs.readFileSync(path.resolve(__dirname, '..', 'users.json'), 'utf8')
   const userExists = JSON.parse(usersRegister);
-
+  console.log('userExist', userExists.find(user => user.username === username))
   return userExists.find(user => user.username === username);
 }
 
 const userValid = (req, res, next) => {
   const { username, password, role } = req.body;
   if (!validateUsers(username) || !validatePassword(password) || validateRole(role))
-    return res.status(400).json({ message: 'data invalid' });
+    return { message: 'data invalid' };
   if (userUnique(username))
-    return res.status(400).json({ message: 'Username not available!' });
-
-  next();
+    return { message: 'Username not available!' };
 }
 
-module.exports = { userValid };
+module.exports = { userValid, userUnique };

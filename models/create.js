@@ -1,4 +1,8 @@
 const { v4: uuidv4 } = require('uuid');
+const { getFile, findByParam } = require('../service/files');
+const fs = require('fs').promises;
+const path = require('path');
+
 
 const User = {
   save: async (userData) => {

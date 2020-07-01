@@ -1,14 +1,12 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/create');
 
 module.exports = async (req, res, next) => {
-  const secret = 'trybeer';
+  const secret = 'project30';
   try {
     const token = req.headers.authorization;
     const payload = jwt.verify(token, secret);
-    const { email } = payload;
-    const verifyUser = await User.validateEmail(email);
-    if (!verifyUser) return res.status(401).json({ message: 'Token inválido!' });
+    
+    if (!payload) return res.status(401).json({ message: 'Token inválido!' });
     req.user = payload;
     next();
   } catch (err) {
